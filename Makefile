@@ -7,6 +7,7 @@ $(PDF): $(NAME)
 	a2x -f pdf --fop \
 	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
 	--xsltproc-opts='--stringparam highlight.source 1' \
+	--xsl-file='fop.xsl' \
 	--asciidoc-opts='-a docinfo1' \
 	$(NAME)
 
