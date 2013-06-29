@@ -6,9 +6,9 @@ all: $(PDF)
 $(PDF): $(NAME)
 	a2x -f pdf --fop --icons \
 	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
-	--xsltproc-opts='--stringparam admon.graphics.path file:///etc/asciidoc/images/icons/' \
 	--xsl-file='fop.xsl' \
 	--asciidoc-opts='-a docinfo1' \
+	--fop-opts="-dpi 300" \
 	$(NAME)
 
 	mv $(PDF) $(PDF).1

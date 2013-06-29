@@ -27,8 +27,6 @@ TIP: This is a tip.
 
 WARNING: This is a warning.
 
-IMPORTANT: Important note.
-
 Shell script looks like this:
 [source,sh]
 ----
