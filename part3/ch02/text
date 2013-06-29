@@ -2,7 +2,7 @@
 The boot process
 ----------------
 
-At the high level, common distros's boot process consists of two parts: the initial RAM disk 
+At the high level, common distros' boot process consists of two parts: the initial RAM disk 
 loads the storage drivers and finds the disk where the rest is stored; then the file system 
 on the disk takes over, loading your services and applications.
 indexterm:[init]
