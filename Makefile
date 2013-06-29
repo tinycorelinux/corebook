@@ -7,7 +7,7 @@ $(PDF): $(NAME)
 	a2x -f pdf --fop $(NAME)
 
 $(NAME): heading $(wildcard part*/ch*/*)
-	cat heading part*/ch*/* > $(NAME)
+	cat heading part*/ch*/text > $(NAME)
 
 clean:
 	rm -f $(NAME) $(PDF) *.xml *.fo
