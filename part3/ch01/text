@@ -10,7 +10,7 @@ system".
 With a mounted archive, we get to keep the bulk on the storage media, compressed and 
 read-only (safe from the usual methods of corruption). Contrasting this to the majority of 
 distros, which unpack the files but usually can't detect a change or corruption in a file, 
-the TCZ method is more failsafe.
+the TCZ method is more fail-safe.
 --
 
 That however only scratches the surface. In this chapter, we'll be looking to the design 
@@ -31,14 +31,14 @@ setup are higher. It would require more RAM to store the setup, and it would hav
 overhead per file access.
 
 Why squashfs then, one might ask? The various mountable formats were compared in the earlier 
-days, during the 1.x and 2.x timeframe. Here are the various pros and cons:
+days, during the 1.x and 2.x time frame. Here are the various pros and cons:
 
 .cramfs
-- limited capacity, no timestamps, limited uid support
+- limited capacity, no time stamps, limited uid support
 - supported in kernel
 
 .zisofs
-- a minimum size of 512kb - overhead for many smaller extensions
+- a minimum size of 512KB - overhead for many smaller extensions
 - supported in kernel
 
 .Mounting tar/zip archives via FUSE
@@ -68,11 +68,11 @@ Therefore, our original decision to go with gzip compression for squashfs archiv
 the correct one.
 
 
-A run of similar tests was made to find the ideal blocksize for squashfs. While the larger 
+A run of similar tests was made to find the ideal block size for squashfs. While the larger 
 blocks improved compression, squashfs keeps a few blocks cached in RAM per mount, so the 
 compression had to be carefully balanced with the RAM requirement.
 
-Unsurprisingly, the smallest blocksize, 4 KB, showed the best RAM behavior. The impact to 
+Unsurprisingly, the smallest block size, 4 KB, showed the best RAM behavior. The impact to 
 compression and by proxy the reading speed was small enough, that this size was settled for. 
 Current versions of Core refuse to load extensions created with other parameters.
 
