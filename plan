@@ -1,0 +1,33 @@
+Background:
+
+I've had this idea of writing a book on Core, fully current for one release, with chapters 
+describing the internals, some on projects to use Core for, some focusing on boot time etc. 
+I was thinking both the pdf and ascii sources would be freely available online, dead tree 
+version available at some cost.
+
+My schedule is fairly full for this year, so it'll probably get started next year.
+
+
+Initial section divide:
+
+Part I - intro, basic use
+Part II - advanced use
+Part III - internals
+Part IV - project topics (chapters on how to do a specific setup)
+
+
+
+-----------
+
+I'm envisioning Part IV as a collection of use cases, supplied by users describing their own 
+systems in some detail?  A general purpose desktop, a samba server, a web server, a portable 
+boot device, etc etc etc.
+
+If its not too far out of scope, I'd be interested in a PART V describing some of the 
+remixes that are out there... not so much for the creators of such to tout their own 
+distribution but to describe the "why" and the "how" of remastering.  Maybe enlist Svolli, 
+JLS, Grandma and/or some others it they are willing?  And including personal, undistributed 
+remasters, again assuming a willing author can be found.
+
+Chapters or sections pertaining to very new hardware (missing drivers and such) and very old 
+hardware (can't boot from USB, low memory and such) would probably be of interest.
