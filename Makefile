@@ -9,7 +9,7 @@ $(PDF): $(NAME)
 	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite \
 	-dCompatibilityLevel=1.3 \
 	-dPDFSETTINGS=/prepress \
-	-sOutputFile=$(PDF) $(PDF).1
+	-o $(PDF) $(PDF).1
 	rm $(PDF).1
 
 $(NAME): heading $(wildcard part*/ch*/*) ending
