@@ -4,7 +4,10 @@ PDF = corebook.pdf
 all: $(PDF)
 
 $(PDF): $(NAME)
-	a2x -f pdf --fop $(NAME)
+	a2x -f pdf --fop \
+	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
+	$(NAME)
+
 	mv $(PDF) $(PDF).1
 	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite \
 	-dCompatibilityLevel=1.3 \
