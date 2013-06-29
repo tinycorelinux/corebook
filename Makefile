@@ -6,6 +6,7 @@ all: $(PDF)
 $(PDF): $(NAME)
 	a2x -f pdf --fop \
 	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
+	--asciidoc-opts='-a docinfo1' \
 	$(NAME)
 
 	mv $(PDF) $(PDF).1
@@ -15,8 +16,8 @@ $(PDF): $(NAME)
 	-o $(PDF) $(PDF).1
 	rm $(PDF).1
 
-$(NAME): heading $(wildcard part*/ch*/*) ending
+$(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml
 	cat heading part*/ch*/text ending > $(NAME)
 
 clean:
-	rm -f $(NAME) $(PDF) *.xml *.fo
+	rm -f $(NAME) $(PDF) core*.xml *.fo
