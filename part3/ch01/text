@@ -3,15 +3,15 @@ The TCZ format
 
 If one had to put it in a single sentence, TCZ could be described as "a loop-mounted 
 squashfs 4.x archive, with specified parameters, usually symlinked into the main file 
-system".
+system". indexterm:[TCZ format]
 
 [NOTE]
---
+===================
 With a mounted archive, we get to keep the bulk on the storage media, compressed and 
 read-only (safe from the usual methods of corruption). Contrasting this to the majority of 
 distros, which unpack the files but usually can't detect a change or corruption in a file, 
 the TCZ method is more fail-safe.
---
+===================
 
 That however only scratches the surface. In this chapter, we'll be looking to the design 
 decisions behind it, and the gory details to its inner workings. The accompanying files are 
