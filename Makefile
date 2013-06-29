@@ -10,4 +10,4 @@ $(NAME):
 	cat heading part*/ch*/* > $(NAME)
 
 clean:
-	rm -f $(NAME) $(PDF)
+	rm -f $(NAME) $(PDF) *.xml
