@@ -1,4 +1,106 @@
-First chapter
--------------
+The TCZ format
+--------------
 
-Text, etc
+If one had to put it in a single sentence, TCZ could be described as "a loop-mounted 
+squashfs 4.x archive, with specified parameters, usually symlinked into the main file 
+system".
+
+[NOTE]
+--
+With a mounted archive, we get to keep the bulk on the storage media, compressed and 
+read-only (safe from the usual methods of corruption). Contrasting this to the majority of 
+distros, which unpack the files but usually can't detect a change or corruption in a file, 
+the TCZ method is more failsafe.
+--
+
+That however only scratches the surface. In this chapter, we'll be looking to the design 
+decisions behind it, and the gory details to its inner workings. The accompanying files are 
+covered elsewhere; we shall only focus on TCZ here.
+
+Starting from the installation method, the archive can either be mounted and symlinked, or 
+its contents can be copied to the file system (usually RAM) for faster execution. The 
+mount-and-symlink method is necessary in order to get the files in expected locations, while 
+still keeping the data compressed and on the storage media, not extracted in RAM. The 
+default is to mount.
+
+It's often questioned why Core eschews the many union file systems, unlike most other live 
+distributions. The reason for that is twofold: first, they tend to be unstable (buggy). 
+There are quite a lot of mysterious crashes, and worse, disappearing files reported on 
+the 'net for the various union file systems. Secondly, the system requirements for such a 
+setup are higher. It would require more RAM to store the setup, and it would have more 
+overhead per file access.
+
+Why squashfs then, one might ask? The various mountable formats were compared in the earlier 
+days, during the 1.x and 2.x timeframe. Here are the various pros and cons:
+
+.cramfs
+- limited capacity, no timestamps, limited uid support
+- supported in kernel
+
+.zisofs
+- a minimum size of 512kb - overhead for many smaller extensions
+- supported in kernel
+
+.Mounting tar/zip archives via FUSE
+- the overhead of FUSE
+
+Squashfs came with full support for file attributes, good compression, and fully in-kernel 
+support with good performance. After a few tries it was an easy decision.
+
+
+Squashfs parameters
+~~~~~~~~~~~~~~~~~~~
+
+At the time, only gzip compression was supported, but since then the new options of LZO and 
+XZ have been evaluated. 
+
+LZO created slightly bigger extensions, but its speed advantage was not seen in our use - 
+the cpu could keep up fine with gzip compression, bottle-necked by the hard drive reading 
+speed.
+
+XZ, while nicely improving the compression ratio, comes with the downsides of LZMA: for each 
+extension, it needs to keep the full dictionary in RAM. This means up to 1 MB extra RAM use 
+per extension, depending on the exact settings used when creating the extension. The 
+decompression was also measurably slower compared to gzip, no longer being able to be masked 
+by the IO speed.
+
+Therefore, our original decision to go with gzip compression for squashfs archives was still 
+the correct one.
+
+
+A run of similar tests was made to find the ideal blocksize for squashfs. While the larger 
+blocks improved compression, squashfs keeps a few blocks cached in RAM per mount, so the 
+compression had to be carefully balanced with the RAM requirement.
+
+Unsurprisingly, the smallest blocksize, 4 KB, showed the best RAM behavior. The impact to 
+compression and by proxy the reading speed was small enough, that this size was settled for. 
+Current versions of Core refuse to load extensions created with other parameters.
+
+
+What's inside?
+~~~~~~~~~~~~~~
+
+The contents of a TCZ extension are nothing magic: it's the direct file system tree that can 
+be found when you install an application or library. Let's take a look at lxterminal.tcz.
+
+[literal]
+--
+usr/local/bin/lxterminal
+usr/local/share/applications/lxterminal.desktop
+usr/local/share/lxterminal/lxterminal-preferences.ui
+usr/local/share/lxterminal/lxterminal.conf
+usr/local/share/pixmaps/lxterminal.png
+--
+
+It contains the main binary, lxterminal; the FreeDesktop standard .desktop file, specifying 
+its icon and placement in any menus; the program's icon; and the program's private data. 
+Nothing extra.
+
+NOTE: The leading directories are there by necessity, but since they're uninteresting in 
+this context, we skip them here.
+
+This is what you would find were you to do a "make install DESTDIR=/tmp/somewhere", with 
+possibly documentation and development headers split to other extensions, for lower overhead 
+to those who only want to use the extension.
+
+There's power in simplicity.
