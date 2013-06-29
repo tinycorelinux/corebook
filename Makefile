@@ -4,9 +4,9 @@ PDF = corebook.pdf
 all: $(PDF)
 
 $(PDF): $(NAME)
-	a2x -f pdf --fop \
+	a2x -f pdf --fop --icons \
 	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
-	--xsltproc-opts='--stringparam highlight.source 1' \
+	--xsltproc-opts='--stringparam admon.graphics.path file:///etc/asciidoc/images/icons/' \
 	--xsl-file='fop.xsl' \
 	--asciidoc-opts='-a docinfo1' \
 	$(NAME)
