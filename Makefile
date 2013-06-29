@@ -6,6 +6,7 @@ all: $(PDF)
 $(PDF): $(NAME)
 	a2x -f pdf --fop \
 	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
+	--xsltproc-opts='--stringparam highlight.source 1' \
 	--asciidoc-opts='-a docinfo1' \
 	$(NAME)
 
@@ -16,7 +17,7 @@ $(PDF): $(NAME)
 	-o $(PDF) $(PDF).1
 	rm $(PDF).1
 
-$(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml
+$(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml Makefile
 	cat heading part*/ch*/text ending > $(NAME)
 
 clean:
