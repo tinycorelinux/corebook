@@ -102,4 +102,7 @@ This is what you would find were you to do a "make install DESTDIR=/tmp/somewher
 possibly documentation and development headers split to other extensions, for lower overhead 
 to those who only want to use the extension.
 
+Using the regular paths, with writable directories, means that most applications "just 
+work".
+
 There's power in simplicity.
