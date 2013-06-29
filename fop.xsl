@@ -20,6 +20,11 @@
 
 <xsl:param name="generate.toc" select="'book toc,title'"/>
 
+<xsl:attribute-set name="root.properties">
+	<xsl:attribute name="widows">4</xsl:attribute>
+	<xsl:attribute name="orphans">4</xsl:attribute>
+</xsl:attribute-set>
+
 <!-- My style customisations
 <xsl:template match='xslthl:keyword' mode="xslthl">
 <fo:inline font-weight="normal" color="#AA22FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
