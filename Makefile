@@ -10,4 +10,4 @@ $(NAME): heading $(wildcard part*/ch*/*)
 	cat heading part*/ch*/* > $(NAME)
 
 clean:
-	rm -f $(NAME) $(PDF) *.xml
+	rm -f $(NAME) $(PDF) *.xml *.fo
