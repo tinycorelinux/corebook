@@ -8,11 +8,13 @@ v0.0, 2013
 Dedication section
 ==================
 
-foo
+This book wouldn't be possible without Robert Shingledecker, without whom Tiny Core itself 
+wouldn't exist.
 
 [preface]
 Preface
 =======
 
-foo
+This book mainly targets those with some familiarity with Linux, with no fear for the 
+command line. A spirit of tinkering is advised, but not necessary.
 
