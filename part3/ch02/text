@@ -1,0 +1,126 @@
+
+The boot process
+----------------
+
+At the high level, common distros's boot process consists of two parts: the initial RAM disk 
+loads the storage drivers and finds the disk where the rest is stored; then the file system 
+on the disk takes over, loading your services and applications.
+indexterm:[init]
+
+Core is different, in that it never leaves the first stage. We fully run in the initial RAM 
+disk, never leaving for a spinning disk (or a network mount, etc). There are other methods 
+of "running in RAM" too, such as those used by Puppy, Knoppix, and DSL, which all do a 
+variation of the usual method - they create a new, bigger RAM area, and move to it, letting 
+the new part finish the boot.
+
+NOTE: While the newer technology is called initial RAM FS (initramfs), not initial RAM disk 
+(initrd), the terms will be used interchangeably here, always referring to the newer method.
+indexterm:[initrd]
+indexterm:[initramfs]
+
+The first step: /init
+~~~~~~~~~~~~~~~~~~~~~
+
+Once the kernel has booted itself and unpacked our initramfs archive, it hands off control 
+to a specific file, /init. This can be any executable, in our case it is a short shell 
+script.
+
+The tasks given for this very first program are only those not doable later as easily. It 
+changes the allocated RAM space for /, optionally changing some options for *init* (a 
+different program), and if a fallback setup is desired, does an old-style move of allocating 
+new RAM space, copying the data there, and moving to it.
+
+As this 16-line script finishes, it gives off control to the real init. This is the program 
+that controls boot, shutdown, and reboot. It's the one that takes care of all your dead 
+zombies, and listen's for the user's ctrl-alt-del key-presses. It sets up the number 
+of terminals requested, and fires up a login prompt program on each. Common options here are 
+SysVinit, upstart, systemd, and busybox init. Core uses busybox init.
+
+Real Boot: init
+~~~~~~~~~~~~~~~
+
+Busybox init is a BSD-style one, meaning it does not have runlevels, but runs one script on 
+boot. At this point it does very little, giving control to our main boot script, tc-config.
+indexterm:[tc-config]
+
+Main boot: tc-config
+~~~~~~~~~~~~~~~~~~~~
+
+The tc-config boot script is responsible for bringing up your hardware, acting on most boot 
+codes, and making it possible for extensions to be loaded.
+
+.The order of events inside this script:
+. Check boot options
+. Fire up udev, start cold-plugging devices
+. Wait for slow USB devices if requested
+. Set up compressed swap in RAM, unless requested not to
+. Scan the available partitions, and create /etc/fstab with the results
+. Start up the system logger if requested
+. Set up language, timezone, clock, and hostname
+. Setup the requested username
+. If an extension server was requested over AoE, NBD, NFS, TFTP, or HTTP, handle it
+. If a virtual (loop) drive was requested, mount it
+. Setup persistent home and/or opt, if requested
+. Load laptop modules if requested
+. Enable swap if possible
+. Fire up extension loading
+. Fire up backup restore
+. Start bootsync.sh
+
+After this sequence of events, the control moves to traditional userspace.
+
+Bootsync.sh
+~~~~~~~~~~~
+
+This is the entry point for all items you need to run on boot, while the boot waits for them 
+to complete. If you need network access later, this might be a good place to wait for the 
+network to come up.
+
+This script launches bootlocal.sh, backgrounded.
+indexterm:[bootsync.sh]
+
+Bootlocal.sh
+~~~~~~~~~~~~
+
+This is the entry point for all items that don't need to be waited for. This may include 
+loading some non-essential module (ISA sound cards, for example), or starting some server.
+indexterm:[bootlocal.sh]
+
+Root's login
+~~~~~~~~~~~~
+
+Once bootsync.sh is complete (and while bootlocal.sh happily does its own thing in the 
+background, on another cpu core if there is one), init regains control.
+
+As the boot is now complete from init's point of view, it feel safe to launch up all 
+requested terminals. By default, this is only the first terminal, but with the _multivt_ 
+bootcode, you can request six.
+
+The first terminal is configured to do an automatic login to root, only once. If you log 
+out, this terminal will present a login prompt.
+
+Root's login script is setup to do one of two things: if automatic login was disabled, it 
+logs out, and otherwise, it passes the control up to our regular user, named *tc* by 
+default.
+
+Regular user
+~~~~~~~~~~~~
+
+Now we're more in the regular distro territory: the normal user's login script does nothing 
+out of the ordinary. If an X server is available, and a text-only boot was not requested, X 
+is started.
+
+The X Window System
+~~~~~~~~~~~~~~~~~~~
+
+The shipped .xinitrc file sets up the default background, starts any X-dependant programs 
+you've configured, and starts up the configured window manager.
+
+pass:[.X.d]
+~~~~~~~~~~~
+
+This is the final part of the boot process. Just before starting up the window manager, the 
+.xinitrc script sources and executes every file found in this directory (~/.X.d).
+
+This is used to start up any programs that need X to run. For example, if you want to start 
+a browser automatically on every boot, this is your location.
