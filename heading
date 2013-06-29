@@ -12,9 +12,26 @@ This book wouldn't be possible without Robert Shingledecker, without whom Tiny C
 wouldn't exist.
 
 [preface]
-Target Audience
-===============
+Preface
+=======
 
 This book mainly targets those with some familiarity with Linux, with no fear for the 
 command line. A spirit of tinkering is advised, but not necessary.
 
+Conventions
+~~~~~~~~~~~
+
+NOTE: This is a note.
+
+TIP: This is a tip.
+
+WARNING: This is a warning.
+
+IMPORTANT: Important note.
+
+Shell script looks like this:
+[source,sh]
+----
+$ echo Code to be typed into an unprivileged shell.
+# echo Code to be typed with root privileges.
+----
