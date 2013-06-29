@@ -18,7 +18,7 @@ $(PDF): $(NAME)
 	-o $(PDF) $(PDF).1
 	rm $(PDF).1
 
-$(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml Makefile
+$(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml Makefile fop.xsl
 	cat heading part*/ch*/text ending > $(NAME)
 
 clean:
