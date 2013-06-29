@@ -33,11 +33,11 @@ overhead per file access.
 Why squashfs then, one might ask? The various mountable formats were compared in the earlier 
 days, during the 1.x and 2.x time frame. Here are the various pros and cons:
 
-.cramfs
+.Cramfs
 - limited capacity, no time stamps, limited uid support
 - supported in kernel
 
-.zisofs
+.Zisofs
 - a minimum size of 512KB - overhead for many smaller extensions
 - supported in kernel
 
