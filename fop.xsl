@@ -18,6 +18,8 @@
 <xsl:param name="linenumbering.extension" select="'1'"/> 
 <xsl:param name="linenumbering.everyNth" select="'1'"/> 
 
+<xsl:param name="generate.toc" select="'book toc,title'"/>
+
 <!-- My style customisations
 <xsl:template match='xslthl:keyword' mode="xslthl">
 <fo:inline font-weight="normal" color="#AA22FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
