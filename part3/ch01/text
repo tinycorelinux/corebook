@@ -83,14 +83,13 @@ What's inside?
 The contents of a TCZ extension are nothing magic: it's the direct file system tree that can 
 be found when you install an application or library. Let's take a look at lxterminal.tcz.
 
-[literal]
---
+------------------------
 usr/local/bin/lxterminal
 usr/local/share/applications/lxterminal.desktop
 usr/local/share/lxterminal/lxterminal-preferences.ui
 usr/local/share/lxterminal/lxterminal.conf
 usr/local/share/pixmaps/lxterminal.png
---
+------------------------
 
 It contains the main binary, lxterminal; the FreeDesktop standard .desktop file, specifying 
 its icon and placement in any menus; the program's icon; and the program's private data. 
