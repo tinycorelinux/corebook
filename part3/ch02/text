@@ -113,14 +113,14 @@ is started.
 The X Window System
 ~~~~~~~~~~~~~~~~~~~
 
-The shipped .xinitrc file sets up the default background, starts any X-dependant programs 
+The shipped .xsession file sets up the default background, starts any X-dependant programs 
 you've configured, and starts up the configured window manager.
 
 pass:[.X.d]
 ~~~~~~~~~~~
 
-This is the final part of the boot process. Just before starting up the window manager, the 
-.xinitrc script sources and executes every file found in this directory (~/.X.d).
+This is the final part of the boot process. After starting up the window manager, the 
+.xsession script sources and executes every file found in this directory (~/.X.d).
 
 This is used to start up any programs that need X to run. For example, if you want to start 
 a browser automatically on every boot, this is your location.
