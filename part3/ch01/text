@@ -98,8 +98,9 @@ Nothing extra.
 NOTE: The leading directories are there by necessity, but since they're uninteresting in 
 this context, we skip them here.
 
-This is what you would find were you to do a "make install DESTDIR=/tmp/somewhere", with 
-possibly documentation and development headers split to other extensions, for lower overhead 
+This is what you would find under /tmp/somewhere after doing a "make install 
+DESTDIR=/tmp/somewhere". Often documentation and development headers are further
+split to other extensions, for lower overhead 
 to those who only want to use the extension.
 
 Using the regular paths, with writable directories, means that most applications "just 
