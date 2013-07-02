@@ -31,5 +31,5 @@ Shell script looks like this:
 [source,sh]
 ----
 $ echo Code to be typed into an unprivileged shell.
-# echo Code to be typed with root privileges.
+# This is a comment.
 ----
