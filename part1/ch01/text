@@ -52,7 +52,7 @@ USB and External Storage Devices Special Requirements
 Tiny Core can be instructed to search for data on external devices at boot time:
 a USB pen drive, compact flash, or other portable media. This need not be the boot media;
 in fact, it is common to for example store user data on a hard disk, while booting from cd 
-or usb.
+or USB.
 
 Sometimes, hardware doesn't wake up fast enough for Tiny Core's boot sequence, though. If 
 the hardware doesn't wake up in time, Tiny Core will move on and finish booting without that 
@@ -184,8 +184,7 @@ it for your home directory. These are set using boot codes/options.
 The bootcode home=hdXY will automatically setup /home/tc to "bind" to /mnt/hdXY/home/tc. 
 When using the home boot code, mydata.tgz is not created - personal data backups must occur in a more 
 traditional way. The home boot code lets Tiny Core coexist with other Linux installations by 
-inserting the tc user directory under a pre-existing /home directory. Be careful, as the 
-initial use of the boot code will creat this directory and its content. Also, Tiny Core 
+inserting the tc user directory under a pre-existing /home directory. Also, Tiny Core 
 cannot auto-detect a persistent home directory, so the home boot option is always required. 
 
 The decision on whether to use the default backup, or to set up a persistent home/opt 
