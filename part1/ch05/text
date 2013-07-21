@@ -1,0 +1,46 @@
+Updating extensions
+-------------------
+
+Extensions are usually updated more often than the base system.
+
+As extension updates may require some action on your part, it is recommended to view the 
+info files of updated extensions before doing the update. The Apps tool will let you do 
+that, while the command-line update is a batch one.
+
+In both cases, the updated extensions are stored in a staging directory, and the actual 
+update will be applied on the next reboot. This ensures that no running app will be 
+interfered by things being changed from under it.
+
+Apps
+~~~~
+
+Starting with the GUI update method, fire up Apps, and select Apps - Maintenance - Check for 
+updates.
+
+image::images/part1/apps_update_menu.png[scaledwidth="100%"]
+
+After a short while, Apps will have the left panel populated with all extensions with 
+available updates, with the status from the check displayed in the right panel.
+
+If there is a newer Core version available, or some of the extensions you have have been 
+removed from the repository, this information will be shown in the right panel.
+
+image::images/part1/apps_updates.png[scaledwidth="100%"]
+
+Clicking on an item will show that extension's info file: whether the update is just a 
+bog-standard version update, or whether some action is required will be visible there.
+
+To select all items for processing, pick the first one, hold shift, and pick the last one.
+Clicking on "Process selected item(s)" will start the update.
+
+tce-update
+~~~~~~~~~~
+
+Simply running *sudo tce-update* will do a batch update of all extensions.
+
+However, if there is not enough space to store the updated extensions, you will need to do 
+an in-place update, which requires a boot with the bootcodes *base norestore*. These options 
+cause no extensions to be loaded, making it safe to write the files directly.
+
+If this is the case, the script will warn you and exit.
+

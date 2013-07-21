@@ -1,0 +1,29 @@
+Updating the base system
+------------------------
+
+As new minor and patch versions are released, for example 4.7 and 4.7.1, how do we update to 
+the latest core?
+
+The process is usually as simple as downloading the latest vmlinuz and core.gz, and 
+replacing them on your boot media. This can be done live from the system, as Tiny Core boots 
+to RAM, and so you can operate on the boot files in any way you wish.
+
+After a reboot, you will be running the latest core code. To check the running version, you 
+can run the *version* command:
+
+[source,sh]
+----
+$ version
+4.7.5
+----
+
+It is important to review the release notes for any items in your backup that may need to be 
+updated. Often there are tweaks to the user files such as .profile, which you may have 
+customized to your needs; any such files are mentioned in the release notes.
+
+The latest pristine copies of any user files can be found in */etc/skel*. If you have 
+customized some of the files, please compare the latest copy with your version to see if any 
+changes need to be done.
+
+With the base system updated, it's recommended to update extensions next.
+
