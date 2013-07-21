@@ -83,3 +83,11 @@ was not installed for this session. We could install it with:
 ----
 $ tce-load -i ace-of-penguins
 ----
+
+[TIP]
+========
+Just like most Core tools, tce-load and tce-ab are shell scripts.
+As far as package managers go, they are fairly simple and easy to understand.
+
+You are encouraged to look under the hood.
+========
