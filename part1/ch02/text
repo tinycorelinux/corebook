@@ -17,7 +17,7 @@ The tabs are respectively the extension's info file, the list of files in the ex
 list of dependencies, and an analysis of the total download size needed.
 
 The dropdown menu on the bottom, currently saying "OnBoot", defines what to do with the 
-selected extension. The modes will be covered later on.
+selected extension. The modes will be covered later on in detail.
 
 The tce bar displays the path to your current *tce* directory. If it's the default (RAM), it 
 will be red; if it's on permanent storage, it will be green. The set button to the right 
@@ -30,6 +30,33 @@ files it provides.
 
 Finally, the main menu in the upper-left corner defines the mode of action.
 
-To start browsing, click on the Apps menu -> remote -> browse.
+To start browsing, click on the Apps menu - remote - browse.
 
 image::images/part1/apps_browsing.png[scaledwidth="100%"]
+
+We can browse the full list, or get a list of search results with the upper-right search 
+bar. To return to the full list from a search results list, click again on remote - browse.
+
+image::images/part1/apps_selected.png[scaledwidth="100%"]
+
+With Ace of Penguins selected, we are shown the info file by default. If we're interested in 
+the files, dependencies, or how much we'd need to download, the tabs are now active.
+
+Let's go on to install it. But with which method?
+
+.Install methods
+OnBoot::
+	The default method. This extension will be installed, and added to the onboot list, 
+	to be mounted on the following boots.
+OnDemand::
+	A loading script will be generated for this extension. Instead of being loaded on 
+	boot, the icon/menu entry for this extension will load the extension when you first 
+	need it. +
+	This option speeds up your boot time, at the cost of making the first start of the 
+	application slower.
+Download + load::
+	The extension will be downloaded and installed for this session only. If you have 
+	set up your *tce* directory, it will reside there, but since it is not added to the 
+	onboot list, it will not be loaded after a reboot.
+Download only::
+	The extension will only be downloaded, nothing more will be done.
