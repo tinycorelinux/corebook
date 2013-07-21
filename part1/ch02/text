@@ -65,3 +65,10 @@ Let's pick OnBoot, the default today. Clicking on Go, a download progress window
 up, and soon we're informed that the install succeeded:
 
 image::images/part1/apps_installed.png[scaledwidth="100%"]
+
+Should the install fail (network error, md5sum failure...), you will be informed of the 
+issue with a popup.
+
+Let's enjoy a game of penguin FreeCell now ;)
+
+image::images/part1/freecell.png[scaledwidth="100%"]
