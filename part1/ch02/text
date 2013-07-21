@@ -60,3 +60,8 @@ Download + load::
 	onboot list, it will not be loaded after a reboot.
 Download only::
 	The extension will only be downloaded, nothing more will be done.
+
+Let's pick OnBoot, the default today. Clicking on Go, a download progress window will pop 
+up, and soon we're informed that the install succeeded:
+
+image::images/part1/apps_installed.png[scaledwidth="100%"]
