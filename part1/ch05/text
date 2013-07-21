@@ -39,7 +39,7 @@ tce-update
 Simply running *sudo tce-update* will do a batch update of all extensions.
 
 However, if there is not enough space to store the updated extensions, you will need to do 
-an in-place update, which requires a boot with the bootcodes *base norestore*. These options 
+an in-place update, which requires a boot with the boot codes *base norestore*. These options 
 cause no extensions to be loaded, making it safe to write the files directly.
 
 If this is the case, the script will warn you and exit.
