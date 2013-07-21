@@ -20,6 +20,9 @@ Preface
 This book mainly targets those with some familiarity with Linux, with no fear for the 
 command line. A spirit of tinkering is advised, but not necessary.
 
+Reading the chapters in order is not necessary, so feel free to jump to the interesting 
+parts directly.
+
 Conventions
 ~~~~~~~~~~~
 
@@ -34,7 +37,7 @@ Shell script looks like this:
 ----
 $ echo Code to be typed into an unprivileged shell.
 # This is a comment.
-$ echo This is a long line \
-  extended into many lines. You can type the backslash \
+$ echo This is a long line extended \
+  into many lines. The backslash can be written \
   as is, the shell will understand it.
 ----
