@@ -23,3 +23,6 @@ $(NAME): heading $(wildcard part*/ch*/*) ending docinfo.xml Makefile fop.xsl
 
 clean:
 	rm -f $(NAME) $(PDF) core*.xml *.fo
+
+up: all
+	scp $(PDF) tcbox:public_html
