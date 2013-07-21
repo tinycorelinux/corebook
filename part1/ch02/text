@@ -1,6 +1,33 @@
 Basic package management via GUI
 --------------------------------
 
-The first contact is often the graphical package manager, the Appbrowser.
+The first contact is often the graphical package manager, the Appbrowser. You can start it 
+from the bottom launcher under the name Apps, or if using an alternate window manager 
+without wbar, under the menu.
 
 image::images/part1/appbrowser.png[scaledwidth="100%"]
+
+Let's quickly go over the interface.
+
+The two white main areas are for the content. On the left, once connected, you will have a 
+list of packages, while the right panel displays the info you've selected from the four 
+tabs.
+
+The tabs are respectively the extension's info file, the list of files in the extension, the 
+list of dependencies, and an analysis of the total download size needed.
+
+The dropdown menu on the bottom, currently saying "OnBoot", defines what to do with the 
+selected extension. The modes will be covered later on.
+
+The tce bar displays the path to your current *tce* directory. If it's the default (RAM), it 
+will be red; if it's on permanent storage, it will be green. The set button to the right 
+lets you set the *tce* directory if needed.
+
+The URI bar shows the selected mirror.
+
+The search dropdown menu lets you do three kinds of searches: by name, by tag, and by the 
+files it provides.
+
+Finally, the main menu in the upper-left corner defines the mode of action.
+
+To start browsing, click on the Apps menu -> remote -> browse.
