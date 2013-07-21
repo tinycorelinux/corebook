@@ -44,22 +44,24 @@ the files, dependencies, or how much we'd need to download, the tabs are now act
 
 Let's go on to install it. But with which method?
 
+
 .Install methods
 OnBoot::
 	The default method. This extension will be installed, and added to the onboot list, 
-	to be mounted on the following boots.
+	to be mounted on the following boots. indexterm:[OnBoot]
 OnDemand::
 	A loading script will be generated for this extension. Instead of being loaded on 
 	boot, the icon/menu entry for this extension will load the extension when you first 
 	need it. +
 	This option speeds up your boot time, at the cost of making the first start of the 
-	application slower.
+	application slower. indexterm:[OnDemand]
 Download + load::
 	The extension will be downloaded and installed for this session only. If you have 
 	set up your *tce* directory, it will reside there, but since it is not added to the 
-	onboot list, it will not be loaded after a reboot.
+	onboot list, it will not be loaded after a reboot. indexterm:[Download + load]
 Download only::
 	The extension will only be downloaded, nothing more will be done.
+	indexterm:[Download only]
 
 Let's pick OnBoot, the default today. Clicking on Go, a download progress window will pop 
 up, and soon we're informed that the install succeeded:
@@ -69,6 +71,6 @@ image::images/part1/apps_installed.png[scaledwidth="100%"]
 Should the install fail (network error, md5sum failure...), you will be informed of the 
 issue with a popup.
 
-Let's enjoy a game of penguin FreeCell now ;)
+Let's enjoy a game of penguin FreeCell now:
 
 image::images/part1/freecell.png[scaledwidth="100%"]
