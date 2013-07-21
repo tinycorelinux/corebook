@@ -166,9 +166,9 @@ Tiny Core includes the filetool utility for saving personal settings and data. T
 */opt/.filetool.lst* lists files and directories to be backed up at power down and restored 
 at 
 reboot. The list may be changed manually (using vi, nano, etc) or via the scripts in the 
-Tools menu; note that the entry for */opt/filetool.lst* should never be removed from the 
+Tools menu; note that the entry for */opt/.filetool.lst* should never be removed from the 
 list 
-itself. Filetool also supports exclusion of particular files via */opt/xfiletool.lst*.
+itself. Filetool also supports exclusion of particular files via */opt/.xfiletool.lst*.
 
 By default, *filetool.lst* includes the entire home/tc directory, and *xfiletool.lst* 
 excludes some unnecessary caches and temporary directories.
