@@ -34,4 +34,7 @@ Shell script looks like this:
 ----
 $ echo Code to be typed into an unprivileged shell.
 # This is a comment.
+$ echo This is a long line \
+  extended into many lines. You can type the backslash \
+  as is, the shell will understand it.
 ----
