@@ -5,6 +5,8 @@ In this chapter we'll go over the basic use of the command line equivalent to Ap
 *tce-ab*, and the direct interface, *tce-load*.
 
 Starting tce-ab, we are greeted with a line-based interface:
+indexterm:[tce-ab]
+
 [source,sh]
 ----
 $ tce-ab
@@ -39,6 +41,7 @@ tce-load
 
 Tce-load is the non-interactive tool used behind the scenes by the boot process, Apps, and 
 tce-ab.
+indexterm:[tce-load]
 
 Running it with the help option gives us a short overview of what it does:
 [source,txt]
