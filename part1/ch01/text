@@ -69,13 +69,13 @@ slow devices to register with the system bus.
 Dependency checking and downloading
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tiny Core makes application-getting as easy as possible. The Appbrowser provides application 
+Tiny Core makes application-getting as easy as possible. The Apps tool provides application 
 details from individual .info files - this is enlightening reading material when choosing 
 applications. Always read the .info files, and re-read them before upgrading to catch 
 changes and concerns.
 
 Dependencies are the pieces (other applications) required for an application. In short, the 
-Tiny Core Appbrowser will take care of downloading and checking dependencies for you. 
+Tiny Core Apps tool will take care of downloading and checking dependencies for you. 
 
 Modes of operation
 ~~~~~~~~~~~~~~~~~~
@@ -98,7 +98,7 @@ The default mode: cloud/internet
 By default, Tiny Core Linux operates like a cloud/internet client. In default mode:
 
 Tiny Core boots entirely into RAM. 
-Users run the Appbrowser to browse the repository and download applications. 
+Users run the Apps tool to browse the repository and download applications. 
 Application Extensions (downloaded applications) last only for the current session. 
 Tiny Core just uses as much RAM as possible. 
 
@@ -123,7 +123,7 @@ directory
 of downloaded extensions. Applications stored in the /tce are optionally mounted at boot 
 time.
 
-Tiny Core uses the Appbrowser to place application extensions in this tce/ directory and 
+Tiny Core uses the Apps tool to place application extensions in this tce/ directory and 
 to flag them as 
 either "OnBoot" (mount at boot) or "On Demand" (do not mount at boot, but create a special 
 menu section for easy access and display an icon if available).
