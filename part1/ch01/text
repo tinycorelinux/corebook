@@ -82,13 +82,14 @@ Modes of operation
 
 The modes of operation mix up how Tiny Core loads, mounts, and installs at boot time (see 
 philosophies, above, if you want to clarify what those three things mean here). Tiny Core 
-has three main Modes:
-- Default mode: cloud/internet 
-- Mount mode: TCZ/Install 
-- Copy mode: TCZ/Install + copy2fs.flg/lst
+has three main modes:
 
-Again, some may say there is a "Traditional Mode: Install to Hard Drive", but that's not 
-really a Mode at all. If you want to do it, go right ahead. It's just not one of the 
+- Default mode: cloud/internet 
+- Mount mode: TCZ/install 
+- Copy mode: TCZ/install + copy2fs.flg/lst
+
+Again, some may say there is a "Traditional mode: install to a hard drive", but that's not 
+really a mode at all. If you want to do it, go right ahead. It's just not one of the 
 original goals of the project, so expect to keep both pieces if it breaks.
 
 The default mode: cloud/internet
@@ -105,19 +106,19 @@ Since Cloud/Internet Mode operates out of RAM, it runs fast. Cloud/Internet Mode
 and quick-booting. Application extensions are lost on reboot, but only the system files have 
 to be restored.
 If you would like applications stored locally and set up on each reboot, then consider the 
-Mount and Copy Modes. 
+mount and copy modes. 
 
 The mount mode of operation: TCZ/install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the most widely used and recommended method for using Tiny Core. 
 
-Applications are stored locally in a directory named tce on a persistent store, e.g. a 
+Applications are stored locally in a directory named *tce* on a persistent store, e.g. a 
 supported disk partition (ext2, ext3, ext4, vfat).
 Applications are optionally mounted on reboot (see onboot.lst in forum and wiki). 
 Mounting applications saves RAM for other uses.
 
-Unless specified with a boot code of tce=xdyz Tiny Core will search for and uses the /tce 
+Unless specified with a boot code of *tce=xdyz* Tiny Core will search for and uses the /tce 
 directory
 of downloaded extensions. Applications stored in the /tce are optionally mounted at boot 
 time.
@@ -132,17 +133,17 @@ The copy mode of operation: TCZ/install + copyfs indicator
 
 The copy mode is a modification of the mount mode.
 
-Selected Application Extensions are copied into RAM instead of mounted. 
+Selected application extensions are copied into RAM instead of mounted. 
 Applications can be RAM-loaded in bulk (copy2fs.flg), selectively loaded into RAM 
 (copy2fs.lst), or mounted. 
 The Appsaudit program tracks installation/loading options (bulk copy, selective copy, etc). 
 Boot times are longer, since copying to RAM takes more time than mounting, but runtime 
 speed, especially first start, is greatly faster.
 
-Copy Mode briefly extends the boot time to gain some of the RAM-run speed of Default Mode 
-and the persistence of a pure Mount Mode.
+Copy mode briefly extends the boot time to gain some of the RAM-run speed of default mode 
+and the persistence of a pure mount mode.
 
-In Copy Mode, it is important to note that extensions can be either mounted or copied into 
+In copy mode, it is important to note that extensions can be either mounted or copied into 
 RAM. The Appsaudit program makes this flexibility possible by keeping track of user 
 selections. 
 
@@ -152,28 +153,32 @@ allows the storage to be unmounted, and the system to avoid any corruption on po
 Backup/restore and other persistence options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Aside from the Mount Mode and the tce directory of application extensions, Tiny Core 
+Aside from the mount mode and the *tce* directory of application extensions, Tiny Core 
 supports persistent/permanent:
-Backup and restore of personal settings, and
-persistent /home and /opt directories.
+
+- backup and restore of personal settings, and
+- persistent /home and /opt directories.
 
 Backup/restore
 ^^^^^^^^^^^^^^
 
 Tiny Core includes the filetool utility for saving personal settings and data. The text file 
-/opt/.filetool.lst lists files and directories to be backed up at power down and restored at 
+*/opt/.filetool.lst* lists files and directories to be backed up at power down and restored 
+at 
 reboot. The list may be changed manually (using vi, nano, etc) or via the scripts in the 
-Tools menu; note that the entry for /opt/filetool.lst should never be removed from the list 
-itself. filetool also supports exclusion of particular files via /opt/xfiletool.lst.
+Tools menu; note that the entry for */opt/filetool.lst* should never be removed from the 
+list 
+itself. Filetool also supports exclusion of particular files via */opt/xfiletool.lst*.
 
-By default, filetool.lst includes the entire home/tc directory, and xfiletool.lst excludes 
-some unnecessary caches and temporary directories.
+By default, *filetool.lst* includes the entire home/tc directory, and *xfiletool.lst* 
+excludes some unnecessary caches and temporary directories.
 
-Filetool writes the backup file mydata.tgz. The location of mydata.tgz can be initially set 
-using the 
-boot option restore=hdXY, restore=hdXY/directory, or, after boot, by selecting 
+Filetool writes the backup file *mydata.tgz*. The location of mydata.tgz can be initially 
+set using the 
+boot option *restore=hdXY*, *restore=hdXY/directory*, or, after boot, by selecting 
 Backup/Restore from the Control Panel. If the restore code is not used, Tiny Core will 
-search for mydata.tgz in available root directories at boot. Conversely, the boot option norestore 
+search for *mydata.tgz* in available root directories at boot. Conversely, the boot option 
+norestore 
 ignores any existing backup files, a useful tool for trouble-shooting and upgrading.
 
 Further settings and configurations are stored or executed using /home/tc/.xsession, 
