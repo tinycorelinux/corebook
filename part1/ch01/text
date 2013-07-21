@@ -178,7 +178,7 @@ set using the
 boot option *restore=hdXY*, *restore=hdXY/directory*, or, after boot, by selecting 
 Backup/Restore from the Control Panel. If the restore code is not used, Tiny Core will 
 search for *mydata.tgz* in available root directories at boot. Conversely, the boot option 
-norestore 
+*norestore* 
 ignores any existing backup files, a useful tool for trouble-shooting and upgrading.
 
 Further settings and configurations are stored or executed using /home/tc/.xsession, 
@@ -190,9 +190,8 @@ Persistent home
 Just as Tiny Core offers persistence options for downloaded application extensions, so does 
 it for your home directory. These are set using boot codes/options.
 
-The bootcode home=hdXY will automatically setup /home/tc to "bind" to /mnt/hdXY/home/tc. 
-When using the home boot code, mydata.tgz is not created - personal data backups must occur in a more 
-traditional way. The home boot code lets Tiny Core coexist with other Linux installations by 
+The bootcode *home=hdXY* will automatically setup /home/tc to "bind" to /mnt/hdXY/home/tc. 
+The home boot code lets Tiny Core coexist with other Linux installations by 
 inserting the tc user directory under a pre-existing /home directory. Also, Tiny Core 
 cannot auto-detect a persistent home directory, so the home boot option is always required. 
 
