@@ -1,4 +1,4 @@
-Core Concepts
+Core concepts
 -------------
 
 NOTE: This chapter is an edited version of the one available on our web page.
@@ -46,8 +46,8 @@ The boot code *base* is notable. Use *base* to simulate Default Mode and skip al
 application extension installing or mounting. This is a useful tool for trouble-shooting, extension 
 building, upgrading ... and just checking out how fast Tiny Core can boot on your hardware. 
 
-USB and External Storage Devices Special Requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+USB and other external storage devices special requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Tiny Core can be instructed to search for data on external devices at boot time:
 a USB pen drive, compact flash, or other portable media. This need not be the boot media;
@@ -62,7 +62,7 @@ If you store data on external/slow media, it may be necessary to use the boot co
 waitusb=5 or similar. This pauses the pauses the boot process for five seconds, waiting for 
 slow devices to register with the system bus. 
 
-Dependency Checking and Downloading
+Dependency checking and downloading
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Tiny Core makes application-getting as easy as possible. The Appbrowser provides application 
@@ -73,24 +73,24 @@ changes and concerns.
 Dependencies are the pieces (other applications) required for an application. In short, the 
 Tiny Core Appbrowser will take care of downloading and checking dependencies for you. 
 
-Modes of Operation
+Modes of operation
 ~~~~~~~~~~~~~~~~~~
 
-The Modes of Operation mix up how Tiny Core Loads, Mounts, and Installs at boot time (see 
-Philosophies, above, if you want to clarify what those three things mean here). Tiny Core 
+The modes of operation mix up how Tiny Core loads, mounts, and installs at boot time (see 
+philosophies, above, if you want to clarify what those three things mean here). Tiny Core 
 has three main Modes:
-- Default Mode: Cloud/Internet 
-- Mount Mode: TCZ/Install 
-- Copy Mode: TCZ/Install + copy2fs.flg/lst
+- Default mode: cloud/internet 
+- Mount mode: TCZ/Install 
+- Copy mode: TCZ/Install + copy2fs.flg/lst
 
 Again, some may say there is a "Traditional Mode: Install to Hard Drive", but that's not 
 really a Mode at all. If you want to do it, go right ahead. It's just not one of the 
 original goals of the project, so expect to keep both pieces if it breaks.
 
-The Default Mode: Cloud/Internet
+The default mode: cloud/internet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, Tiny Core Linux operates like a Cloud/Internet client. In Default Mode:
+By default, Tiny Core Linux operates like a cloud/internet client. In default mode:
 
 Tiny Core boots entirely into RAM. 
 Users run the Appbrowser to browse the repository and download applications. 
@@ -103,7 +103,7 @@ to be restored.
 If you would like applications stored locally and set up on each reboot, then consider the 
 Mount and Copy Modes. 
 
-The Mount Mode of Operation: TCZ/Install
+The mount mode of operation: TCZ/install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the most widely used and recommended method for using Tiny Core. 
@@ -123,7 +123,7 @@ to flag them as
 either "OnBoot" (mount at boot) or "On Demand" (do not mount at boot, but create a special 
 menu section for easy access and display an icon if available).
 
-The Copy Mode of Operation: TCZ/Install + copyfs indicator
+The copy mode of operation: TCZ/install + copyfs indicator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The copy mode is a modification of the mount mode.
@@ -145,15 +145,15 @@ selections.
 It should be noted that using a bulk selection, that is, loading all extensions to RAM, 
 allows the storage to be unmounted, and the system to avoid any corruption on power loss.
 
-Backup/Restore and Other Persistence Options
+Backup/restore and other persistence options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Aside from the Mount Mode and the tce directory of application extensions, Tiny Core 
 supports persistent/permanent:
-Backup and Restore of personal settings, and
-Persistent /home and /opt directories.
+Backup and restore of personal settings, and
+persistent /home and /opt directories.
 
-Backup/Restore
+Backup/restore
 ^^^^^^^^^^^^^^
 
 Tiny Core includes the filetool utility for saving personal settings and data. The text file 
@@ -175,7 +175,7 @@ ignores any existing backup files, a useful tool for trouble-shooting and upgrad
 Further settings and configurations are stored or executed using /home/tc/.xsession, 
 /home/tc/.profile, /opt/bootlocal.sh, and /opt.
 
-Persistent Home
+Persistent home
 ^^^^^^^^^^^^^^^
 
 Just as Tiny Core offers persistence options for downloaded application extensions, so does 
@@ -191,7 +191,7 @@ The decision on whether to use the default backup, or to set up a persistent hom
 directory depends on the amount of data you intend to save, and the device you use for 
 storage (USB flash and SSDs may have limited write cycles, for instance).
 
-Bottom Matter
+Bottom matter
 ~~~~~~~~~~~~~
 
 If you have made it this far, congratulations! You're ready to get Tiny Core and get 
