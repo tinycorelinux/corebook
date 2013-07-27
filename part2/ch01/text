@@ -3,7 +3,7 @@ Remastering
 
 Remastering is the process of editing the initrd image. Producing a new ISO image is not 
 necessary, but is often useful if you intend to burn the result to a CD or to test easily in 
-a virtual machine.
+a virtual machine. indexterm:[remaster]
 
 This chapter covers the process of remastering manually. There exists a helper extension, 
 EZRemaster, but that one will not be covered here.
