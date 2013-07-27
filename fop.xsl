@@ -27,6 +27,28 @@
 
 <xsl:param name="orderedlist.label.width">1.5em</xsl:param>
 
+  <!-- 1.2 section -->
+  <xsl:attribute-set name="section.title.level1.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.5"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  <!-- 1.2.3 section -->
+  <xsl:attribute-set name="section.title.level2.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.36"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  <!-- 1.2.3.4 section -->
+  <xsl:attribute-set name="section.title.level3.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.2"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+
 <!-- My style customisations
 <xsl:template match='xslthl:keyword' mode="xslthl">
 <fo:inline font-weight="normal" color="#AA22FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
