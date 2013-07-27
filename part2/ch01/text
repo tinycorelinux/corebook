@@ -1,4 +1,98 @@
-First chapter
--------------
+Remastering
+-----------
 
-Text, etc
+Remastering is the process of editing the initrd image. Producing a new ISO image is not 
+necessary, but is often useful if you intend to burn the result to a CD or to test easily in 
+a virtual machine.
+
+This chapter covers the process of remastering manually. There exists a helper extension, 
+EZRemaster, but that one will not be covered here.
+
+Pre-requirements
+~~~~~~~~~~~~~~~~
+
+You need a Linux distribution with the required programs available: cpio, tar, gzip, advdef, 
+and mkisofs. This need not be Tiny Core itself, but remastering inside Tiny Core is the most 
+tested option.
+
+For remastering on Core, install the extensions advcomp.tcz and optionally mkisofs-tools.tcz 
+if creating an ISO image.
+
+Unpacking
+~~~~~~~~~
+
+First, we'll extract the kernel and initrd image from the latest Core iso.
+
+[source,sh]
+----
+$ sudo mkdir /mnt/tmp
+$ sudo mount TinyCore-current.iso /mnt/tmp -o loop,ro
+$ cp /mnt/tmp/boot/bzImage /mnt/tmp/boot/tinycore.gz /tmp
+$ sudo umount /mnt/tmp
+----
+
+If you are going to create an ISO image, instead of copying only these two files, copy 
+everything:
+
+[source,sh]
+----
+$ sudo mkdir /mnt/tmp
+$ sudo mount TinyCore-current.iso /mnt/tmp -o loop,ro
+$ cp -a /mnt/tmp/boot /tmp
+$ mv /tmp/boot/tinycore.gz /tmp
+$ sudo umount /mnt/tmp
+----
+
+With the files copied into /tmp, we'll be unpacking the initrd image next.
+
+[source,sh]
+----
+$ sudo mkdir /tmp/extract
+$ cd /tmp/extract
+$ zcat /tmp/tinycore.gz | sudo cpio -i -H newc -d
+----
+
+Please note the use of sudo where needed; root rights are required to preserve permissions 
+correctly. If your host distribution sets non-default flags for */tmp*, you may also need to 
+change the permissions of the */tmp/extract* directory - it needs to be *root:root 755* in 
+order to produce a bootable image.
+
+Now, with the initrd image laid bare before our eyes, feel free to do any edits, additions, 
+or removals needed.
+
+Packing
+~~~~~~~
+
+With the modifications done, these steps create the initrd image from the extracted 
+directory tree:
+
+[source,sh]
+----
+$ cd /tmp/extract
+$ sudo find | sudo cpio -o -H newc | gzip -2 > ../tinycore.gz
+$ cd /tmp
+$ advdef -z4 tinycore.gz
+----
+
+The image is compressed using gzip's level 2 to save time. Advdef is used to re-compress the 
+image with a slightly better implementation, producing a smaller image that is faster to 
+boot.
+
+Creating an ISO image
+~~~~~~~~~~~~~~~~~~~~~
+
+The following commands create a bootable ISO image, ready to be burned or booted in a 
+virtual machine:
+
+[source,sh]
+----
+$ cd /tmp
+$ mv tinycore.gz boot
+$ mkdir newiso
+$ mv boot newiso
+$ mkisofs -l -J -r -V TC-custom -no-emul-boot -boot-load-size 4 \
+ -boot-info-table -b boot/isolinux/isolinux.bin \
+  -c boot/isolinux/boot.cat -o TC-remastered.iso newiso
+$ rm -rf newiso
+----
+
