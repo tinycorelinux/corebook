@@ -27,7 +27,8 @@ First, we'll extract the kernel and initrd image from the latest Core iso.
 ----
 $ sudo mkdir /mnt/tmp
 $ sudo mount TinyCore-current.iso /mnt/tmp -o loop,ro
-$ cp /mnt/tmp/boot/bzImage /mnt/tmp/boot/tinycore.gz /tmp
+$ cd /mnt/tmp
+$ cp boot/bzImage boot/tinycore.gz /tmp
 $ sudo umount /mnt/tmp
 ----
 
@@ -69,7 +70,8 @@ directory tree:
 [source,sh]
 ----
 $ cd /tmp/extract
-$ sudo find | sudo cpio -o -H newc | gzip -2 > ../tinycore.gz
+$ sudo find | sudo cpio -o -H newc | \
+  gzip -2 > ../tinycore.gz
 $ cd /tmp
 $ advdef -z4 tinycore.gz
 ----
@@ -90,8 +92,9 @@ $ cd /tmp
 $ mv tinycore.gz boot
 $ mkdir newiso
 $ mv boot newiso
-$ mkisofs -l -J -r -V TC-custom -no-emul-boot -boot-load-size 4 \
- -boot-info-table -b boot/isolinux/isolinux.bin \
+$ mkisofs -l -J -r -V TC-custom -no-emul-boot \
+  -boot-load-size 4 \
+  -boot-info-table -b boot/isolinux/isolinux.bin \
   -c boot/isolinux/boot.cat -o TC-remastered.iso newiso
 $ rm -rf newiso
 ----
