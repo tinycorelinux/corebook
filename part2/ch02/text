@@ -52,6 +52,9 @@ $ sudo find | sudo cpio -o -H newc | \
 $ advdef -z4 ../myimg.gz
 ----
 
+To see whether the image works, boot it as outlined in the next section, and log out. Your 
+new login text should be visible above the login prompt.
+
 Booting with more than one initrd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -75,4 +78,3 @@ with.
 ----
 $ cat core.gz myimg.gz > new.gz
 ----
-
