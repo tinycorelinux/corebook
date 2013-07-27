@@ -1,0 +1,59 @@
+Managing extensions
+-------------------
+
+This chapter will detail the options under the Maintenance menu in Apps.
+
+MD5 checking
+~~~~~~~~~~~~
+
+This option allows you to do a corruption check for downloaded extensions. Many types of 
+corruption are detected when trying to install an extension, but for some types, or 
+extensions not installed, it can be useful to do a manual check.
+
+Check for orphans
+~~~~~~~~~~~~~~~~~
+
+Orphans are extensions not found in the repository. They may have been removed for various 
+reasons, or they may be custom extensions not submitted to the repository.
+
+You aren't required to take any action in case an extension was removed from the mirrors; if 
+it works for you, you can continue to use it, but no updates will be coming.
+
+Dependencies and deletions
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This mode lets you view various reports on the dependencies of all extensions present in the 
+tce directory. Some may require the reporting database to be build, those will be greyed out 
+until the helper database is built.
+
+One function in particular, update dep files, is occasionally needed. Occasionally there's 
+server-side reorganization of the dependencies, or an extension may be renamed, requiring 
+you to update the dependency files to avoid inconsistencies. After updating the .dep files, 
+it's recommended to use the "Fetch missing dependencies", in case a dependency was added, or 
+an extension was renamed.
+
+The other function, extension deletion, allows you to mark an extension to be deleted on the 
+next reboot. All of their dependencies that aren't needed by anything else will also be 
+removed.
+
+Check onboot unneeded
+~~~~~~~~~~~~~~~~~~~~~
+
+This option analyzes your onboot.lst to see if there are any redundant items. For example, 
+gtk2 is a dependency of Firefox, so if you listed both gtk2 and Firefox, gtk2 would be 
+redundant.
+
+Having a compact list without such redundancies helps boot time.
+
+Onboot/ondemand maintenance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These two modes allow you to add and remove extensions from the onboot or ondemand lists. 
+This comes in handy if you earlier chose to have an extension be on demand, but now it would 
+make more sense to load it on boot, for example.
+
+Onboot.lst is a plain text file, so you can edit it with an editor of your choice in 
+addition to the GUI method listed. Ondemand items are generated scripts, so managing them 
+manually is discouraged.
+
+
