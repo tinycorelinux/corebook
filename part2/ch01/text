@@ -26,14 +26,14 @@ if creating an ISO image.
 Unpacking
 ~~~~~~~~~
 
-First, we'll extract the kernel and initrd image from the latest Core iso.
+First, we'll extract the kernel and initrd image from the latest Core ISO.
 
 [source,sh]
 ----
 $ sudo mkdir /mnt/tmp
 $ sudo mount TinyCore-current.iso /mnt/tmp -o loop,ro
 $ cd /mnt/tmp
-$ cp boot/bzImage boot/tinycore.gz /tmp
+$ cp boot/vmlinuz boot/tinycore.gz /tmp
 $ sudo umount /mnt/tmp
 ----
 
