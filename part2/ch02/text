@@ -1,0 +1,78 @@
+Remastering with a separate image
+---------------------------------
+
+In order to better keep track of which files are modified or added, and to enable easier 
+updating to a newer Core, it's recommended to use the method outlined in this chapter.
+
+However, if you need to remove something from the image, for example to fit in tight memory 
+constraints, this method will not work. It is only suitable for adding or changing files.
+
+There are specific characteristics in the kernel's cpio loader that aren't present in the 
+userspace utility: it allows you to load several images, either separately or concatenated 
+together, and if the same file exists in more than one image, the later version overwrites 
+the former.
+
+This allows us to keep all our changes in a separate initrd image, making it easy to update 
+to a newer Core version (literally only replacing core.gz and checking our modifications are  
+up to date).
+
+For the sake of an example, let's create a separate image that changes the login message.
+
+Practise image
+~~~~~~~~~~~~~~
+
+The login message is stored in /etc/issue. Therefore we need to create an image that 
+contains the exact same path, with the contents we want to see.
+
+[source,sh]
+----
+$ cd /tmp
+$ sudo mkdir -p tmp/etc
+$ echo "I believe!" | sudo tee tmp/etc/issue
+----
+
+Now our new directory tree should look like this:
+
+[source,sh]
+----
+tmp/
+`-- etc/
+    `-- issue
+    
+1 directory, 1 file
+----
+
+Let's pack it up like we would a normal remaster.
+
+[source,sh]
+----
+$ cd /tmp/tmp
+$ sudo find | sudo cpio -o -H newc | \
+  gzip 2 > ../myimg.gz
+$ advdef -z4 ../myimg.gz
+----
+
+Booting with more than one initrd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many bootloaders allow you to submit more than one image separately. For example, the 
+syslinux family uses this syntax:
+
+[source,sh]
+----
+initrd=/boot/core.gz,/boot/myimg.gz
+----
+
+That is, you place the new image in the same directory as the main image, and place it after 
+the original one, separated by a comma.
+
+If using a bootloader that only supports one initrd (GRUB legacy, some of the DOS-based 
+loaders, etc), you will need to cat the images together. This process is not easily 
+reversible in userspace, so keep a separated copy of your new image around to do updates 
+with.
+
+[source,sh]
+----
+$ cat core.gz myimg.gz > new.gz
+----
+
