@@ -178,5 +178,5 @@ Booting the image in KVM takes under one second.
 
 The ISO image is approximately 17 Mb in size, and the system uses 35 Mb of RAM when running. 
 It's recommended to add about 5-20 Mb to that to account for different resolutions and 
-drivers, putting the required RAM for this image at 55 Mb (64 Mb rounded to nearest common 
-size).
+drivers, putting the required RAM for this image at 55 Mb (64 Mb rounded to the nearest 
+common size).
