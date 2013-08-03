@@ -49,6 +49,10 @@
     </xsl:attribute>
   </xsl:attribute-set>
 
+<xsl:attribute-set name="monospace.verbatim.properties">
+	<xsl:attribute name="keep-together.within-column">always</xsl:attribute>
+</xsl:attribute-set>
+
 <!-- My style customisations
 <xsl:template match='xslthl:keyword' mode="xslthl">
 <fo:inline font-weight="normal" color="#AA22FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
