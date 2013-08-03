@@ -23,7 +23,7 @@ TinyCore ISO we just downloaded. Start it either in a virtual machine, or on rea
 With our environment up, download the rdesktop extension:
 [source,sh]
 ----
-$ tce-load -w rdesktop
+$ tce-load -w rdesktop glibc_gconv
 ----
 
 As we're running in the cloud mode, all extensions will be kept in RAM, in */tmp/tce*. With 
@@ -37,14 +37,19 @@ $ sudo mount /dev/sr0
 $ cp -a /mnt/sr0 /tmp/newiso
 ----
 
+The copy might warn about not being able to keep the file ownership; this warning is 
+harmless.
+
 Copy rdesktop and its dependencies to the *cde* directory on the new ISO:
 [source,sh]
 ----
 $ cd /tmp/tce/optional
-$ cp * /tmp/newiso/cde/optional
+$ sudo cp * /tmp/newiso/cde/optional
 
 # Add it to onboot.lst, so it gets installed on boot.
+$ chmod u+w /tmp/newiso/cde/onboot.lst
 $ echo rdesktop.tcz >> /tmp/newiso/cde/onboot.lst
+$ echo glibc_gconv.tcz >> /tmp/newiso/cde/onboot.lst
 ----
 
 If you want to disable *wbar* in the new image, edit the new *onboot.lst* and remove the 
@@ -101,7 +106,7 @@ Fire up rdesktop when the system is up
 We'll add a file to the default user's *.X.d* directory. This script piece will run rdesktop 
 in a loop, popping up an error message if it fails for some reason.
 
-Given that no disk will be mounted, the system can be safely turned off via the
+Given that no writable disk will be mounted, the system can be safely turned off via the
 physical power button. If this is to run on a set of dedicated terminals, it might also be 
 useful to add a cron job to turn the system off at preset hours.
 
@@ -142,15 +147,18 @@ Let's place the initrd on the ISO, and have it be used:
 [source,sh]
 ----
 $ cd /tmp/newiso/boot
-$ mv /tmp/myimg.gz .
-$ editor isolinux.cfg
+$ sudo mv /tmp/myimg.gz .
+$ sudo sed -i 's@core.gz@&,/boot/myimg.gz@g' \
+  isolinux/isolinux.cfg
 ----
+
+If you'd like to tweak the boot menu, or set other boot options, edit *isolinux.cfg* now.
 
 Finally, create the ISO image:
 [source,sh]
 ----
 $ cd /tmp
-$ mkisofs -l -J -r -V TC-custom -no-emul-boot \
+$ sudo mkisofs -l -J -r -V TC-custom -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table -b boot/isolinux/isolinux.bin \
   -c boot/isolinux/boot.cat -o TC-remastered.iso newiso
@@ -165,6 +173,7 @@ the RDP client in a loop.
 
 Booting the image in KVM takes under one second.
 
-The ISO image is approximately XX Mb in size, and the system uses XX Mb of RAM when running. 
+The ISO image is approximately 17 Mb in size, and the system uses 35 Mb of RAM when running. 
 It's recommended to add about 5-20 Mb to that to account for different resolutions and 
-drivers, putting the required RAM for this image at XX Mb.
+drivers, putting the required RAM for this image at 55 Mb (64 Mb rounded to nearest common 
+size).
