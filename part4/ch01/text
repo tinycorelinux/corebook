@@ -20,11 +20,14 @@ Add the rdesktop extension and dependencies to the ISO
 In order to easily get the extensions we need, we'll be doing the remaster inside the fresh 
 TinyCore ISO we just downloaded. Start it either in a virtual machine, or on real hardware.
 
-With our environment up, download the rdesktop extension:
+With our environment up, download the rdesktop and gconv extensions:
 [source,sh]
 ----
 $ tce-load -w rdesktop glibc_gconv
 ----
+
+The gconv extension contains the data files for converting text between character sets; it's 
+an optional dependency of rdesktop.
 
 As we're running in the cloud mode, all extensions will be kept in RAM, in */tmp/tce*. With 
 a fresh image, only rdesktop and its dependencies will be there.
