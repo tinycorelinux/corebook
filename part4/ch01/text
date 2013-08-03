@@ -1,4 +1,170 @@
-First chapter
--------------
 
-Text, etc
+A thin remote desktop client
+----------------------------
+
+In this chapter, we'll build an ISO image that automatically launches a RDP session to a 
+pre-determined target.
+
+Overview of steps:
+
+. Grab the latest TinyCore ISO (X is needed)
+. Add the rdesktop extension and dependencies to the ISO
+. Make the boot wait for getting an IP address
+. Fire up rdesktop when the system is up
+
+To start with, download the latest TinyCore ISO from your close mirror.
+
+Add the rdesktop extension and dependencies to the ISO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to easily get the extensions we need, we'll be doing the remaster inside the fresh 
+TinyCore ISO we just downloaded. Start it either in a virtual machine, or on real hardware.
+
+With our environment up, download the rdesktop extension:
+[source,sh]
+----
+$ tce-load -w rdesktop
+----
+
+As we're running in the cloud mode, all extensions will be kept in RAM, in */tmp/tce*. With 
+a fresh image, only rdesktop and its dependencies will be there.
+
+Let's mount and copy the ISO we booted from:
+[source,sh]
+----
+# The CD might already be mounted, but just in case not:
+$ sudo mount /dev/sr0
+$ cp -a /mnt/sr0 /tmp/newiso
+----
+
+Copy rdesktop and its dependencies to the *cde* directory on the new ISO:
+[source,sh]
+----
+$ cd /tmp/tce/optional
+$ cp * /tmp/newiso/cde/optional
+
+# Add it to onboot.lst, so it gets installed on boot.
+$ echo rdesktop.tcz >> /tmp/newiso/cde/onboot.lst
+----
+
+If you want to disable *wbar* in the new image, edit the new *onboot.lst* and remove the 
+wbar.tcz line.
+
+Now that the extensions have been copied, we can install the extensions needed to create the 
+ISO:
+[source,sh]
+----
+$ tce-load -wi advcomp mkisofs-tools
+----
+
+Make the boot wait for getting an IP address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A normal Core boot does not wait for the network to be up; however, for a dedicated RDP 
+client, that's what we want to happen.
+
+To make the boot wait for it, we need to add the commands to one of the synchronous files. 
+Since this is a system-wide resource we're waiting for, */opt/bootsync.sh* is our target.
+
+We'll include our customizations in a new initrd file:
+[source,sh]
+----
+$ sudo su
+# When editing the main system files, it's best to be
+# root, so that permissions and ownership are correct.
+
+$ cd /tmp
+$ mkdir -p initrd/opt
+$ cp /opt/bootsync.sh initrd/opt
+$ editor initrd/opt/bootsync.sh
+----
+
+Paste the following piece of script to the end of the file:
+[source,sh]
+----
+count=0
+echo -n Waiting for the network...
+while [ "$count" -lt 60 ]; do
+	ifconfig eth0 | grep -q inet && break
+	sleep 1
+	count=$((count + 1))
+	echo -n .
+done
+----
+
+This piece of script will wait up to 60 seconds, checking if the first wired network card 
+has an IP address, and if it does, breaking out of the loop.
+
+Fire up rdesktop when the system is up
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We'll add a file to the default user's *.X.d* directory. This script piece will run rdesktop 
+in a loop, popping up an error message if it fails for some reason.
+
+Given that no disk will be mounted, the system can be safely turned off via the
+physical power button. If this is to run on a set of dedicated terminals, it might also be 
+useful to add a cron job to turn the system off at preset hours.
+
+[source,sh]
+----
+$ sudo su
+# When editing the main system files, it's best to be
+# root, so that permissions and ownership are correct.
+
+$ cd /tmp/initrd
+$ mkdir -p etc/skel/.X.d
+$ cd etc/skel/.X.d
+$ editor rdesktop
+----
+
+Add the desired rdesktop command line to the file:
+[source,sh]
+----
+while [ 1 ]; do
+	rdesktop -u user 10.0.2.2:7777 2> /tmp/rderr
+	[ "$?" -ne 0 ] && popup `cat /tmp/rderr`
+done
+----
+
+This starts up rdesktop, directing errors to a file, and if the launch fails, show the 
+errors to the user with a popup message.
+
+Let's pack our new initrd image up:
+[source,sh]
+----
+$ cd /tmp/initrd
+$ sudo find | sudo cpio -o -H newc | \
+  gzip 2 > ../myimg.gz
+$ advdef -z4 ../myimg.gz
+----
+
+Let's place the initrd on the ISO, and have it be used:
+[source,sh]
+----
+$ cd /tmp/newiso/boot
+$ mv /tmp/myimg.gz .
+$ editor isolinux.cfg
+----
+
+Finally, create the ISO image:
+[source,sh]
+----
+$ cd /tmp
+$ mkisofs -l -J -r -V TC-custom -no-emul-boot \
+  -boot-load-size 4 \
+  -boot-info-table -b boot/isolinux/isolinux.bin \
+  -c boot/isolinux/boot.cat -o TC-remastered.iso newiso
+$ rm -rf newiso
+----
+
+Result
+~~~~~~
+
+Our new ISO image boots gracefully to the desktop, waiting for the network to be up, running 
+the RDP client in a loop.
+
+Booting the image in KVM takes under one second.
+
+The ISO image is approximately XX Mb in size, and the system uses XX Mb of RAM when running. 
+It's recommended to add about 5-20 Mb to that to account for different resolutions and 
+drivers, putting the required RAM for this image at XX Mb.
