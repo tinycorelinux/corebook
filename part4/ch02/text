@@ -1,0 +1,165 @@
+
+Automated network installer
+---------------------------
+
+In this chapter, we'll build a PXE-bootable image that partitions and formats the local 
+disk, installs a bootloader, and unpacks a preset tarball to the new partition.
+
+It may be used for quick mass installations, or booted from a CD/USB as a conventional 
+automated installer.
+
+What the image installs is not specified here; it need not be Core.
+
+Start files
+~~~~~~~~~~~
+
+We need to download the kernel and main initrd, vmlinuz and core.gz, from any mirror. The 
+installer logic will be placed in an additional initrd.
+
+This procedure may be performed from any linux distribution; the downloaded extension has no 
+dependencies, so it is easy to do with a web browser if necessary.
+
+Download the syslinux extension:
+[source,sh]
+----
+$ tce-load -w syslinux
+----
+
+The installer script
+~~~~~~~~~~~~~~~~~~~~
+
+We'll include an installer script in the new initrd, and call it from *bootsync.sh*, so that 
+its output is visible on screen.
+
+[source,sh]
+----
+$ sudo su
+# When editing the main system files, it's best to be
+# root, so that permissions and ownership are correct.
+
+$ cd /tmp
+$ mkdir -p initrd/opt
+$ cp /opt/bootsync.sh initrd/opt
+$ editor initrd/opt/bootsync.sh
+----
+
+Add a call to your script to the end, making sure the network is up before starting it:
+
+[source,sh]
+----
+count=0
+echo -n Waiting for the network...
+while [ "$count" -lt 60 ]; do
+	ifconfig eth0 | grep -q inet && break
+	sleep 1
+	count=$((count + 1))
+	echo -n .
+done
+
+/opt/installer.sh
+----
+
+Create the installer script, marking it as executable:
+
+[source,sh]
+----
+$ sudo su
+# When editing the main system files, it's best to be
+# root, so that permissions and ownership are correct.
+
+$ cd /tmp/initrd/opt
+$ touch installer.sh
+$ chmod a+x installer.sh
+$ editor installer.sh
+----
+
+Here's the example contents:
+
+[source,sh]
+----
+#!/bin/sh
+
+TARGET=/dev/sda
+
+out() {
+	sync; sync
+	poweroff
+}
+
+# Check there is a disk
+fdisk -l $TARGET 2>&1 | grep -q bytes
+[ "$?" -ne 0 ] && echo "No disk found" && \
+	sleep 10 && out
+
+# Zero out the partition table
+dd if=/dev/zero of=$TARGET bs=512 count=1
+
+# Partition it to two
+# Swap is set up at 256 Mb, rest for ext4
+fdisk $TARGET << EOF
+n
+p
+1
+
++256M
+t
+82
+n
+p
+2
+
+
+w
+EOF
+
+mkswap ${TARGET}1
+mkfs.ext4 ${TARGET}2
+
+cat /usr/local/share/syslinux/mbr.bin > $TARGET
+
+# Mount it, grab the tarball
+mkdir /mnt/target
+mount ${TARGET}2 /mnt/target
+
+cd /mnt/target
+wget http://my-url.com/files.tgz
+tar xvf files.tgz
+rm files.tgz
+
+# Install extlinux
+mkdir -p boot/extlinux
+extlinux -i /mnt/target/boot/extlinux
+
+umount /mnt/target
+
+# Done!
+echo Success.
+sleep 5
+out
+----
+
+We'll also need to unpack the syslinux extension to this new initrd. To do this on Core, 
+install the squashfs-tools-4.x extension.
+
+[source,sh]
+----
+$ sudo su
+$ cd /tmp
+$ unsquashfs syslinux.tcz
+$ cp -a squashfs-root/* initrd
+----
+
+Packing up & testing
+~~~~~~~~~~~~~~~~~~~~
+
+Let's pack our new initrd image up:
+[source,sh]
+----
+$ cd /tmp/initrd
+$ sudo find | sudo cpio -o -H newc | \
+  gzip 2 > ../myimg.gz
+$ advdef -z4 ../myimg.gz
+----
+
+Try booting the new image in a virtual machine with a hard drive attached - the whole 
+process should be quite fast.
