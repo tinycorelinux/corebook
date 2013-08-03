@@ -45,7 +45,7 @@ $ for file in `cat nano.tcz.tree`; do
 $	cp ${file}* /tmp/newiso/cde/optional
 $ done
 
-# Add it to the onboot.lst, so that it's installed on boot.
+# Add it to onboot.lst, so it gets installed on boot.
 $ echo nano.tcz >> /tmp/newiso/cde/onboot.lst
 ----
 
