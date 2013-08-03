@@ -1,0 +1,112 @@
+The tce directory structure
+---------------------------
+
+Looking inside the *tce* directory, there are a variety of files: control files in plain 
+text, and extensions as compressed archives. In this chapter we'll introduce the meaning and 
+format of these control files.
+
+Here's a typical *tce* directory:
+[source,sh]
+----
+.:
+firstrun
+onboot.lst
+ondemand/
+optional/
+xwbar.lst
+
+./ondemand:
+ace-of-penguins
+
+./optional:
+ace-of-penguins.tcz
+ace-of-penguins.tcz.md5.txt
+nano.tcz
+nano.tcz.dep
+nano.tcz.md5.txt
+ncurses-common.tcz
+ncurses-common.tcz.md5.txt
+ncurses.tcz
+ncurses.tcz.dep
+ncurses.tcz.md5.txt
+upgrade/
+
+./optional/upgrade:
+ncurses.tcz
+ncurses.tcz.dep
+ncurses.tcz.md5.txt
+----
+
+Starting from the top level, we have two directories: *ondemand/* for the ondemand scripts 
+(they install the extension, and optionally launch the program if one could be identified), 
+and *optional/* for keeping the extensions.
+
+The *optional/upgrade/* is a temporary directory, meaning these extension updates were 
+downloaded this session, and will be applied on reboot.
+
+This leaves us with the top-level plain text files.
+
+Firstrun
+~~~~~~~~
+
+This is an empty marker, whose existence means that the first-run dialog has been run and 
+shouldn't be run again. The first-run dialog is run on the launch of *Apps*, asking whether 
+you'd like to automatically choose the best mirror available. indexterm:[firstrun]
+
+The mirror chooser utility can be later on launched from the menu, if needed.
+
+Onboot.lst
+~~~~~~~~~~
+
+This is the plain text file containing a list of all extensions that should be loaded on 
+boot. The files should be listed without paths, and are looked for only in the *optional/* 
+directory. indexterm:[onboot.lst]
+
+This file may be managed via *Apps* or via your favorite text editor.
+
+Example onboot.lst file:
+[source,sh]
+----
+nano.tcz
+ace-of-penguins.tcz
+----
+
+Xwbar.lst
+~~~~~~~~~
+
+This file is formatted according to the *wbar* config file format. It lists the blocks that 
+should not be included in *wbar*, the zooming quick-launch bar included by default.
+
+Due to the format, it's preferred to edit this file via the *tc-wbarconf* utility, but 
+hand-crafted edits are possible. indexterm:[xwbar.lst]
+
+Example xwbar.lst file:
+[source,sh]
+----
+i: /usr/local/share/pixmaps/exit.png
+t: Exit
+c: exec exittc
+----
+
+Ondemand scripts
+~~~~~~~~~~~~~~~~
+
+If you install an extension as OnDemand, a script will be generated for it under the 
+*ondemand/* directory. If the extension can be detected as containing a single program, the 
+script will also launch the program; if not, it will merely load the extension when called.
+
+If the extension is detected as containing a single icon for the single program, this icon 
+will copied to the *ondemand/* directory, and will be shown in *wbar* just like if the 
+program were installed on boot. Upon clicking this icon, the generated script is called, and 
+the icon is removed, replaced by the application's real icon.
+
+These scripts are included in the window manager's menu whether or not they contain an icon 
+or a program.
+
+Example ondemand script:
+[source,sh]
+----
+#!/bin/sh
+ondemand -e nano.tcz
+----
+
