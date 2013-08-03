@@ -11,6 +11,7 @@ amount of data transferred would still be several times larger if the meta-data 
 in the main extension archive.
 
 The accompanying files are:
+
 - dep: direct dependencies
 - info: size, license, author, updates, and usage information
 - list: file list
@@ -53,14 +54,17 @@ Copying-policy: GPL
 Size:           88K
 Extension_by:   Curaga
 Tags:		Nano editor
-Comments:       The most essential component of any unix system,
-                and my personal favourite editor: Nano!
+Comments:       The most essential component of any
+		unix system, and my personal favourite
+		editor: Nano!
 -
-                Has most advanced options enabled, color syntax
-                highlighting, multibuffer, suspend etc.
+                Has most advanced options enabled,
+                color syntax highlighting, multibuffer,
+                suspend etc.
 -
 Change-log:     2008/07/05 - First version
-                2008/12/09 - Update to 2.0.9, this time in /usr/local
+                2008/12/09 - Update to 2.0.9,
+              		     this time in /usr/local
                 2009/10/05 - Removed user.tar.gz
 Current:        2011/05/25 - Update to 2.2.6
 ----
