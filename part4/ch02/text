@@ -116,7 +116,10 @@ mkswap ${TARGET}1
 mkfs.ext4 ${TARGET}2
 
 cat /usr/local/share/syslinux/mbr.bin > $TARGET
+----
 
+[source,sh]
+----
 # Mount it, grab the tarball
 mkdir /mnt/target
 mount ${TARGET}2 /mnt/target
@@ -130,9 +133,11 @@ rm files.tgz
 mkdir -p boot/extlinux
 extlinux -i /mnt/target/boot/extlinux
 
+cd /
 umount /mnt/target
 
 # Done!
+clear
 echo Success.
 sleep 5
 out
