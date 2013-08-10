@@ -1,0 +1,53 @@
+
+Extension install scripts
+-------------------------
+
+Extensions may optionally include a script to be run after they're loaded.
+This is often used to make a default configuration file writable, or to work around some 
+application that doesn't recognize its plugins if they are symlinks instead of real files.
+
+These install scripts live in the */usr/local/tce.installed* directory. They are named after 
+the extension's file name, so for *myext-foo.tcz* the install script needs to be named 
+*myext-foo*.
+
+Install scripts run as root.
+
+The install scripts should be owned by *tc:staff* and have executable permissions. The 
+*tce.installed* directory should be owned by *root:staff* and have *775* permissions.
+
+WARNING: Faulty permissions for the *tce.installed* directory may break extension loading.
+
+Example: nano
+~~~~~~~~~~~~~
+
+For an example, let's take a look at what kind of install script would be needed for the 
+nano editor.
+
+Nano ships with a system-wide default configuration file. If the user loads the nano 
+extension to RAM, the file will be writable, and nothing needs to be done; but what about 
+the other case, default mounting?
+
+In that case, the file would be a symlink to a read-only file, not what we want. So in the 
+install script, we need to detect if the configuration file is a symlink, and if so, copy 
+the real file in its place.
+
+As the install scripts are run before the backup is restored, we never overwrite any custom 
+configuration the user has done.
+
+[source,sh]
+----
+#!/bin/sh
+
+CONFDIR=/usr/local/etc
+
+[ -h $CONFDIR/nanorc ] && \
+	rm -f $CONFDIR/nanorc && \
+	cp -a /tmp/tcloop/nano/$CONFDIR/nanorc \
+		$CONFDIR
+
+# If the config file is a symlink,
+# remove it, and copy the real file
+# in its place.
+#
+# This is a no-op on copy2fs installs.
+----
