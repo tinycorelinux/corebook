@@ -89,7 +89,8 @@ To start it on boot, add the following to */opt/bootlocal.sh*:
 	-h /mnt/sda1/files
 ----
 
-A busybox httpd doesn't support file listings natively, it comes with a CGI program to do it 
+As busybox httpd doesn't support file listings natively, it comes with a CGI program to do 
+it 
 instead. Grab the *httpd_indexcgi.c* file from the latest stable busybox tarball, and 
 compile it to the proper place:
 
