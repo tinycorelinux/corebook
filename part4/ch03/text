@@ -1,0 +1,161 @@
+
+Private cloud
+-------------
+
+Cloud is such a buzzword. It means everything and nothing.
+
+For the purposes of this chapter, it means you set up an old computer at home, sharing your 
+files, letting you access them from anywhere, including your phone.
+
+The power usage of old computers is surprisingly low compared to modern 500W power guzzlers; 
+a first-generation Pentium may run in 60W full, less than the power guzzler runs at idle. 
+Since file serving takes little cpu, any old clunker ought to be of use; if the power 
+demands matter, we recommend re-purposing a thin client, as they often use only 15-25W.
+
+Most file sharing protocols are insecure; it's not recommended to expose SMB or NFS to the 
+internet. We'll be setting up two servers: busybox httpd giving passworded read-only access 
+to our files, and a SSH server giving secure read-write access.
+
+We assume you have installed Core to the computer, and have persistence set up. For this 
+example, we'll be sharing the files on *sda1/files*.
+
+It's assumed there's a NAT router between the box and the internet; it will handle port 
+forwarding and firewalling. It's assumed the data disk is the same as where Core is 
+installed; otherwise, it needs to be mounted in *bootlocal.sh*.
+
+SSH
+~~~
+
+For SSH, we have the choice of using dropbear, or the OpenSSH server. If SFTP is required, 
+you'll need OpenSSH; for this example, we'll assume shell and scp are enough, and will pick 
+dropbear. Install your selected SSH server extension, OnBoot.
+
+For file access, we'll create a separate user that has no other rights. His home directory 
+shall be the files directory.
+
+[source,sh]
+----
+$ sudo adduser -H -h /mnt/sda1/files johndoe
+# -H: don't create directory
+# -h: path to home directory
+
+# We need to give our new user write access to files
+$ sudo chown -R johndoe /mnt/sda1/files
+----
+
+To start dropbear on boot, add the following line to */opt/bootlocal.sh*:
+[source,sh]
+----
+/etc/init.d/dropbear start
+----
+
+To save our new user, their password, and the SSH host keys, add these lines to the backup 
+in */opt/.filetool.lst*:
+[source,sh]
+----
+etc/passwd
+etc/shadow
+etc/group
+etc/dropbear
+----
+
+Generate the host keys now, and run a backup:
+[source,sh]
+----
+$ sudo /etc/init.d/dropbear start
+$ backup
+----
+
+HTTPD
+~~~~~
+
+There is a pre-compiled extension for busybox httpd, *busybox-httpd.tcz*. If you need to 
+customize it, busybox is fairly easy to compile.
+
+Start by creating the config file for it:
+[source,sh]
+----
+$ sudo su
+$ echo "/:foo:bar" > /mnt/sda1/httpd.conf
+----
+
+This file disallows all access without the given username (foo) and password (bar).
+
+To start it on boot, add the following to */opt/bootlocal.sh*:
+[source,sh]
+----
+/usr/local/httpd/sbin/httpd -u nobody:nogroup \
+	-r "Private." -c /mnt/sda1/httpd.conf \
+	-h /mnt/sda1/files
+----
+
+A busybox httpd doesn't support file listings natively, it comes with a CGI program to do it 
+instead. Grab the *httpd_indexcgi.c* file from the latest stable busybox tarball, and 
+compile it to the proper place:
+
+[source,sh]
+----
+# Load compiletc.tcz if you hadn't already.
+$ gcc -o index.cgi httpd_indexcgi.c -Os -s
+$ mkdir /mnt/sda1/files/cgi-bin
+$ mv index.cgi /mnt/sda1/files/cgi-bin
+----
+
+Connections, ports
+~~~~~~~~~~~~~~~~~~
+
+Many routers have a DynDNS (or other such service) client built-in. These services give you 
+a DNS address even if your IP is not stable, as it often is not in home connections.
+
+As your NAT router handles port forwarding, you get to decide which ports to redirect to 
+your cloud's ports 22 (SSH) and 80 (HTTP). It's not recommended to use the port 22 publicly, 
+as that's painting a target on your door - there are automated bots trying to attack every 
+server with port 22 open. Even though using a non-standard SSH port is mere security by 
+obscurity, it's not humans that move is intended to deter, but automatic bots and scripts.
+
+For the HTTP port, most phones let you use a port other than 80, but using a port other than 
+the common ones (80, 443, or 8080) may be blocked by some 3G networks.
+
+Security considerations
+~~~~~~~~~~~~~~~~~~~~~~~
+
+HTTP and HTTP authentication is insecure. Anyone can snoop your username, password, and data 
+- don't use a sensitive one for these credentials, or download sensitive files over the HTTP 
+connection.
+
+It's however a balance with usability. Most devices support HTTP and HTTP authentication; 
+SSH access can be considered considerably more luxurious.
+
+As the router is assumed to handle firewalling, no firewall is installed on the box in this 
+example. Adding one would be an additional defense layer, but its advantage in practise 
+would be small in this scenario.
+
+Using a heavier HTTP server would allow SSL connections, giving slightly better protection 
+for the read-only access. However SSH with public key authentication is recommended for 
+sensitive data.
+
+The HTTP server is run as nobody, without any kind of write access to the system. Along with 
+the simplicity of busybox, it's unlikely for there to be a remote exploit for it. A chroot 
+may be added on top to isolate the server from the core system; though the valuable data 
+would be inside the chroot.
+
+HTTP server logging would be available by adding the *-v -f* options to the start line, 
+preventing the server from daemonizing and requesting verbose output. Redirecting stderr to 
+a file would preserve the logs. Remember in this case to have the httpd server be the last 
+line in bootlocal.sh, as the lines after it wouldn't execute.
+
+Final result
+~~~~~~~~~~~~
+
+You have your own personal cloud humming over there, giving you access to your data all 
+over the world. Sharing subfolders with specific passwords, say holiday pictures to 
+far-living family, is just one config change away.
+
+Assuming your end-device allows it, you have secure upload, download and shell; otherwise, 
+you have read-only HTTP access.
+
+
+The required extensions + the CGI script total about 120kb of disk space. Both servers use 
+about 500kb of RAM. The overhead over Core itself is small enough not to matter; if the 
+computer has enough RAM to run a shell, it can run this scenario. A Pentium with 32mb of RAM 
+would be adequate.
