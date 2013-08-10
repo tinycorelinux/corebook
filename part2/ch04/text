@@ -1,0 +1,69 @@
+
+Creating a personal (data) extension
+------------------------------------
+
+When you have a set of unchanging data that needs to be stored outside your home directory, 
+it's recommended to create an extension out of it rather than add it to the backup (where it 
+would add to your boot and shutdown times).
+
+The extension completely mirrors the resulting file system tree, so that if we want to see 
+*/usr/share/mydir*, our extension should contain *usr/share/mydir*.
+
+For an example, say you downloaded an icon theme from *gnome-look.org*. Icon themes should 
+be installed to */usr/share/icons/name* for a system-wide installation. It's a great example 
+of this type of data: unchanging, and needs to be outside the home directory.
+
+First, we'll create the tree we want to see inside the extension, in a temporary directory.
+We'll do this as root, so that system directories get the proper permissions and ownership.
+
+[source,sh]
+----
+$ sudo su
+$ cd /tmp
+$ mkdir myextension
+$ cd myextension
+$ mkdir -p usr/share/icons
+----
+
+Then, assuming the icon theme was unpacked to /tmp/gold (containing */tmp/gold/16x16* and 
+other icon directories), move it to the proper place:
+
+[source,sh]
+----
+$ sudo su # Still as root
+$ mv /tmp/gold /tmp/myextension/usr/share/icons
+----
+
+Now we're ready to create an extension out of this directory tree. If you haven't already 
+loaded the *squashfs-tools-4.x.tcz* extension, do so now.
+
+[source,sh]
+----
+$ cd /tmp
+$ mksquashfs myextension myicons.tcz
+----
+
+[NOTE]
+===============
+Our mksquashfs has been changed to use custom defaults. If using a mksquashfs binary from 
+elsewhere, you need to add the options *-b 4k -no-xattrs* for the same result.
+===============
+
+Your personal extension is now ready. All it takes now is to move it to your *tce* 
+directory, and to set it as OnBoot (if you need it every boot).
+
+[source,sh]
+----
+$ cd /tmp
+$ mv -v myicons.tcz /etc/sysconfig/tcedir/optional
+
+# Adding it to onboot.lst. Skip if you want it
+# OnDemand or not in any list at all
+# (manual loading only)
+$ cd /etc/sysconfig/tcedir
+$ echo myicons.tcz >> onboot.lst
+----
+
+You can install it right now with *tce-load -i myicons*, or you can reboot to test whether 
+it gets properly loaded on boot. Once the extension is loaded, you should see the 
+icons in */usr/share/icons*, and be able to use them in apps.
