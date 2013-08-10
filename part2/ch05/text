@@ -82,7 +82,7 @@ usr/
                 |-- lessecho.1
                 `-- lesskey.1
 
-5 directories, 6 files
+6 directories, 6 files
 ----
 
 We see that less installed three binaries, and three manual pages, all in the proper 
@@ -95,6 +95,14 @@ In this case, let's remove the man pages:
 ----
 $ cd /tmp/destless
 $ sudo rm -rf usr/local/share
+----
+
+It's also recommended to remove debugging symbols from the binaries, likewise for smaller 
+size:
+[source,sh]
+----
+$ cd /tmp/destless/usr/local/bin
+$ sudo strip -g *
 ----
 
 Packing up
