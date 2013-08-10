@@ -1,0 +1,110 @@
+
+Creating an extension
+---------------------
+
+Creating an extension with binaries is no different from one containing mere data, like in 
+the previous chapter. This chapter will mainly focus on the specifics of binaries, following 
+the process from compiling to organizing them according to conventions.
+
+By way of example, we'll be compiling *less*, a command-line document viewer. The process is 
+no different for graphical applications, no actions are needed to make them have proper 
+icons or menu items. Core follows the common FreeDesktop icon and menu standards.
+
+To start, install the main development extension, *compiletc.tcz*. This meta-extension will 
+install the GCC toolchain and system headers for you, corresponding to *build-essential* on 
+Debian systems, and other names on other distributions.
+
+Building less
+~~~~~~~~~~~~~
+
+Less uses the common Autotools build framework: "./configure && make && make install". Other 
+build systems (cmake, custom makefiles, and so on) will require different steps; consult the 
+program's install documentation if unsure.
+
+As less needs ncurses to build, install it and its headers, *ncurses-dev.tcz*. We assume you 
+have the latest less source downloaded and unpacked to /tmp.
+
+[NOTE]
+===========
+At this point, you would set the environment variables CFLAGS, CXXFLAGS and LDFLAGS.
+These variables affect the compiler and linker optimization, and vary by the target.
+
+If building an extension for yourself, you may use any values; if building for the 
+repository, see the wiki for the latest recommended values for your architecture.
+It's OK to leave them empty for your own extensions.
+===========
+
+
+[source,sh]
+----
+$ cd /tmp
+$ cd less-458 # Latest version at the time
+
+# Check the default options are OK
+$ ./configure --help | more
+
+# They are OK for less. Go with the defaults.
+$ ./configure
+
+# The process should run without errors.
+# If not, google for the error message.
+#
+# Next, build less:
+$ make
+----
+
+Creating the extension directory tree
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While still in the less-458 directory, we'll use the Autotools support for installing to a 
+destination directory, not to the running system (which would be lost on reboot).
+
+[source,sh]
+----
+# Again as root, so that system directory
+# permissions and ownership is correct.
+$ sudo make DESTDIR=/tmp/destless install
+----
+
+Taking a look in this temporary directory, the tree looks like this:
+[source,sh]
+----
+usr/
+`-- local/
+    |-- bin/
+    |   |-- less*
+    |   |-- lessecho*
+    |   `-- lesskey*
+    `-- share/
+        `-- man/
+            `-- man1/
+                |-- less.1
+                |-- lessecho.1
+                `-- lesskey.1
+
+5 directories, 6 files
+----
+
+We see that less installed three binaries, and three manual pages, all in the proper 
+locations. As network access is quite common, it's conventional to remove manual pages and 
+other documentation from extensions, or to have them in a separate -doc extension, so that 
+the main extension can be smaller.
+
+In this case, let's remove the man pages:
+[source,sh]
+----
+$ cd /tmp/destless
+$ sudo rm -rf usr/local/share
+----
+
+Packing up
+~~~~~~~~~~
+
+Creating a squashfs archive from the ready-made directory tree is the same as with a 
+data-only extension: one simple invocation.
+
+[source,sh]
+----
+$ cd /tmp
+$ mksquashfs destless myless.tcz
+----
