@@ -23,6 +23,9 @@ command line. A spirit of tinkering is advised, but not necessary.
 Reading the chapters in order is not necessary, so feel free to jump to the interesting 
 parts directly.
 
+The book is current for the latest stable 4.x for the x86 architecture, 4.7.7 at the time of 
+writing, though many of the principles apply to other versions and architecture ports.
+
 Conventions
 ~~~~~~~~~~~
 
