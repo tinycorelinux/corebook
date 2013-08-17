@@ -1,0 +1,111 @@
+
+File hosting via FTP
+--------------------
+
+Often you might need somebody to send you a bigger file, which is untenable over plain old 
+e-mail. The common alternative nowadays are third-party hosters such as Mega and Mediafire, 
+or cloud services such as those from Microsoft, Google, or Dropbox.
+
+The downside to these third-party services (besides the obvious reliance on a third party - 
+if they go down, you can't get to your file) is that they're not compatible with all 
+browsers, occasionally seemingly break at random, and sometimes host intrusive ads.
+They also cannot be automated easily, or require personal information to upload/download.
+
+To this end, we'll be setting up a FTP server with anonymous uploads, and a read-only 
+downloads section. FTP can be easily scripted, and it tends to be more efficient at serving 
+files than HTTP.
+
+Please keep in mind that FTP works over plaintext; don't store confidential data here, or 
+use any secure passwords for the authenticated content.
+
+It's assumed the data drive is mounted on boot. We'll be using *sda1* in this example.
+
+Installing & configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We'll be using a small server called BFTPD. Install *bftpd.tcz* onboot, and add this line to 
+*/opt/bootlocal.sh*:
+
+[source,sh]
+----
+bftpd -d -c /mnt/sda1/bftpd.conf
+----
+
+Copy the supplied example config file to the drive, and open it in your favorite editor:
+
+[source,sh]
+----
+$ cp /usr/local/etc/bftpd.conf.sample \
+	/mnt/sda1/bftpd.conf
+$ editor /mnt/sda1/bftpd.conf
+----
+
+The entries we'll consider now are HELLO_STRING, QUIT_MSG (cosmetical messages), the 
+ALLOWCOMMAND ones, the USERLIMIT ones, and the user sections.
+
+Once the hello and quit messages are to your liking, check that the only allowed command is 
+STOR - users aren't allowed to delete files, or to send site commands (special 
+server-dependent commands).
+
+You might want to limit the connections with the USERLIMIT variables, in particular 
+USERLIMIT_SINGLEUSER that stops a single user being logged in many times at once.
+
+In the user section, the default file sets up the anonymous login as redirecting to the 
+system user *ftp*. This fits us well. However, we want anonymous logins to be enabled, and 
+the user to be restricted to our data drive, so remove the DENY_LOGIN variable from the
+*user ftp* section, making the section look like this:
+
+[source,sh]
+----
+user ftp {
+  #Any password fits.
+  ANONYMOUS_USER="yes"
+  ROOTDIR="/mnt/sda1"  
+}
+----
+
+The next steps are creating the *ftp* user, backing up the user files, and making the upload 
+and download directories with appropriate permissions.
+
+[source,sh]
+----
+$ sudo adduser -h /mnt/sda1 -D -H ftp
+# Their home dir is /mnt/sda1,
+# they don't have a password, and
+# the directory will be created manually.
+
+# Add the user files to the backup.
+# This can also be done via the GUIs if desired.
+$ echo "etc/passwd" >> /opt/.filetool.lst
+$ echo "etc/shadow" >> /opt/.filetool.lst
+$ echo "etc/group" >> /opt/.filetool.lst
+
+$ cd /mnt/sda1
+$ mkdir upload download
+$ sudo chown ftp upload
+$ chmod o-w download
+$ chmod g+w upload
+
+# Anything placed in the download dir
+# is read-only.
+----
+
+As a sanity check before rebooting, start the server in no-fork mode to see that there are 
+no typos in the config file, or other issues:
+
+[source,sh]
+----
+$ sudo bftpd -D -c /mnt/sda1/bftpd.conf
+# If there are no errors, press ctrl-C
+----
+
+Testing
+~~~~~~~
+
+After a reboot, our FTP server should be running. Check that it's present in the running 
+processes list by running *ps*, and that it's listening by running *netstat -l -t*.
+
+A command-line FTP client is available in the *inetutils* extension, but you can use any 
+browser or FTP client to test the uploads and downloads.
+
+TODO TEST RESULTS
