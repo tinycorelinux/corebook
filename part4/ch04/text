@@ -1,0 +1,37 @@
+
+Simple Web server
+----------------
+
+*By Luiz Fernando Estevarengo AKA Zendrael*
+
+Building a simple web server is really easy with Core and Busybox HTTPD. This server is tiny 
+and fast, although it does not run some server-side pages, you can run CGI scripts compiled 
+or not - you can even write a shell script to act like a CGI.
+
+Download and load the busybox-httpd.tcz extension via Apps or by the command line. You must 
+put it in the OnBoot list if you want to load it every time the computer boots up, including this 
+line in */opt/bootlocal.sh*:
+
+[source,sh]
+----
+/usr/local/httpd/sbin/httpd -p 85 -h /home/tc/public_html -u tc:staff
+----
+
+We're specifying that the server will run on port 85, will load files stored in the 
+public_html folder under my user, and will run as the user *tc* with group *staff*.
+This is a conf-less method so you don't need a config file.
+
+By default, Busybox-HTTPD doesn't list files in directories, it will always look for an 
+index.html file. If you prefer to have a directory listing feature, you must add a CGI 
+script for it, also provided by the extension:
+
+[source,sh]
+----
+$ mkdir -p /home/tc/public_html/cgi-bin
+$ cp /usr/local/httpd/index.cgi /home/tc/public_html/cgi-bin
+
+# Make sure it has proper permissions
+$ chmod 755 /home/tc/public_html/cgi-bin/index.cgi
+----
+
+A quick reboot later, it's ready to go, serving files over the web!
