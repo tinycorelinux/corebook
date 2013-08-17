@@ -8,6 +8,15 @@ A Core install consists of three parts: a bootloader on some media, the main ima
 While these can all be on the same disk, they need not be; all three can be on separate 
 media if needed.
 
+[TIP]
+=========
+A Core install is completely nomadic, it doesn't read any settings from the install system.
+
+This means you can install to a drive on one system, and then move the drive to the target 
+system without any issues. This is useful for example for laptops that can't boot from CD or 
+USB.
+=========
+
 With the official installer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -75,12 +84,14 @@ image::images/part1/installer_done.png[scaledwidth="100%"]
 The installer will happily chug away, and assuming nothing out of place happens, you'll see 
 a success screen like this one.
 
-Manually
-~~~~~~~~
-
-gg
-
 From Windows via core2usb
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-gg
+A Core Team member created a simple USB installer for Windows users. It's not recommended to 
+use third-party installers such as LiLi or unetbootin, as they won't create the third part 
+of the install (the *tce* directory), meaning more work for you.
+
+This utility is available from http://core2usb.sf.net/. If you don't want to burn a CD, it's 
+a convenient one-click way to install Core to USB.
+
+image::images/part1/core2usb.png[scaledwidth="100%"]
