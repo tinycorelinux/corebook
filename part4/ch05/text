@@ -87,7 +87,7 @@ $ chmod o-w download
 $ chmod g+w upload
 
 # Anything placed in the download dir
-# is read-only.
+# is read-only via FTP.
 ----
 
 As a sanity check before rebooting, start the server in no-fork mode to see that there are 
