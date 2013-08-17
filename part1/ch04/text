@@ -1,29 +1,96 @@
-Updating the base system
-------------------------
+Basic package management via CLI
+--------------------------------
 
-As new minor and patch versions are released, for example 4.7 and 4.7.1, how do we update to 
-the latest core?
+In this chapter we'll go over the basic use of the command line equivalent to Apps, 
+*tce-ab*, and the direct interface, *tce-load*.
 
-The process is usually as simple as downloading the latest vmlinuz and core.gz, and 
-replacing them on your boot media. This can be done live from the system, as Tiny Core boots 
-to RAM, and so you can operate on the boot files in any way you wish.
-
-After a reboot, you will be running the latest core code. To check the running version, you 
-can run the *version* command:
+Starting tce-ab, we are greeted with a line-based interface:
+indexterm:[tce-ab]
 
 [source,sh]
 ----
-$ version
-4.7.5
+$ tce-ab
+tce-ab - Tiny Core Extension: Application Browser
+
+S)earch P)rovides K)eywords Q)uit:
 ----
 
-It is important to review the release notes for any items in your backup that may need to be 
-updated. Often there are tweaks to the user files such as .profile, which you may have 
-customized to your needs; any such files are mentioned in the release notes.
+The three search options are the same as with the Apps program (note that keywords = tags).
 
-The latest pristine copies of any user files can be found in */etc/skel*. If you have 
-customized some of the files, please compare the latest copy with your version to see if any 
-changes need to be done.
+For example, doing a keyword search for "browser", we are greeted with a list of extensions 
+with a matching tag. Selecting the number of the extension fires up the extension's info 
+file in the *less* viewer.
 
-With the base system updated, it's recommended to update extensions next.
+After having read the info file and pressing 'q', tce-ab gives us a set of choices on what 
+to do with it:
+[source,sh]
+----
+A)bout I)nstall O)nDemand D)epends T)ree F)iles siZ)e \
+L)ist S)earch P)rovides K)eywords Q)uit:
+----
 
+About brings us back to the info file, install and ondemand have the same functions as with 
+Apps, as do depends, files and size. Displaying the tree file will show the recursive chart 
+of dependencies, used by the size function to calculate the necessary download size.
+
+List will return us to the selection list, and the search options will let us to do a new 
+search.
+
+tce-load
+~~~~~~~~
+
+Tce-load is the non-interactive tool used behind the scenes by the boot process, Apps, and 
+tce-ab.
+indexterm:[tce-load]
+
+Running it with the help option gives us a short overview of what it does:
+[source,txt]
+----
+$ tce-load -h
+Usage: tce-load [-i -w -wi -wo -wil -ic -wic -wicl]{s} \
+extensions
+  -i   Loads local extension
+  -w   Download extension only
+  -wi  Download and install extension
+  -wo  Download and create an ondemand item
+  Adding -c to any -i option will force a one time \
+	copy to file system
+  Adding -l to any -i option indicates load only - \
+	do not update onboot or ondemand
+  Adding -s to any option will suppress OK message \
+	used by apps GUI
+
+Example usage:
+ Load local extension:
+   tce-load -i /mnt/hda1/tce/optional/nano.tcz
+ Download into tce/optional directory, updates OnBoot
+ and installs:
+   tce-load -w -i nano.tcz
+ Download only into tce/optional directory:
+   tce-load -w nano.tcz
+----
+
+For example, if we already know the name of the extension needed, we can ask for it to be 
+downloaded and installed (the OnBoot mode):
+
+[source,sh]
+----
+$ tce-load -wi ace-of-penguins
+----
+
+The tool will operate in the set *tce* directory, so unless given full path, it will look 
+there first. Suppose we had selected "Download only" for Ace of Penguins before, and thus it 
+was not installed for this session. We could install it with:
+
+[source,sh]
+----
+$ tce-load -i ace-of-penguins
+----
+
+[TIP]
+========
+Just like most Core tools, tce-load and tce-ab are shell scripts.
+As far as package managers go, they are fairly simple and easy to understand.
+
+You are encouraged to look under the hood.
+========

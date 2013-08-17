@@ -1,96 +1,76 @@
-Basic package management via CLI
+Basic package management via GUI
 --------------------------------
 
-In this chapter we'll go over the basic use of the command line equivalent to Apps, 
-*tce-ab*, and the direct interface, *tce-load*.
+The first contact is often the graphical package manager, the Apps tool. You can start it 
+from the bottom launcher under the name Apps, or if using an alternate window manager 
+without wbar, under the menu.
 
-Starting tce-ab, we are greeted with a line-based interface:
-indexterm:[tce-ab]
+image::images/part1/appbrowser.png[scaledwidth="100%"]
 
-[source,sh]
-----
-$ tce-ab
-tce-ab - Tiny Core Extension: Application Browser
+Let's quickly go over the interface.
 
-S)earch P)rovides K)eywords Q)uit:
-----
+The two white main areas are for the content. On the left, once connected, you will have a 
+list of packages, while the right panel displays the info you've selected from the four 
+tabs.
 
-The three search options are the same as with the Apps program (note that keywords = tags).
+The tabs are respectively the extension's info file, the list of files in the extension, the 
+list of dependencies, and an analysis of the total download size needed.
 
-For example, doing a keyword search for "browser", we are greeted with a list of extensions 
-with a matching tag. Selecting the number of the extension fires up the extension's info 
-file in the *less* viewer.
+The dropdown menu on the bottom, currently saying "OnBoot", defines what to do with the 
+selected extension. The modes will be covered later on in detail.
 
-After having read the info file and pressing 'q', tce-ab gives us a set of choices on what 
-to do with it:
-[source,sh]
-----
-A)bout I)nstall O)nDemand D)epends T)ree F)iles siZ)e \
-L)ist S)earch P)rovides K)eywords Q)uit:
-----
+The tce bar displays the path to your current *tce* directory. If it's the default (RAM), it 
+will be red; if it's on permanent storage, it will be green. The set button to the right 
+lets you set the *tce* directory if needed.
 
-About brings us back to the info file, install and ondemand have the same functions as with 
-Apps, as do depends, files and size. Displaying the tree file will show the recursive chart 
-of dependencies, used by the size function to calculate the necessary download size.
+The URI bar shows the selected mirror.
 
-List will return us to the selection list, and the search options will let us to do a new 
-search.
+The search dropdown menu lets you do three kinds of searches: by name, by tag, and by the 
+files it provides.
 
-tce-load
-~~~~~~~~
+Finally, the main menu in the upper-left corner defines the mode of action.
 
-Tce-load is the non-interactive tool used behind the scenes by the boot process, Apps, and 
-tce-ab.
-indexterm:[tce-load]
+To start browsing, click on the Apps menu - remote - browse.
 
-Running it with the help option gives us a short overview of what it does:
-[source,txt]
-----
-$ tce-load -h
-Usage: tce-load [-i -w -wi -wo -wil -ic -wic -wicl]{s} \
-extensions
-  -i   Loads local extension
-  -w   Download extension only
-  -wi  Download and install extension
-  -wo  Download and create an ondemand item
-  Adding -c to any -i option will force a one time \
-	copy to file system
-  Adding -l to any -i option indicates load only - \
-	do not update onboot or ondemand
-  Adding -s to any option will suppress OK message \
-	used by apps GUI
+image::images/part1/apps_browsing.png[scaledwidth="100%"]
 
-Example usage:
- Load local extension:
-   tce-load -i /mnt/hda1/tce/optional/nano.tcz
- Download into tce/optional directory, updates OnBoot
- and installs:
-   tce-load -w -i nano.tcz
- Download only into tce/optional directory:
-   tce-load -w nano.tcz
-----
+We can browse the full list, or get a list of search results with the upper-right search 
+bar. To return to the full list from a search results list, click again on remote - browse.
 
-For example, if we already know the name of the extension needed, we can ask for it to be 
-downloaded and installed (the OnBoot mode):
+image::images/part1/apps_selected.png[scaledwidth="100%"]
 
-[source,sh]
-----
-$ tce-load -wi ace-of-penguins
-----
+With Ace of Penguins selected, we are shown the info file by default. If we're interested in 
+the files, dependencies, or how much we'd need to download, the tabs are now active.
 
-The tool will operate in the set *tce* directory, so unless given full path, it will look 
-there first. Suppose we had selected "Download only" for Ace of Penguins before, and thus it 
-was not installed for this session. We could install it with:
+Let's go on to install it. But with which method?
 
-[source,sh]
-----
-$ tce-load -i ace-of-penguins
-----
 
-[TIP]
-========
-Just like most Core tools, tce-load and tce-ab are shell scripts.
-As far as package managers go, they are fairly simple and easy to understand.
+.Install methods
+OnBoot::
+	The default method. This extension will be installed, and added to the onboot list, 
+	to be mounted on the following boots. indexterm:[OnBoot]
+OnDemand::
+	A loading script will be generated for this extension. Instead of being loaded on 
+	boot, the icon/menu entry for this extension will load the extension when you first 
+	need it. +
+	This option speeds up your boot time, at the cost of making the first start of the 
+	application slower. indexterm:[OnDemand]
+Download + load::
+	The extension will be downloaded and installed for this session only. If you have 
+	set up your *tce* directory, it will reside there, but since it is not added to the 
+	onboot list, it will not be loaded after a reboot. indexterm:[Download + load]
+Download only::
+	The extension will only be downloaded, nothing more will be done.
+	indexterm:[Download only]
 
-You are encouraged to look under the hood.
-========
+Let's pick OnBoot, the default today. Clicking on Go, a download progress window will pop 
+up, and soon we're informed that the install succeeded:
+
+image::images/part1/apps_installed.png[scaledwidth="100%"]
+
+Should the install fail (network error, md5sum failure...), you will be informed of the 
+issue with a popup.
+
+Let's enjoy a game of penguin FreeCell now:
+
+image::images/part1/freecell.png[scaledwidth="100%"]

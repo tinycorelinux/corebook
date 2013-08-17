@@ -1,115 +1,46 @@
-Persistence
------------
+Updating extensions
+-------------------
 
-With the many options for making your data persistent and not disappearing on power-off, it 
-might be a bit confusing to decide which to use. In this chapter we will go over all the 
-options, listing their pros and cons, and the most common setup.
+Extensions are usually updated more often than the base system.
 
-Backup
-~~~~~~
+As extension updates may require some action on your part, it is recommended to view the 
+info files of updated extensions before doing the update. The Apps tool will let you do 
+that, while the command-line update is a batch one.
 
-The backup is on by default as long as you have set up a *tce* directory. It will save all 
-your personal files in your home directory, and the system config files under /opt, 
-excluding common browser caches.
+In both cases, the updated extensions are stored in a staging directory, and the actual 
+update will be applied on the next reboot. This ensures that no running app will be 
+interfered by things being changed from under it.
 
-So all is well, right? The data is safe, restored on boot, saved on power-off. However, 
-as backup happens in those two spots, having a large amount of data will slow down your boot 
-and shutdown process.
+Apps
+~~~~
 
-The backup is ideal for when you have a small amount of data to save, such as 
-application config files or browser bookmarks. A few ten megabytes of PDFs on the other hand 
-will be slow.
+Starting with the GUI update method, fire up Apps, and select Apps - Maintenance - Check for 
+updates.
 
-The other angle is the number of writes. With backup, the storage media is only written to 
-on shutdown. This is excellent if the media happens to be a device with limited writes, such 
-as USB flash, SSD, Compact Flash/Secure Digital memory card, or similar.
+image::images/part1/apps_update_menu.png[scaledwidth="100%"]
 
-No action is needed to use backup as long as a *tce* directory is setup; you will be asked 
-in the shutdown dialog whether to do backup, and the box is ticked by default.
+After a short while, Apps will have the left panel populated with all extensions with 
+available updates, with the status from the check displayed in the right panel.
 
-[TIP]
-======
-If not doing backup is more common for you, you can change the default to be unticked by 
-adding the line BACKUP=0 to your .profile.
-======
+If there is a newer Core version available, or some of the extensions you have have been 
+removed from the repository, this information will be shown in the right panel.
 
-The backup is controlled by two files in /opt: .filetool.lst lists everything to include, 
-and .xfiletool.lst lists everything to exclude. For the syntax of these files, see the 
-documentation on tar.
+image::images/part1/apps_updates.png[scaledwidth="100%"]
 
-Persistent home/opt
-~~~~~~~~~~~~~~~~~~~
+Clicking on an item will show that extension's info file: whether the update is just a 
+bog-standard version update, or whether some action is required will be visible there.
 
-If you have more data to store in these locations, for example personal documents in /home 
-or a third-party binary application in /opt, it's recommended to use persistence for these 
-locations.
+To select all items for processing, pick the first one, hold shift, and pick the last one.
+Clicking on "Process selected item(s)" will start the update.
 
-The file system on the partition needs to support linux permissions; FAT and NTFS will not 
-work.
+tce-update
+~~~~~~~~~~
 
-However, every write to these locations will then go directly to the device, so unless the 
-device is a hard drive, you'll need to weigh on how often it is written. For the "big binary 
-installed in /opt" case, writes would be rare; but for the home directory, all kinds of apps 
-will have caches, configuration files, and other data there they will update.
+Simply running *sudo tce-update* will do a batch update of all extensions.
 
-To make use of these options, you need to add a bootcode for each. You may specify the 
-device directly, via UUID, or via its label.
+However, if there is not enough space to store the updated extensions, you will need to do 
+an in-place update, which requires a boot with the boot codes *base norestore*. These options 
+cause no extensions to be loaded, making it safe to write the files directly.
 
-For example, to use the sda1 partition for home, and sda2 for opt, the boot codes would be 
-*home=sda1 opt=sda2*.
-
-Using absolute names can be unreliable if there are multiple drives present; how fast they 
-initialize affects their naming. So if there are multiple internal drives, or you wish to 
-use an external drive, it's recommended to use either UUID or label.
-
-With a partition labeled "HomeDrive", the home bootcode would be *home=LABEL=HomeDrive*. 
-With a partition's UUID, the bootcode would be *home=UUID=f4t4-65467yg-6546*.
-
-
-TIP: You can view the attached drives' labels and UUIDs with the *blkid* command.
-
-[WARNING]
-======
-When using either of these options, you need to remove the directory from 
-/opt/.filetool.lst. Otherwise it is both backed up and stored directly, removing any 
-benefits of either.
-======
-
-Personal extension
-~~~~~~~~~~~~~~~~~~
-
-If you have read-only data that needs to be in the file system, it's recommended to make a 
-personal extension out of it instead of keeping it in the backup.
-
-For more details on this option, see the Creating extensions chapter.
-
-Other data storage
-~~~~~~~~~~~~~~~~~~
-
-In no way are you restricted to just these options; storing your data is completely up to 
-how you want to do it.
-
-For example, say you have a few gigabytes of music stored in sda1/music. You could add a 
-symlink there to your home directory, file manager, or many other ways; here, we'll symlink 
-it as /music, so that it's nicely accessible to any application.
-
-If the drive is an internal one, with a stable name, you can just add the symlink to your 
-backup. The backup process will only save the symlink, it will not descend into the pointed 
-directory.
-
-If the music drive's name might change, it is better to create the symlink in bootlocal.sh 
-based on the drive's label for example. For more information on bootlocal.sh, see the Boot 
-process chapter.
-
-
-Common setup
-~~~~~~~~~~~~
-
-With the alternatives listed, what is the common setup?
-
-The common setup is one hard drive, persistent home, backup, and optionally other links 
-there.
-
-To set this up on an installed system, you only need to add the *home* bootcode to your 
-bootloader's config file, and reboot. To see that it's being used, type *mount*.
+If this is the case, the script will warn you and exit.
 

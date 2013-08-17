@@ -1,76 +1,59 @@
-Basic package management via GUI
---------------------------------
+Managing extensions
+-------------------
 
-The first contact is often the graphical package manager, the Apps tool. You can start it 
-from the bottom launcher under the name Apps, or if using an alternate window manager 
-without wbar, under the menu.
+This chapter will detail the options under the Maintenance menu in Apps.
 
-image::images/part1/appbrowser.png[scaledwidth="100%"]
+MD5 checking
+~~~~~~~~~~~~
 
-Let's quickly go over the interface.
+This option allows you to do a corruption check for downloaded extensions. Many types of 
+corruption are detected when trying to install an extension, but for some types, or 
+extensions not installed, it can be useful to do a manual check.
 
-The two white main areas are for the content. On the left, once connected, you will have a 
-list of packages, while the right panel displays the info you've selected from the four 
-tabs.
+Check for orphans
+~~~~~~~~~~~~~~~~~
 
-The tabs are respectively the extension's info file, the list of files in the extension, the 
-list of dependencies, and an analysis of the total download size needed.
+Orphans are extensions not found in the repository. They may have been removed for various 
+reasons, or they may be custom extensions not submitted to the repository.
 
-The dropdown menu on the bottom, currently saying "OnBoot", defines what to do with the 
-selected extension. The modes will be covered later on in detail.
+You aren't required to take any action in case an extension was removed from the mirrors; if 
+it works for you, you can continue to use it, but no updates will be coming.
 
-The tce bar displays the path to your current *tce* directory. If it's the default (RAM), it 
-will be red; if it's on permanent storage, it will be green. The set button to the right 
-lets you set the *tce* directory if needed.
+Dependencies and deletions
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The URI bar shows the selected mirror.
+This mode lets you view various reports on the dependencies of all extensions present in the 
+tce directory. Some may require the reporting database to be build, those will be greyed out 
+until the helper database is built.
 
-The search dropdown menu lets you do three kinds of searches: by name, by tag, and by the 
-files it provides.
+One function in particular, update dep files, is occasionally needed. Occasionally there's 
+server-side reorganization of the dependencies, or an extension may be renamed, requiring 
+you to update the dependency files to avoid inconsistencies. After updating the .dep files, 
+it's recommended to use the "Fetch missing dependencies", in case a dependency was added, or 
+an extension was renamed.
 
-Finally, the main menu in the upper-left corner defines the mode of action.
+The other function, extension deletion, allows you to mark an extension to be deleted on the 
+next reboot. All of their dependencies that aren't needed by anything else will also be 
+removed.
 
-To start browsing, click on the Apps menu - remote - browse.
+Check onboot unneeded
+~~~~~~~~~~~~~~~~~~~~~
 
-image::images/part1/apps_browsing.png[scaledwidth="100%"]
+This option analyzes your onboot.lst to see if there are any redundant items. For example, 
+gtk2 is a dependency of Firefox, so if you listed both gtk2 and Firefox, gtk2 would be 
+redundant.
 
-We can browse the full list, or get a list of search results with the upper-right search 
-bar. To return to the full list from a search results list, click again on remote - browse.
+Having a compact list without such redundancies helps boot time.
 
-image::images/part1/apps_selected.png[scaledwidth="100%"]
+Onboot/ondemand maintenance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With Ace of Penguins selected, we are shown the info file by default. If we're interested in 
-the files, dependencies, or how much we'd need to download, the tabs are now active.
+These two modes allow you to add and remove extensions from the onboot or ondemand lists. 
+This comes in handy if you earlier chose to have an extension be on demand, but now it would 
+make more sense to load it on boot, for example.
 
-Let's go on to install it. But with which method?
+Onboot.lst is a plain text file, so you can edit it with an editor of your choice in 
+addition to the GUI method listed. Ondemand items are generated scripts, so managing them 
+manually is discouraged.
 
 
-.Install methods
-OnBoot::
-	The default method. This extension will be installed, and added to the onboot list, 
-	to be mounted on the following boots. indexterm:[OnBoot]
-OnDemand::
-	A loading script will be generated for this extension. Instead of being loaded on 
-	boot, the icon/menu entry for this extension will load the extension when you first 
-	need it. +
-	This option speeds up your boot time, at the cost of making the first start of the 
-	application slower. indexterm:[OnDemand]
-Download + load::
-	The extension will be downloaded and installed for this session only. If you have 
-	set up your *tce* directory, it will reside there, but since it is not added to the 
-	onboot list, it will not be loaded after a reboot. indexterm:[Download + load]
-Download only::
-	The extension will only be downloaded, nothing more will be done.
-	indexterm:[Download only]
-
-Let's pick OnBoot, the default today. Clicking on Go, a download progress window will pop 
-up, and soon we're informed that the install succeeded:
-
-image::images/part1/apps_installed.png[scaledwidth="100%"]
-
-Should the install fail (network error, md5sum failure...), you will be informed of the 
-issue with a popup.
-
-Let's enjoy a game of penguin FreeCell now:
-
-image::images/part1/freecell.png[scaledwidth="100%"]
