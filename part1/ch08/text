@@ -17,8 +17,70 @@ separately to install from a TinyCore or a command-line Core image (*tc-install.
 The command-line version, *tc-install.sh*, is not covered here, but it follows the same 
 prompts as the graphical version.
 
+The GUI installer is a five-step process.
+
+Step 1: Source and destination
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+image::images/part1/installer_pg1.png[scaledwidth="100%"]
+
+In the first step, we need to select the install media, install type, and the target.
+The installer may be able to detect the install media automatically as in this image; if 
+not, click on the "Path to core.gz" text field to browse for the install media.
+
+The three install types are frugal, USB-HDD, and USB-ZIP. Frugal is the default type, it may 
+be installed to a partition, and usually works for bootable USB sticks too. USB-HDD uses the 
+whole disk and slightly different formatting, which may help the USB stick's boot on 
+computers it otherwise wouldn't. USB-ZIP is for older BIOSes that needed ZIP-drive emulation 
+in order to boot from USB.
+
+If this is the only linux system on the computer, select "Install boot loader" and "Mark 
+partition active" (the latter only if not using the whole disk).
+
+Step 2: File system type
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+image::images/part1/installer_pg2.png[scaledwidth="100%"]
+
+Here we select the formatting, defaulting to ext4.
+
+Step 3: Boot codes
+^^^^^^^^^^^^^^^^^^
+
+image::images/part1/installer_pg3.png[scaledwidth="100%"]
+
+If you want to enter any boot codes, this is the place. By default you don't need any.
+
+NOTE: You can change these later by editing the bootloader config file.
+
+Step 4: Optional parts
+^^^^^^^^^^^^^^^^^^^^^^
+
+image::images/part1/installer_pg4.png[scaledwidth="100%"]
+
+This page is only visible when installing from the Core Plus image. You can choose to 
+install some useful extensions here. They can be installed afterwards too, this choice is 
+not special or unreversible.
+
+Step 5: Good to go?
+^^^^^^^^^^^^^^^^^^^
+
+image::images/part1/installer_pg5.png[scaledwidth="100%"]
+
+In the final step, the installer lets us review the choices before starting. If everything's 
+in order, click Proceed.
+
+image::images/part1/installer_done.png[scaledwidth="100%"]
+
+The installer will happily chug away, and assuming nothing out of place happens, you'll see 
+a success screen like this one.
+
 Manually
 ~~~~~~~~
 
+gg
+
 From Windows via core2usb
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+gg
