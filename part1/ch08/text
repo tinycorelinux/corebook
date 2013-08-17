@@ -1,0 +1,24 @@
+
+Installing
+----------
+
+A Core install consists of three parts: a bootloader on some media, the main image 
+(kernel and *core.gz*) on some media, and the *tce* directory on some media.
+
+While these can all be on the same disk, they need not be; all three can be on separate 
+media if needed.
+
+With the official installer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The official installer is included in the CorePlus edition, but can also be downloaded 
+separately to install from a TinyCore or a command-line Core image (*tc-install.tcz*).
+
+The command-line version, *tc-install.sh*, is not covered here, but it follows the same 
+prompts as the graphical version.
+
+Manually
+~~~~~~~~
+
+From Windows via core2usb
+~~~~~~~~~~~~~~~~~~~~~~~~~
