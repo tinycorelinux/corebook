@@ -39,7 +39,7 @@ not, click on the "Path to core.gz" text field to browse for the install media.
 
 The three install types are frugal, USB-HDD, and USB-ZIP. Frugal is the default type, it may 
 be installed to a partition, and usually works for bootable USB sticks too. USB-HDD uses the 
-whole disk and slightly different formatting, which may help the USB stick's boot on 
+whole disk and slightly different formatting, which may help the USB stick boot on 
 computers it otherwise wouldn't. USB-ZIP is for older BIOSes that needed ZIP-drive emulation 
 in order to boot from USB.
 
@@ -87,11 +87,12 @@ a success screen like this one.
 From Windows via core2usb
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A Core Team member created a simple USB installer for Windows users. It's not recommended to 
-use third-party installers such as LiLi or unetbootin, as they won't create the third part 
+Core Team member bmarkus created a simple USB installer for Windows users. It's not 
+recommended to 
+use third-party installers such as LiLi or Unetbootin, as they won't create the third part 
 of the install (the *tce* directory), meaning more work for you.
 
 This utility is available from http://core2usb.sf.net/. If you don't want to burn a CD, it's 
 a convenient one-click way to install Core to USB.
 
-image::images/part1/core2usb.png[scaledwidth="100%"]
+image::images/part1/core2usb.jpg[scaledwidth="100%"]
