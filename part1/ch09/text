@@ -41,7 +41,10 @@ VMWare
 
 VMWare's virtualized network card and SCSI card are supported (vmxnet3 and pvscsi). However, 
 VMWare defaults to an emulated SCSI card whose support is not built-in, but included in the 
-*scsi* extension. In order to load extensions from a SCSI drive, one would need to create a 
+*scsi* extension - a catch 22 situation. In order to load extensions from a SCSI drive, one 
+would 
+need 
+to create a 
 remaster that includes the SCSI drivers, or to have a two-step boot with the SCSI drivers on 
 an IDE disk.
 
