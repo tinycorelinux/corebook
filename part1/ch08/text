@@ -1,98 +1,76 @@
+Basic package management via GUI
+--------------------------------
 
-Installing
-----------
+The first contact is often the graphical package manager, the Apps tool. You can start it 
+from the bottom launcher under the name Apps, or if using an alternate window manager 
+without wbar, under the menu.
 
-A Core install consists of three parts: a bootloader on some media, the main image 
-(kernel and *core.gz*) on some media, and the *tce* directory on some media.
+image::images/part1/appbrowser.png[scaledwidth="100%"]
 
-While these can all be on the same disk, they need not be; all three can be on separate 
-media if needed.
+Let's quickly go over the interface.
 
-[TIP]
-=========
-A Core install is completely nomadic, it doesn't read any settings from the install system.
+The two white main areas are for the content. On the left, once connected, you will have a 
+list of packages, while the right panel displays the info you've selected from the four 
+tabs.
 
-This means you can install to a drive on one system, and then move the drive to the target 
-system without any issues. This is useful for example for laptops that can't boot from CD or 
-USB.
-=========
+The tabs are respectively the extension's info file, the list of files in the extension, the 
+list of dependencies, and an analysis of the total download size needed.
 
-With the official installer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The dropdown menu on the bottom, currently saying "OnBoot", defines what to do with the 
+selected extension. The modes will be covered later on in detail.
 
-The official installer is included in the Core Plus edition, but can also be downloaded 
-separately to install from a TinyCore or a command-line Core image (*tc-install.tcz*).
+The tce bar displays the path to your current *tce* directory. If it's the default (RAM), it 
+will be red; if it's on permanent storage, it will be green. The set button to the right 
+lets you set the *tce* directory if needed.
 
-The command-line version, *tc-install.sh*, is not covered here, but it follows the same 
-prompts as the graphical version.
+The URI bar shows the selected mirror.
 
-The GUI installer is a five-step process.
+The search dropdown menu lets you do three kinds of searches: by name, by tag, and by the 
+files it provides.
 
-Step 1: Source and destination
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Finally, the main menu in the upper-left corner defines the mode of action.
 
-image::images/part1/installer_pg1.png[scaledwidth="100%"]
+To start browsing, click on the Apps menu - remote - browse.
 
-In the first step, we need to select the install media, install type, and the target.
-The installer may be able to detect the install media automatically as in this image; if 
-not, click on the "Path to core.gz" text field to browse for the install media.
+image::images/part1/apps_browsing.png[scaledwidth="100%"]
 
-The three install types are frugal, USB-HDD, and USB-ZIP. Frugal is the default type, it may 
-be installed to a partition, and usually works for bootable USB sticks too. USB-HDD uses the 
-whole disk and slightly different formatting, which may help the USB stick boot on 
-computers it otherwise wouldn't. USB-ZIP is for older BIOSes that needed ZIP-drive emulation 
-in order to boot from USB.
+We can browse the full list, or get a list of search results with the upper-right search 
+bar. To return to the full list from a search results list, click again on remote - browse.
 
-If this is the only Linux system on the computer, select "Install boot loader" and "Mark 
-partition active" (the latter only if not using the whole disk).
+image::images/part1/apps_selected.png[scaledwidth="100%"]
 
-Step 2: File system type
-^^^^^^^^^^^^^^^^^^^^^^^^
+With Ace of Penguins selected, we are shown the info file by default. If we're interested in 
+the files, dependencies, or how much we'd need to download, the tabs are now active.
 
-image::images/part1/installer_pg2.png[scaledwidth="100%"]
+Let's go on to install it. But with which method?
 
-Here we select the formatting, defaulting to ext4.
 
-Step 3: Boot codes
-^^^^^^^^^^^^^^^^^^
+.Install methods
+OnBoot::
+	The default method. This extension will be installed, and added to the onboot list, 
+	to be mounted on the following boots. indexterm:[OnBoot]
+OnDemand::
+	A loading script will be generated for this extension. Instead of being loaded on 
+	boot, the icon/menu entry for this extension will load the extension when you first 
+	need it. +
+	This option speeds up your boot time, at the cost of making the first start of the 
+	application slower. indexterm:[OnDemand]
+Download + load::
+	The extension will be downloaded and installed for this session only. If you have 
+	set up your *tce* directory, it will reside there, but since it is not added to the 
+	onboot list, it will not be loaded after a reboot. indexterm:[Download + load]
+Download only::
+	The extension will only be downloaded, nothing more will be done.
+	indexterm:[Download only]
 
-image::images/part1/installer_pg3.png[scaledwidth="100%"]
+Let's pick OnBoot, the default today. Clicking on Go, a download progress window will pop 
+up, and soon we're informed that the install succeeded:
 
-If you want to enter any boot codes, this is the place. By default you don't need any.
+image::images/part1/apps_installed.png[scaledwidth="100%"]
 
-NOTE: You can change these later by editing the bootloader config file.
+Should the install fail (network error, md5sum failure...), you will be informed of the 
+issue with a popup.
 
-Step 4: Optional parts
-^^^^^^^^^^^^^^^^^^^^^^
+Let's enjoy a game of penguin FreeCell now:
 
-image::images/part1/installer_pg4.png[scaledwidth="100%"]
-
-This page is only visible when installing from the Core Plus image. You can choose to 
-install some useful extensions here. They can be installed afterwards too, this choice is 
-not special or irreversible.
-
-Step 5: Good to go?
-^^^^^^^^^^^^^^^^^^^
-
-image::images/part1/installer_pg5.png[scaledwidth="100%"]
-
-In the final step, the installer lets us review the choices before starting. If everything's 
-in order, click Proceed.
-
-image::images/part1/installer_done.png[scaledwidth="100%"]
-
-The installer will happily chug away, and assuming nothing out of place happens, you'll see 
-a success screen like this one.
-
-From Windows via core2usb
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Core Team member bmarkus created a simple USB installer for Windows users. It's not 
-recommended to 
-use third-party installers such as LiLi or Unetbootin, as they won't create the third part 
-of the install (the *tce* directory), meaning more work for you.
-
-This utility is available from http://core2usb.sf.net/. If you don't want to burn a CD, it's 
-a convenient one-click way to install Core to USB.
-
-image::images/part1/core2usb.jpg[scaledwidth="100%"]
+image::images/part1/freecell.png[scaledwidth="100%"]
