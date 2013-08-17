@@ -1,0 +1,89 @@
+
+Network booting
+---------------
+
+Core can easily be booted via the network (PXE). This may be used to have many diskless 
+computers, for example as stand-alone web browser stations, or as thin clients that rely on 
+the server for some needs; or as a distribution method for an installer, recovery setup, or 
+anything else you can come up with.
+
+Core is also capable of being the boot server, but it's not required; you may use any system 
+with TFTP, PXE (DHCP), and HTTP/NFS/other file sharing protocol as the server, from 
+CentOS to Debian to even Windows. We don't recommend that last option though.
+
+Core includes a quick setup wizard for testing PXE booting, *tc-terminal-server*. It allows 
+you to quickly setup one machine as a mothership, sharing the base image, to test if the 
+other computers on your network (and the network itself) work for PXE booting. For more 
+permanent setups, it's not recommended to use the wizard.
+
+As the server setups vary wildly, we won't go into the configuration details of any specific 
+one in this chapter. Instead we cover the available options, helping you decide which setup 
+fits your needs the best.
+
+.Steps
+.. Selecting the base image
+.. Are separate extensions needed?
+.. Other considerations
+
+Selecting the base image
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+For thin clients, the obvious option is to use the shipped image, the normal *core.gz* and 
+kernel. However, if the clients are to be stand-alone, it might make sense to create a 
+remaster instead, holding your modifications in a second initrd (pxelinux is capable of 
+using multiple initrds).
+
+The constraints of the clients also factor in. If they are low in RAM, a remaster where 
+everything is in RAM may prove unfeasible; in this situation, you may trade performance for 
+lower RAM use by mounting extensions from the server. It does increase network demands, but 
+as the extensions are then not copied to client RAM, only cached in the file system cache, 
+it can save a lot of RAM.
+
+Are separate extensions needed?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the extensions are integrated into the initrd, as in the above section, then you can skip 
+this section.
+
+Core supports several ways of loading extensions over the network. Some of these (NFS, NBD, 
+AOE) mount the share over the network, using the extensions remotely from the server; the others 
+(TFTP, HTTP) download the extensions over the given protocol to RAM, then mount them from 
+there.
+
+Considering the latter option, one might ask what's the difference to just having them in 
+the initrd in the first place. After all, in both cases they are downloaded from the server 
+into the client's RAM. The difference is in boot speed: TFTP, even when tuned to use high 
+block sizes, is a slow protocol - using HTTP may improve transfer speeds greatly.
+
+The other part is the more even access pattern:
+if everything were in one initrd, that client would 
+make one big request; if each extension was requested individually, the network requests 
+would be more spread out over time.
+
+One may also combine the mount-a-share approaches with having extensions OnDemand. This 
+combination would allow for very quick boot speeds, and less network usage, as the bigger 
+applications would only be requested once the user starts them.
+
+[TIP]
+===========
+You're not limited to the mentioned protocols. If there's a Linux client for your file 
+protocol, you can include just that client and the extension downloading logic in the 
+initrd, allowing you to use more exotic protocols to download or mount extensions from the 
+server.
+===========
+
+Other considerations
+~~~~~~~~~~~~~~~~~~~~
+
+The extensions are usually read-only from the clients' end, making it easy to upgrade in 
+one place, at the server, and a reboot of the client is all that's needed. Often some data 
+needs to be RW though, perhaps home directories over NFS, perhaps some other shared folder 
+for common data.
+
+The memory use needs to be considered. A diskless client may have little recourse when its 
+RAM runs out. While Core ships the *zram* module by default, allowing you to over-commit the 
+RAM by about 20%, you may still need swap.
+
+Swapping over the network is not advised; it's not yet quite stable in the current kernels, 
+and doing it over the network may cause too much congestion. As a backup, you might consider 
+letting the clients have HDDs, but only as swap partitions.
