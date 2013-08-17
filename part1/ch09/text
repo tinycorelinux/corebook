@@ -1,0 +1,55 @@
+
+Virtualization - Core as a guest
+--------------------------------
+
+Most virtual machines default to emulating actual, common hardware. Core should run directly 
+on any of those. However, some default to server hardware, and many have special 
+virtualization-only hardware that can improve performance. This chapter explores these 
+gotchas.
+
+Qemu / KVM
+~~~~~~~~~~
+
+The premier open source virtualization solution, KVM, runs Core splendidly. There's built-in 
+support for most of the virtio drivers, helping the virtual machine reach faster 
+performance.
+
+To make use of the virtio network card, add *-net nic,model=virtio -net user* to your Qemu 
+command line. If you have a special network setup (other than user), don't add the *-net 
+user* part.
+
+To use a virtio disk, instead of the common *-hda 'file'*, the syntax is
+*-drive file='file',if=virtio,media=disk*. Use *media=cdrom* for ISO images instead.
+
+The default options to adjust the assigned RAM and CPU cores work fine; *-m 256 -smp 4* 
+would give the VM 256 megabytes of RAM and four cores.
+
+The absolute pointer mode, enabled via *-usb -usbdevice tablet*, does not work perfectly 
+with Xvesa, but works fine when using Xorg.
+
+Virtualbox
+~~~~~~~~~~
+
+Virtualbox shares some code with Qemu, and it can also use the virtio network and block 
+drivers; enable them from the settings.
+
+The mouse support in Virtualbox 4 is currently broken with Xvesa as far as we know; using 
+Xorg or Virtualbox 3 instead are workarounds.
+
+VMWare
+~~~~~~
+
+VMWare's virtualized network card and SCSI card are supported (vmxnet3 and pvscsi). However, 
+VMWare defaults to an emulated SCSI card, whose support is not built-in, but included in the 
+*scsi* extension. In order to load extensions from a SCSI drive, one would need to create a 
+remaster that includes the SCSI drivers, or to have a two-step boot with the SCSI drivers on 
+an IDE disk.
+
+The best way is to choose the paravirtualized network and SCSI card though, as they will 
+work directly.
+
+HyperV
+~~~~~~
+
+Microsoft HyperV Linux support was still quite unstable during the time of Core 4.x; it is 
+not supported. HyperV is supported in the coming 5.x versions.
