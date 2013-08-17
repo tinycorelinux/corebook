@@ -20,7 +20,7 @@ USB.
 With the official installer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The official installer is included in the CorePlus edition, but can also be downloaded 
+The official installer is included in the Core Plus edition, but can also be downloaded 
 separately to install from a TinyCore or a command-line Core image (*tc-install.tcz*).
 
 The command-line version, *tc-install.sh*, is not covered here, but it follows the same 
@@ -43,7 +43,7 @@ whole disk and slightly different formatting, which may help the USB stick boot 
 computers it otherwise wouldn't. USB-ZIP is for older BIOSes that needed ZIP-drive emulation 
 in order to boot from USB.
 
-If this is the only linux system on the computer, select "Install boot loader" and "Mark 
+If this is the only Linux system on the computer, select "Install boot loader" and "Mark 
 partition active" (the latter only if not using the whole disk).
 
 Step 2: File system type
@@ -69,7 +69,7 @@ image::images/part1/installer_pg4.png[scaledwidth="100%"]
 
 This page is only visible when installing from the Core Plus image. You can choose to 
 install some useful extensions here. They can be installed afterwards too, this choice is 
-not special or unreversible.
+not special or irreversible.
 
 Step 5: Good to go?
 ^^^^^^^^^^^^^^^^^^^
