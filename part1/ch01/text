@@ -12,15 +12,16 @@ almost all users will require internet access to the online repository.
 Philosophies
 ~~~~~~~~~~~~
 
-As a quick summary, Tiny Core:
-Loads itself into RAM from storage, then mounts applications on storage, or installs 
+As a quick summary, Tiny Core
+loads itself into RAM from storage, then mounts applications on storage, or installs 
 applications to RAM from storage.
 
 Tiny Core is different because users are not encouraged to perform a 'traditional', 
 hard-drive installation of the operating system. Sure, a hard drive installation is 
 possible, but Tiny Core is designed to run from a RAM copy created at boot time. Besides 
 being fast, this protects system files from changes and ensures a pristine system on every 
-reboot. Easy, fast, and simple renew-ability and stability is a principle goal of Tiny Core. 
+reboot. Easy, fast, and simple renew-ability and stability are principle goals of Tiny 
+Core. 
 
 If this sounds similar to what many live CDs do, the techniques are indeed similar and 
 shared.
@@ -31,7 +32,7 @@ Frugal install
 Frugal is the typical installation method for Tiny Core. That is, it is not a traditional 
 hard drive installation, which we call "scatter mode", because all the files of the system 
 are scattered all about the disk. With frugal, you basically have the system in two files, 
-e.g., vmlinuz and core.gz, whose location is specified by the boot loader.
+ *vmlinuz* and *core.gz*, whose location is specified by the boot loader.
 
 Any user files and extensions are stored outside the base OS.
 
@@ -63,7 +64,8 @@ the hardware doesn't wake up in time, Tiny Core will move on and finish booting 
 data.
 
 If you store data on external/slow media, it may be necessary to use the boot code 
-waitusb=5 or similar. This pauses the pauses the boot process for five seconds, waiting for 
+*waitusb=5* or similar. This pauses the pauses the boot process for five seconds, waiting 
+for 
 slow devices to register with the system bus. 
 
 Dependency checking and downloading
@@ -119,9 +121,7 @@ Applications are optionally mounted on reboot (see onboot.lst in forum and wiki)
 Mounting applications saves RAM for other uses.
 
 Unless specified with a boot code of *tce=xdyz* Tiny Core will search for and uses the /tce 
-directory
-of downloaded extensions. Applications stored in the /tce are optionally mounted at boot 
-time.
+directory of downloaded extensions.
 
 Tiny Core uses the Apps tool to place application extensions in this tce/ directory and 
 to flag them as 
@@ -136,7 +136,7 @@ The copy mode is a modification of the mount mode.
 Selected application extensions are copied into RAM instead of mounted. 
 Applications can be RAM-loaded in bulk (copy2fs.flg), selectively loaded into RAM 
 (copy2fs.lst), or mounted. 
-The Appsaudit program tracks installation/loading options (bulk copy, selective copy, etc). 
+The Apps program tracks installation/loading options (bulk copy, selective copy, etc). 
 Boot times are longer, since copying to RAM takes more time than mounting, but runtime 
 speed, especially first start, is greatly faster.
 
@@ -144,7 +144,7 @@ Copy mode briefly extends the boot time to gain some of the RAM-run speed of def
 and the persistence of a pure mount mode.
 
 In copy mode, it is important to note that extensions can be either mounted or copied into 
-RAM. The Appsaudit program makes this flexibility possible by keeping track of user 
+RAM. The Apps program makes this flexibility possible by keeping track of user 
 selections. 
 
 It should be noted that using a bulk selection, that is, loading all extensions to RAM, 
@@ -179,7 +179,7 @@ boot option *restore=hdXY*, *restore=hdXY/directory*, or, after boot, by selecti
 Backup/Restore from the Control Panel. If the restore code is not used, Tiny Core will 
 search for *mydata.tgz* in available root directories at boot. Conversely, the boot option 
 *norestore* 
-ignores any existing backup files, a useful tool for trouble-shooting and upgrading.
+ignores any existing backup files, a useful tool for troubleshooting and upgrading.
 
 Further settings and configurations are stored or executed using /home/tc/.xsession, 
 /home/tc/.profile, /opt/bootlocal.sh, and /opt.
