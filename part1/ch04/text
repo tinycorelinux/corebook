@@ -71,7 +71,7 @@ Running it with the help option gives us a short overview of what it does:
 [source,txt]
 ----
 $ tce-load -h
-Usage: tce-load [-i -w -wi -wo -wil -ic -wic -wicl]{s} \
+Usage: tce-load [-i -w -wi -wo -wil -ic -wic]{s} \
 extensions
   -i   Loads local extension
   -w   Download extension only
