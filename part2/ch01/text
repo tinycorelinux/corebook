@@ -9,7 +9,7 @@ a virtual machine. indexterm:[remaster]
 This chapter covers the process of remastering manually. There exists a helper extension, 
 EZRemaster, but that one will not be covered here.
 
-You typically only need to remaster if you need to edit any of the boot scripts, or if 
+You typically only need to remaster if you need to edit any of the early boot scripts, or if 
 intending to create a stand-alone image for a specific deployment that runs entirely in RAM.
 As updating a remastered image to a newer Core version can be a hassle, a method for that is 
 covered in the next chapter.
