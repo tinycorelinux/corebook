@@ -82,7 +82,9 @@ in order, click Proceed.
 image::images/part1/installer_done.png[scaledwidth="100%"]
 
 The installer will happily chug away, and assuming nothing out of place happens, you'll see 
-a success screen like this one.
+a success screen like the one above. Ready to reboot to Core?
+
+image::images/part1/booting.png[scaledwidth="100%"]
 
 From Windows via core2usb
 ~~~~~~~~~~~~~~~~~~~~~~~~~
