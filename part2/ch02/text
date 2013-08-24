@@ -67,7 +67,7 @@ syslinux family uses this syntax:
 initrd=/boot/core.gz,/boot/myimg.gz
 ----
 
-That is, you place the new image in the same directory as the main image, and place it after 
+That is, you have the new image in the same directory as the main image, and place it after 
 the original one, separated by a comma.
 
 If using a bootloader that only supports one initrd (GRUB legacy, some of the DOS-based 
