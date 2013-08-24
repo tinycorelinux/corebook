@@ -147,7 +147,7 @@ kernel and initrd.
 
 NOTE: For UEFI installs, please consult your bootloader's documentation.
 
-The syslinux family, grub 0.x, and grub 2 have been tested to work fine.
+The syslinux family, lilo, grub 0.x, and grub 2 have been tested to work fine.
 
 For a normal boot, no boot codes need to be added - the location of the *tce* directory will 
 be autodetected. If you anticipate having multiple *tce* directories, then it's recommended 
