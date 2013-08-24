@@ -102,6 +102,8 @@ $ mkisofs -l -J -r -V TC-custom -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table -b boot/isolinux/isolinux.bin \
   -c boot/isolinux/boot.cat -o TC-remastered.iso newiso
+
+# Optionally clean-up the temp dir
 $ rm -rf newiso
 ----
 
