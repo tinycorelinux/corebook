@@ -22,7 +22,7 @@ For the sake of an example, let's create a separate image that changes the login
 Practise image
 ~~~~~~~~~~~~~~
 
-The login message is stored in /etc/issue. Therefore we need to create an image that 
+The login message is stored in */etc/issue*. Therefore we need to create an image that 
 contains the exact same path, with the contents we want to see.
 
 [source,sh]
