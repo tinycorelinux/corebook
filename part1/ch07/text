@@ -111,6 +111,7 @@ With the alternatives listed, what is the common setup?
 The common setup is one hard drive, persistent home, backup, and optionally other links 
 there.
 
-To set this up on an installed system, you only need to add the *home* bootcode to your 
-bootloader's config file, and reboot. To see that it's being used, type *mount*.
+To set this up on an installed system, you only need to add the *home=sda1* bootcode to your 
+bootloader's config file (where sda1 is your partition), and reboot. To see that it's being 
+used, type *mount*.
 
