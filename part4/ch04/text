@@ -12,7 +12,7 @@ Overview of steps:
 . Make the boot wait for getting an IP address
 . Fire up rdesktop when the system is up
 
-To start with, download the latest TinyCore ISO from your close mirror.
+To start with, download the latest TinyCore ISO from your closest mirror.
 
 Add the rdesktop extension and dependencies to the ISO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,7 +35,7 @@ a fresh image, only rdesktop and its dependencies will be there.
 Let's mount and copy the ISO we booted from:
 [source,sh]
 ----
-# The CD might already be mounted, but just in case not:
+# The CD might already be mounted, but just in case:
 $ sudo mount /dev/sr0
 $ cp -a /mnt/sr0 /tmp/newiso
 ----
