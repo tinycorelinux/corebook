@@ -21,8 +21,32 @@ For example, doing a keyword search for "browser", we are greeted with a list of
 with a matching tag. Selecting the number of the extension fires up the extension's info 
 file in the *less* viewer.
 
-After having read the info file and pressing 'q', tce-ab gives us a set of choices on what 
-to do with it:
+[source,sh]
+----
+tce - Tiny Core Extension browser
+
+         1. appbrowser-cli.tcz
+         2. arora.tcz
+         3. bonecho-gtk2.tcz
+         4. bonecho.tcz
+         5. chimera2.tcz
+         6. chromium-browser-locale.tcz
+         7. chromium-browser.tcz
+         8. conkeror.tcz
+         9. dillo2-doc.tcz
+        10. dillo3-doc.tcz
+        11. dillo3-ssl-doc.tcz
+        12. dillo3-ssl.tcz
+        13. dillo3.tcz
+        14. dooble.tcz
+        15. dwb.tcz
+
+Enter selection ( 1 - 80 ) or (q)uit, (n)ext, \
+(p)revious:
+----
+
+After having read the info file and pressing 'q' to quit *less*, tce-ab gives us a set of 
+choices on what to do with it:
 [source,sh]
 ----
 A)bout I)nstall O)nDemand D)epends T)ree F)iles siZ)e \
