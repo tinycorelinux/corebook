@@ -53,10 +53,10 @@ codes, and making it possible for extensions to be loaded.
 . Check boot options
 . Fire up udev, start cold-plugging devices
 . Wait for slow USB devices if requested
-. Set up compressed swap in RAM, unless requested not to
+. Setup compressed swap in RAM, unless requested not to
 . Scan the available partitions, and create /etc/fstab with the results
 . Start up the system logger if requested
-. Set up language, timezone, clock, and hostname
+. Setup language, timezone, clock, and hostname
 . Setup the requested username
 . If an extension server was requested over AoE, NBD, NFS, TFTP, or HTTP, handle it
 . If a virtual (loop) drive was requested, mount it
