@@ -22,7 +22,7 @@ image::images/part1/apps_update_menu.png[scaledwidth="100%"]
 After a short while, Apps will have the left panel populated with all extensions with 
 available updates, with the status from the check displayed in the right panel.
 
-If there is a newer Core version available, or some of the extensions you have have been 
+If there is a newer Core version available, or some of the extensions have been 
 removed from the repository, this information will be shown in the right panel.
 
 image::images/part1/apps_updates.png[scaledwidth="100%"]
