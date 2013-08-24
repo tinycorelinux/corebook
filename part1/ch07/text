@@ -71,7 +71,7 @@ TIP: You can view the attached drives' labels and UUIDs with the *blkid* command
 
 [WARNING]
 ======
-When using either of these options, you need to remove the directory from 
+When using either of these options, you need to remove the corresponding directory from 
 /opt/.filetool.lst. Otherwise it is both backed up and stored directly, removing any 
 benefits of either.
 ======
