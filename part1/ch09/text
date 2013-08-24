@@ -48,8 +48,8 @@ to create a
 remaster that includes the SCSI drivers, or to have a two-step boot with the SCSI drivers on 
 an IDE disk.
 
-The best way is to choose the paravirtualized network and SCSI card though, as they will 
-work directly.
+The best way is to choose the paravirtualized option for network and SCSI card though, as 
+they will work directly.
 
 HyperV
 ~~~~~~
