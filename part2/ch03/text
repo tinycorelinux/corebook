@@ -65,3 +65,9 @@ $ rm -rf newiso
 When you boot this new ISO image, the nano editor will be available for use (installed on 
 boot from the image).
 
+[TIP]
+=========
+In the above example, nano is mounted from the CD, meaning you can't eject the CD while 
+running. The normal mechanism for loading the extensions to RAM can be used if this is 
+desired: create an empty file called *copy2fs.flg* in the *cde* directory.
+=========
