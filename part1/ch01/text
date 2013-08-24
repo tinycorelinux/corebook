@@ -76,7 +76,7 @@ details from individual .info files - this is enlightening reading material when
 applications. Always read the .info files, and re-read them before upgrading to catch 
 changes and concerns.
 
-Dependencies are the pieces (other applications) required for an application. In short, the 
+Dependencies are the pieces (other applications, libraries) required for an application. In short, the 
 Tiny Core Apps tool will take care of downloading and checking dependencies for you. 
 
 Modes of operation
