@@ -48,7 +48,7 @@ There are lots of boot codes. To view all the available options, peruse the boot
 by pressing F2, F3 or F4 at the CD boot prompt.
 
 The boot code *base* is notable. Use *base* to simulate the default mode and skip all 
-application extension installing or mounting. This is a useful tool for trouble-shooting, extension 
+application extension installing or mounting. This is a useful tool for troubleshooting, extension 
 building, upgrading ... and just checking out how fast Tiny Core can boot on your hardware. 
 
 USB and other external storage devices' special requirements
