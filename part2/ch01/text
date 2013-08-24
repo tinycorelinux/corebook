@@ -21,8 +21,8 @@ You need a Linux distribution with the required programs available: cpio, tar, g
 and mkisofs. This need not be Tiny Core itself, but remastering inside Tiny Core is the most 
 tested option.
 
-For remastering on Core, install the extensions advcomp.tcz and optionally mkisofs-tools.tcz 
-if creating an ISO image.
+For remastering on Core, install the extensions *advcomp.tcz* and optionally 
+*mkisofs-tools.tcz* if creating an ISO image.
 
 Unpacking
 ~~~~~~~~~
