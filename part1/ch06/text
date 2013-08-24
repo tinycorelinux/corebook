@@ -42,5 +42,4 @@ However, if there is not enough space to store the updated extensions, you will 
 an in-place update, which requires a boot with the boot codes *base norestore*. These options 
 cause no extensions to be loaded, making it safe to write the files directly.
 
-If this is the case, the script will warn you and exit.
-
+The script will warn you and exit, if the space is too tight to do a normal update.
