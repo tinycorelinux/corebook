@@ -96,3 +96,80 @@ This utility is available from http://core2usb.sf.net/. If you don't want to bur
 a convenient one-click way to install Core to USB.
 
 image::images/part1/core2usb.jpg[scaledwidth="100%"]
+
+Manually
+~~~~~~~~
+
+A manual install can be done from any Linux distro. For advanced users it's often faster 
+than burning a CD or otherwise installing via the installer.
+
+As the exact steps vary a lot depending on your program and host distro choices, we'll only 
+cover the general parts here.
+
+Step 1: Partitioning & formatting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create a normal partition on the target disk using your favorite program: for GUI we 
+recommend *Gparted*, for command line *cfdisk*; both should be available in all major 
+distros.
+
+The partition should be formatted with a Linux file system. We recommend *ext4*.
+
+If the target is a regular hard disk, it's recommended to also create and format a swap 
+partition.
+
+[NOTE]
+=============
+Using more exotic file systems like XFS needs either a remaster or some other way to load 
+the XFS support, in order to access the XFS partition.
+=============
+
+Step 2: Files
+^^^^^^^^^^^^^
+
+The latest Core files are available separately for your convenience - no need to unpack them 
+from the ISO file. Download *core.gz* and *vmlinuz* from your closest mirror, from the 
+directory *release/distribution_files*. The link for the main mirror is 
+http://repo.tinycorelinux.net/4.x/x86/release/distribution_files/.
+
+The usual location for the kernel and initrd is under /boot on the target partition, but you 
+can place them anywhere.
+
+To hold your extensions, create a root directory called *tce* on the target partition.
+
+Step 3: Bootloader
+^^^^^^^^^^^^^^^^^^
+
+Finally, you need to install a bootloader to the target disk's MBR, and point it to the 
+kernel and initrd.
+
+NOTE: For UEFI installs, please consult your bootloader's documentation.
+
+The syslinux family, grub 0.x, and grub 2 have been tested to work fine.
+
+For a normal boot, no boot codes need to be added - the location of the *tce* directory will 
+be autodetected. If you anticipate having multiple *tce* directories, then it's recommended 
+to specify which one you want as a boot code.
+
+For USB sticks, and other removable/slow media such as SD cards, you might need to add the 
+*waitusb* bootcode. It tells Core to wait the given number of seconds to give slow devices 
+time to register, and optionally polls for a given partition label or UUID to proceed as 
+soon as the device shows up.
+
+The syntax is *waitusb=5* to wait five seconds, or *waitusb=20:LABEL=mydisk* to wait up to 
+twenty seconds for the partition labeled "mydisk" to show up.
+
+Finally, you might want to limit the kernel's boot output by adding the *quiet* bootcode.
+
+A typical grub 0.97 config file might look like this:
+
+[source,sh]
+----
+default 0
+timeout 10
+
+title Core
+root (hd0,0)
+kernel /boot/vmlinuz quiet waitusb=5
+initrd /boot/core.gz
+----
