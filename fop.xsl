@@ -53,6 +53,15 @@
 	<xsl:attribute name="keep-together.within-column">always</xsl:attribute>
 </xsl:attribute-set>
 
+<!-- Force a blank page at the end -->
+<xsl:template name="back.cover">
+	<fo:page-sequence master-reference="blank">
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block break-before="page">&#xA0;</fo:block>
+		</fo:flow>
+	</fo:page-sequence>
+</xsl:template>
+
 <!-- My style customisations
 <xsl:template match='xslthl:keyword' mode="xslthl">
 <fo:inline font-weight="normal" color="#AA22FF"><xsl:apply-templates mode="xslthl"/></fo:inline>
