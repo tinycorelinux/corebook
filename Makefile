@@ -5,7 +5,11 @@ all: $(PDF)
 
 $(PDF): $(NAME)
 	a2x -f pdf --fop --icons \
-	--xsltproc-opts='--stringparam page.height 9in --stringparam page.width 6in' \
+	--xsltproc-opts='--stringparam page.height 9in \
+		--stringparam double.sided 1 \
+		--stringparam headers.on.blank.pages 0 \
+		--stringparam footers.on.blank.pages 0 \
+		--stringparam page.width 6in' \
 	--xsl-file='fop.xsl' \
 	--asciidoc-opts='-a docinfo1' \
 	--fop-opts="-dpi 300" \
