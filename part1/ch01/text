@@ -33,7 +33,8 @@ Frugal install
 Frugal is the typical installation method for Tiny Core. That is, it is not a traditional 
 hard drive installation, which we call "scatter mode", because all the files of the system 
 are scattered all about the disk. With frugal, you basically have the system in two files, 
- *vmlinuz* and *core.gz*, whose location is specified by the boot loader.
+*vmlinuz* and *core.gz*, whose location is specified by the boot loader.
+indexterm:[frugal install]
 
 Any user files and extensions are stored outside the base OS.
 

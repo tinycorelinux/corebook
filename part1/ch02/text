@@ -22,6 +22,7 @@ With the official installer
 
 The official installer is included in the Core Plus edition, but can also be downloaded 
 separately to install from a TinyCore or a command-line Core image (*tc-install.tcz*).
+indexterm:[tc-install]
 
 The command-line version, *tc-install.sh*, is not covered here, but it follows the same 
 prompts as the graphical version.
@@ -93,6 +94,7 @@ Core Team member bmarkus created a simple USB installer for Windows users. It's 
 recommended to 
 use third-party installers such as LiLi or Unetbootin, as they won't create the third part 
 of the install (the *tce* directory), meaning more work for you.
+indexterm:[core2usb]
 
 This utility is available from http://core2usb.sf.net/. If you don't want to burn a CD, it's 
 a convenient one-click way to install Core to USB.

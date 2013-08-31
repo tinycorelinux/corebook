@@ -38,6 +38,7 @@ tce-update
 ~~~~~~~~~~
 
 Simply running *sudo tce-update* will do a batch update of all extensions.
+indexterm:[tce-update]
 
 However, if there is not enough space to store the updated extensions, you will need to do 
 an in-place update, which requires a boot with the boot codes *base norestore*. These options 

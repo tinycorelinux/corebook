@@ -10,6 +10,7 @@ on the disc.
 Since a CD is read-only, most of the operations you can perform on a normal *tce* directory 
 cannot be done. For this reason, the directory is renamed *cde* when included in an ISO 
 image.
+indexterm:[cde directory]
 
 The specifics of directory structure are exactly the same as for the *tce* directory.
 

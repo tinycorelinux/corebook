@@ -13,6 +13,7 @@ Qemu / KVM
 The premier open source virtualization solution, KVM, runs Core splendidly. There's built-in 
 support for most of the virtio drivers, helping the virtual machine reach faster 
 performance.
+indexterm:[KVM] indexterm:[Qemu]
 
 To make use of the virtio network card, add *-net nic,model=virtio -net user* to your Qemu 
 command line. If you have a special network setup (other than user), don't add the *-net 
@@ -31,7 +32,7 @@ Virtualbox
 ~~~~~~~~~~
 
 Virtualbox shares some code with Qemu, and it can also use the virtio network and block 
-drivers; enable them from the settings.
+drivers; enable them from the settings. indexterm:[Virtualbox]
 
 The mouse support in Virtualbox 4 is currently broken with Xvesa as far as we know; using 
 Xorg or Virtualbox 3 instead are workarounds.
@@ -42,11 +43,10 @@ VMWare
 VMWare's virtualized network card and SCSI card are supported (vmxnet3 and pvscsi). However, 
 VMWare defaults to an emulated SCSI card whose support is not built-in, but included in the 
 *scsi* extension - a catch 22 situation. In order to load extensions from a SCSI drive, one 
-would 
-need 
-to create a 
+would need to create a 
 remaster that includes the SCSI drivers, or to have a two-step boot with the SCSI drivers on 
 an IDE disk.
+indexterm:[VMWare]
 
 The best way is to choose the paravirtualized option for network and SCSI card though, as 
 they will work directly.
@@ -56,3 +56,4 @@ HyperV
 
 Microsoft HyperV Linux support was still quite unstable during the time of Core 4.x; it is 
 not supported. HyperV is supported in the coming 5.x versions.
+indexterm:[HyperV]
