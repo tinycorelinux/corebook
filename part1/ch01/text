@@ -111,8 +111,8 @@ to be restored.
 If you would like applications stored locally and set up on each reboot, then consider the 
 mount and copy modes. 
 
-Mount mode: TCZ/install
-~~~~~~~~~~~~~~~~~~~~~~~
+Mount mode
+~~~~~~~~~~
 
 This is the most widely used and recommended method for using Tiny Core. 
 
@@ -129,8 +129,8 @@ to flag them as
 either "OnBoot" (mount at boot) or "On Demand" (do not mount at boot, but create a special 
 menu section for easy access and display an icon if available).
 
-Copy mode: TCZ/install + copyfs indicator
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copy mode
+~~~~~~~~~
 
 The copy mode is a modification of the mount mode.
 
