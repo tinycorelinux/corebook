@@ -111,8 +111,8 @@ to be restored.
 If you would like applications stored locally and set up on each reboot, then consider the 
 mount and copy modes. 
 
-The mount mode of operation: TCZ/install
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mount mode: TCZ/install
+~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the most widely used and recommended method for using Tiny Core. 
 
@@ -129,8 +129,8 @@ to flag them as
 either "OnBoot" (mount at boot) or "On Demand" (do not mount at boot, but create a special 
 menu section for easy access and display an icon if available).
 
-The copy mode of operation: TCZ/install + copyfs indicator
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Copy mode: TCZ/install + copyfs indicator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The copy mode is a modification of the mount mode.
 
@@ -151,8 +151,8 @@ selections.
 It should be noted that using a bulk selection, that is, loading all extensions to RAM, 
 allows the storage to be unmounted, and the system to avoid any corruption on power loss.
 
-Backup/restore and other persistence options
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Backup/restore & other persistence options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Aside from the mount mode and the *tce* directory of application extensions, Tiny Core 
 supports persistent/permanent:
