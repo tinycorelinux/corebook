@@ -119,3 +119,13 @@ As far as package managers go, they are fairly simple and easy to understand.
 
 You are encouraged to look under the hood.
 ========
+
+Comparison of tce-load with some common package managers:
+[options="header"]
+|======
+|                                |apt (deb)           |yum (rpm)       |tce-load (tcz)
+|Install a package from the repo |apt-get install *pkg* |yum install *pkg* |tce-load -wi *pkg*
+|Install from a local file       |dpkg -i *pkg*         |yum localinstall *pkg* |tce-load -i *pkg*
+|Search                          |apt-cache search *pattern* |yum search *pattern* |tce-ab
+|List installed packages         |dpkg -l             |rpm -qa         |ls /usr/local/tce.installed
+|======

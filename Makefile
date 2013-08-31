@@ -9,6 +9,7 @@ $(PDF): $(NAME)
 		--stringparam double.sided 1 \
 		--stringparam headers.on.blank.pages 0 \
 		--stringparam footers.on.blank.pages 0 \
+		--stringparam tablecolumns.extension 0 \
 		--stringparam page.width 6in' \
 	--xsl-file='fop.xsl' \
 	--asciidoc-opts='-a docinfo1' \
