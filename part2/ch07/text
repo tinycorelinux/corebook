@@ -1,0 +1,50 @@
+
+Creating custom boot codes
+--------------------------
+
+Often it can be useful to set up custom boot codes to handle different cases. For example, a 
+rescue USB stick might have a boot menu with several options: text boot, GUI boot, stress 
+test...
+
+The contents of the boot command line are visible in */proc/cmdline*. Our shell functions 
+collection, *tc-functions*, contains helper functions you can use in your scripts.
+
+Example script, perhaps called from user *tc*'s *.profile*:
+
+[source,sh]
+----
+#!/bin/sh
+# Include the helper functions
+. /etc/init.d/tc-functions
+
+# checkbootparam checks for the presence
+# getbootparam gets the argument from "param=arg"
+if $(checkbootparam stress); then
+	type=$(getbootparam stresstype)
+
+	case $type in
+		cpu)
+			# CPU testing here
+		;;
+		ram)
+			# RAM testing
+		;;
+		*)
+			echo Unknown test $type
+			sleep 20
+		;;
+	esac
+fi
+----
+
+If the boot code "stress" is present, the script checks another boot code, "stresstype=foo", 
+for which type of stress test to run.
+
+[NOTE]
+=========
+This is a slightly contrived example to show the likely flow control.
+
+In a real-life stress test bootcode, you wouldn't waste space by using two separate 
+boot codes for the same thing, but instead would check for the presence of the same boot 
+code.
+=========
