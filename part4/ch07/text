@@ -1,0 +1,129 @@
+
+Bringing up old hardware - common gotchas
+-----------------------------------------
+
+Older hardware often carries limitations. This chapter lists some of them, and what you can 
+do about them.
+
+One might question the point in doing so, particularly if electricity costs in the area are 
+high. However, getting some use of old hardware can be fruitful, often free of any immediate 
+costs, and helps reduce electronic waste.
+
+The power use of old computers is not high in comparison to modern desktop computers, so if 
+you have a job they can perform, the power costs may not create a big enough offset to pay 
+for a new computer.
+
+BIOS
+~~~~
+
+The firmware, most often buggy, and coincidentally, most often not user-replaceable beyond 
+flashing an image from the manufacturer, may carry a number of limitations.
+
+Even if claiming to support a boot method (USB, CD, PXE, floppy), that support might be 
+buggy. BIOSes from the USB 1 era will often only boot from USB with the USB-ZIP emulation 
+mode.
+
+Should the BIOS not support booting from a CD, and a PXE setup is inconvenient, we recommend 
+removing the hard disk, and installing to it on another computer. Core does not read any 
+info from the installing computer, so the resulting install will work just fine when moved 
+to the target.
+
+If the target has integrated graphics, the BIOS often controls the amount of RAM to assign 
+to the graphics card. This amount limits the resolutions you can use, and the acceleration 
+that can be available. If you have the choice, use a minimum of 16 MB.
+
+Some BIOSes, notably Dell ones with Intel graphics, either don't offer that choice, or only 
+offer very small choices. On these machines the only way around the limit is to use Xorg 
+with the fully accelerated driver, as it can control the RAM allocation regardless of the 
+BIOS. With Xvesa or the framebuffer, you might be limited to 640x480 at a low color depth.
+
+Sound
+~~~~~
+
+Core offers two sound systems: ALSA and OSS. OSS doesn't support any ISA cards, so if the 
+sound card is connected via the ISA bus (either as an extension card, or by an integrated 
+ISA bus on the motherboard), your only choice is ALSA.
+
+ISA sound cards often cannot be automatically detected. In these cases, you will need to 
+find out the name of the sound module, and to add a modprobe call to *bootlocal.sh*. Often 
+you might need to also pass the card's parameters (IRQ, DMA address) as options to the 
+driver module.
+
+VESA support
+~~~~~~~~~~~~
+
+Some older graphics cards don't have proper support for the VESA standard. This means that 
+the standard Xvesa server might display at a wrong resolution, or with wrong colors.
+
+In these cases, the options are the framebuffer, and Xorg. To use a framebuffer resolution, 
+you need to add the *vga=791* bootcode to your bootloader's config file (where 791 is a 
+number specifying the resolution and color depth - this particular one is 1024x768 at 16bit 
+color depth), and to install the Xfbdev server instead of Xvesa.
+
+Should the framebuffer also fail, or if non-VESA resolutions are needed, you'll need to 
+install Xorg with a suitable driver.
+
+NOTE: There doesn't exist a Xorg driver for all cards - check online before trying.
+
+Networking
+~~~~~~~~~~
+
+ISA network cards have the same downsides as ISA sound cards: you may need to manually 
+modprobe the correct driver, and to pass the card's details as driver parameters.
+
+PCMCIA network cards should work automatically, as long as the PCMCIA bus itself is 
+recognized. You can use the *lspcmcia* command to list any attached cards to see if they are 
+recognized.
+
+Should the computer not have a network card, Linux supports various other ways to move data 
+in addition to plain old ethernet. You can harness infrared, the serial or parallel port, or 
+even the sound card to move data (yes, even to browse the internet!) as long as you have 
+another computer that can act as a router.
+
+Bigger hard drives
+~~~~~~~~~~~~~~~~~~
+
+The IDE bus will usually accept drives as large as you can buy, up to terabytes, even on 
+computers that were sold with 10 GB drives. The possible issue with these is that the BIOS 
+cannot read past a certain size, even though Linux can.
+
+The solution to this issue is to create a separate boot partition at the beginning of the 
+disk, making sure the BIOS can read all of it. The common BIOS limits are 137 GB, 8.5 GB, 
+and 528 MB, so by making your boot partition be less than 500 MB in size you guarantee that 
+the BIOS will be able to read it.
+
+For Core, the boot partition only needs to contain the boot loader, kernel, and *core.gz*. 
+Any personal data and extensions can reside on different partitions.
+
+Memory limitations
+~~~~~~~~~~~~~~~~~~
+
+Of all the limits, RAM might be the hardest to overcome. While used RAM sticks of the older 
+technologies can be bought for cheap, the computer may not be able to take much (each 
+motherboard has a maximum amount). A large swap partition is recommended (at least 100 MB).
+
+As long as there's enough RAM to boot Core itself (28 MB in text mode, 48 MB in GUI at the 
+time of writing), a lot can be done through selecting lightweight programs. Instead of the 
+latest Firefox or Chrome, consider an older version of Opera; if Javascript support is not 
+needed, Dillo; if text is enough, lynx or links.
+
+[NOTE]
+===========
+Some versions of Links can display images. It is a very lightweight browser if the features 
+are enough.
+===========
+
+Likewise, for playing music, eschew the complex GUI players like Amarok in favor of simpler 
+ones like XMMS, or command-line ones like mpg123 or mplayer.
+
+To write documents, Ted is a lightweight RTF editor. Older OpenOffice may be considered for 
+more complex documents.
+
+Should the target not have enough RAM to run Core itself, there are some things you can do 
+to help the situation with a remaster. The base image contains a couple megabytes of 
+drivers: by removing those the target doesn't need, you can lower the required RAM.
+Using text mode is a given.
+
+Depending on the situation, *zram* may or may not be useful. With very little RAM, the 
+compressed swap in RAM might actually act counter-intuitively, not leaving enough to run the 
+desired program, causing constant swapping. You can disable it with the bootcode *nozswap*.
