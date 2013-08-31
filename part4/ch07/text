@@ -61,6 +61,17 @@ you need to add the *vga=791* bootcode to your bootloader's config file (where 7
 number specifying the resolution and color depth - this particular one is 1024x768 at 16bit 
 color depth), and to install the Xfbdev server instead of Xvesa.
 
+Table of common VESA resolutions:
+------------
+                640 800 1024 1280
+                 *   *   *    *
+                480 600 768  1024
+
+256 colors      769 771 773  775
+16-bit          785 788 791  794
+24-bit          786 789 792  795
+------------
+
 Should the framebuffer also fail, or if non-VESA resolutions are needed, you'll need to 
 install Xorg with a suitable driver.
 
