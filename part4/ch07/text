@@ -26,7 +26,7 @@ mode.
 Should the BIOS not support booting from a CD, and a PXE setup is inconvenient, we recommend 
 removing the hard disk, and installing to it on another computer. Core does not read any 
 info from the installing computer, so the resulting install will work just fine when moved 
-to the target. Alternatively, Smart Boot Manager may be used to chainload the CD from the 
+to the target. Alternatively, Smart Boot Manager may be used to chain-load the CD from the 
 floppy drive.
 
 If the target has integrated graphics, the BIOS often controls the amount of RAM to assign 
@@ -54,7 +54,8 @@ VESA support
 ~~~~~~~~~~~~
 
 Some older graphics cards don't have proper support for the VESA standard. This means that 
-the standard Xvesa server might display at a wrong resolution, or with wrong colors.
+the standard Xvesa server might display at a wrong resolution, with wrong colors, or fail to 
+start altogether.
 
 In these cases, the options are the framebuffer, and Xorg. To use a framebuffer resolution, 
 you need to add the *vga=791* bootcode to your bootloader's config file (where 791 is a 
