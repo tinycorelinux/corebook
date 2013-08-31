@@ -26,7 +26,8 @@ mode.
 Should the BIOS not support booting from a CD, and a PXE setup is inconvenient, we recommend 
 removing the hard disk, and installing to it on another computer. Core does not read any 
 info from the installing computer, so the resulting install will work just fine when moved 
-to the target.
+to the target. Alternatively, Smart Boot Manager may be used to chainload the CD from the 
+floppy drive.
 
 If the target has integrated graphics, the BIOS often controls the amount of RAM to assign 
 to the graphics card. This amount limits the resolutions you can use, and the acceleration 
