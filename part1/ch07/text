@@ -115,3 +115,19 @@ To set this up on an installed system, you only need to add the *home=sda1* boot
 bootloader's config file (where sda1 is your partition), and reboot. To see that it's being 
 used, type *mount*.
 
+Summary
+~~~~~~~
+
+.Backup
+- Happens on boot and shutdown
+- Slow if you have lots of data
+
+.Persistent home/opt
+- Direct writes
+- No boot overhead
+
+.Personal extension
+- Only static data
+- Very little boot overhead
+
+Any combinations are allowed.
