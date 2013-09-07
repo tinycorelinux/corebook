@@ -42,8 +42,17 @@ Real Boot: init
 ~~~~~~~~~~~~~~~
 
 Busybox init is a BSD-style one, meaning it does not have runlevels, but runs one script on 
-boot. At this point it does very little, giving control to our main boot script, tc-config.
+boot. At this point it does very little, giving control to our main boot script, tc-config 
+(via rcS).
 indexterm:[tc-config]
+
+Bootstrap: rcS
+~~~~~~~~~~~~~~
+
+The rcS script sets up some system mount points, and passes control to tc-config.
+
+The first few initialization lines of tc-config were separated into rcS, to ease remaster 
+maintenance. As one example, the Plymouth boot splash can be started from there.
 
 Main boot: tc-config
 ~~~~~~~~~~~~~~~~~~~~
