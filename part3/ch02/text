@@ -18,6 +18,8 @@ NOTE: While the newer technology is called initial RAM FS (initramfs), not initi
 indexterm:[initrd]
 indexterm:[initramfs]
 
+image::images/part3/bootprocess.png[scaledwidth="100%"]
+
 The first step: /init
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -115,6 +117,8 @@ The X Window System
 
 The shipped .xsession file sets up the default background, starts any X-dependant programs 
 you've configured, and starts up the configured window manager.
+
+image::images/part3/bootprocess_gui.png[scaledwidth="50%"]
 
 pass:[.X.d]
 ~~~~~~~~~~~
