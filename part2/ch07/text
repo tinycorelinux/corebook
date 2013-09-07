@@ -48,3 +48,7 @@ In a real-life stress test bootcode, you wouldn't waste space by using two separ
 boot codes for the same thing, but instead would check for the presence of the same boot 
 code.
 =========
+
+If using *isolinux* with gfxboot, the boot menu might look like this:
+
+image::images/part2/gfxboot.png[scaledwidth="100%"]
