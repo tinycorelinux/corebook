@@ -64,8 +64,8 @@ user ftp {
 }
 ----
 
-The next steps are creating the *ftp* user, backing up the user files, and making the upload 
-and download directories with appropriate permissions.
+The next steps are creating the *ftp* user, backing up the user files, and creating the 
+upload and download directories with appropriate permissions.
 
 [source,sh]
 ----
