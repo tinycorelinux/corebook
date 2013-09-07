@@ -132,6 +132,8 @@ to flag them as
 either "OnBoot" (mount at boot) or "On Demand" (do not mount at boot, but create a special 
 menu section for easy access and display an icon if available).
 
+image::images/part1/tcedir.png[scaledwidth="40%"]
+
 Copy mode
 ~~~~~~~~~
 
