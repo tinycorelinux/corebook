@@ -38,6 +38,8 @@ indexterm:[frugal install]
 
 Any user files and extensions are stored outside the base OS.
 
+image::images/part1/scattered.png[scaledwidth="100%"]
+
 Boot codes
 ~~~~~~~~~~
 
