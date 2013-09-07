@@ -67,15 +67,13 @@ number specifying the resolution and color depth - this particular one is 1024x7
 color depth), and to install the Xfbdev server instead of Xvesa.
 
 Table of common VESA resolutions:
-------------
-                640 800 1024 1280
-                 *   *   *    *
-                480 600 768  1024
-
-256 colors      769 771 773  775
-16-bit          785 788 791  794
-24-bit          786 789 792  795
-------------
+[options="header",cols="1<h,4*1^"]
+|=====
+|             | 640x480  | 800x600  | 1024x768  | 1280x1024
+|256 colors   | 769      | 771      | 773       | 775
+|16-bit       | 785      | 788      | 791       | 794
+|24-bit       | 786      | 789      | 792       | 795
+|=====
 
 Should the framebuffer also fail, or if non-VESA resolutions are needed, you'll need to 
 install Xorg with a suitable driver.
