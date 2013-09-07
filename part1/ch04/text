@@ -120,7 +120,9 @@ As far as package managers go, they are fairly simple and easy to understand.
 You are encouraged to look under the hood.
 ========
 
-Comparison of tce-load with some common package managers:
+Comparing package managers
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 [options="header"]
 |======
 |                               ^|apt (deb)          ^|yum (rpm)       ^|tce-load (tcz)
