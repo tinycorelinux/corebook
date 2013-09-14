@@ -127,6 +127,9 @@ The X Window System
 The shipped .xsession file sets up the default background, starts any X-dependant programs 
 you've configured, and starts up the configured window manager.
 
+These parts only apply if you have the GUI extensions loaded (Xlibs, Xprogs, an X server, 
+and a window manager). A command-line-only boot ends at user tc's login.
+
 image::images/part3/bootprocess_gui.png[scaledwidth="50%"]
 
 pass:[.X.d]
