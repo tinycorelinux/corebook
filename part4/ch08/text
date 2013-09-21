@@ -416,6 +416,8 @@ setInterval( "getClock()", 1000 );
 </overlay>
 ----
 
+Note the three line continuations here too.
+
 Now, start Firefox. It may ask if you want to install our clock extension: do so.
 
 After a restart, nothing will change; we need to right-click the toolbar and go
