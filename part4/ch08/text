@@ -17,7 +17,7 @@ Selecting extensions
 Starting with an installed TinyCore, you will need:
 - firefox.tcz (our browser)
 - idesk.tcz (for the screen icons)
-- liberation-fonts-ttf.tcz (because many sites use them)
+- liberation-fonts-ttf.tcz (many sites are designed for Microsoft fonts)
 - openbox.tcz (deals better with our add-on later)
 
 Load all these extensions OnBoot.
