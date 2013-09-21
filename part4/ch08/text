@@ -4,31 +4,34 @@ A Web kiosk
 
 *By Luiz Fernando Estevarengo AKA Zendrael*
 
-A kiosk machine is essentialy a terminal to access the web, any website or
-just one website or webapp for some reason. It does not run any kid of app
-other than the webbrowser taking all of the screen space, even if it is not fullscreen. 
+A kiosk machine is essentially a terminal to access the web, any website, 
+just one website, or perhaps a webapp. It does not run any kid of app
+other than the web browser.
 
 With Core, we can build a simple kiosk with little effort, a bunch of extensions 
 and the creation of an add-on to our browser of choice. 
 
 Selecting extensions
-Starting with CorePlus, If you plan to just let the users use the web, from now 
-on you will need only:
-firefox.tcz (our browser)
-idesk.tcz (a trick for the screen icons)
-msttcorefonts-installer.tcz (because many sites use them)
-openbox.tcz (deals better with our add-on later)
+~~~~~~~~~~~~~~~~~~~~
 
-Put all of the above extensions to load at OnBoot.
+Starting with an installed TinyCore, you will need:
+- firefox.tcz (our browser)
+- idesk.tcz (for the screen icons)
+- liberation-fonts-ttf.tcz (because many sites use them)
+- openbox.tcz (deals better with our add-on later)
+
+Load all these extensions OnBoot.
 
 If you want to let the user do more on the web, you can also use alsa.tcz, 
 getflash.tcz, and your choice of Firefox add-ons.
 
-As for a better looking experience, you may want to have a gtk2.tcz and some gtk2 
-engine loaded with a theme of your choice too. The beauty will not be covered as it 
-depends on the likes of each people.
+For a better looking experience, you may want to have a gtk2 theme 
+engine loaded with a theme of your choice. This will not be covered as it 
+depends on your preferences.
 
 Configuring Core extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 iDesk icons
 What happens if our user, for some reason, closes the browser or it crashes? 
 We must have an easy way to restart the browser, preferably with a visual clue, 
