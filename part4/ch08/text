@@ -1,11 +1,17 @@
-Simple Kiosk
 
-A kiosk machine is essentialy a terminal to access the web, any website or just one website or webapp for some reason. It does not run any kid of app other than the webbrowser taking all of the screen space, even if it is not fullscreen. 
+A Web kiosk
+-----------
 
-With Core, we can build a simple kiosk with little effort, a bunch of extensions and the creation of an add-on to our browser of choice. 
+A kiosk machine is essentialy a terminal to access the web, any website or
+just one website or webapp for some reason. It does not run any kid of app
+other than the webbrowser taking all of the screen space, even if it is not fullscreen. 
+
+With Core, we can build a simple kiosk with little effort, a bunch of extensions 
+and the creation of an add-on to our browser of choice. 
 
 Selecting extensions
-Starting with CorePlus, If you plan to just let the users use the web, from now on you will need only:
+Starting with CorePlus, If you plan to just let the users use the web, from now 
+on you will need only:
 firefox.tcz (our browser)
 idesk.tcz (a trick for the screen icons)
 msttcorefonts-installer.tcz (because many sites use them)
@@ -13,15 +19,22 @@ openbox.tcz (deals better with our add-on later)
 
 Put all of the above extensions to load at OnBoot.
 
-If you want to let the user do more on the web, you can also use alsa.tcz, getflash.tcz, and your choice of Firefox add-ons.
+If you want to let the user do more on the web, you can also use alsa.tcz, 
+getflash.tcz, and your choice of Firefox add-ons.
 
-As for a better looking experience, you may want to have a gtk2.tcz and some gtk2 engine loaded with a theme of your choice too. The beauty will not be covered as it depends on the likes of each people.
+As for a better looking experience, you may want to have a gtk2.tcz and some gtk2 
+engine loaded with a theme of your choice too. The beauty will not be covered as it 
+depends on the likes of each people.
 
 Configuring Core extensions
 iDesk icons
-What happens if our user, for some reason, closes the browser or it crashes? We must have an easy way to restart the browser, preferably with a visual clue, like an icon in the desktop. iDesk let us do it with icons that can not be changed, deleted or moved on the deskop, only if you could change the configs. Let's do the trick! 
+What happens if our user, for some reason, closes the browser or it crashes? 
+We must have an easy way to restart the browser, preferably with a visual clue, 
+like an icon in the desktop. iDesk let us do it with icons that can not be changed, 
+deleted or moved on the deskop, only if you could change the configs. Let's do the trick! 
 
-Inside your home directory create one file, the .ideskrc which cointain the idesk configuration; and one directory, where will be stored your icons, .idesktop:
+Inside your home directory create one file, the .ideskrc which cointain the idesk 
+configuration; and one directory, where will be stored your icons, .idesktop:
 
 $ touch .ideskrc
 $ mkdir .idesktop
@@ -60,7 +73,8 @@ table Actions
     Execute[1]: right doubleClk
 end
 
-Now, inside the .idesktop directory we will create the file that contains the information of our icon to restart the browser if it crashes or the user close it by some way:
+Now, inside the .idesktop directory we will create the file that contains the information 
+of our icon to restart the browser if it crashes or the user close it by some way:
 
 $ cd .idesktop
 $ touch kiosk.lnk
@@ -78,10 +92,13 @@ table Icon
     Command[0]: firefox
 end
 
-Note that the icon mentioned in the file is inside the .idesktop folder. You can use any icon you want, whereever it is. Save the file.
+Note that the icon mentioned in the file is inside the .idesktop folder.
+You can use any icon you want, whereever it is. Save the file.
 
 iDesk autoload
-As the iDesk will serve to show an icon for our browser (if the user, for some reason closes it), it need to be loaded right after the boot. So, in the ~/.X.d/ directory we sill create a file named idesk with a single command inside it:
+As the iDesk will serve to show an icon for our browser (if the user, for some reason closes it),
+it need to be loaded right after the boot. So, in the ~/.X.d/ directory we sill create a file
+named idesk with a single command inside it:
 
 $ cd ~/.X.d/
 $ touch idesk
@@ -94,7 +111,10 @@ We will do a custom profile to handle the kiosk. Open up a terminal and type:
 $ cd ~/.mozilla/firefox
 $ ls 
 
-You will find some directory like j08765.default and a file name profiles.ini. Here is where your actual profile, settings ans extensions are stored and the file where firefox looks for it as default, repectively. So, we will start to change the profile name and set it to the ini file:
+You will find some directory like j08765.default and a file name profiles.ini.
+Here is where your actual profile, settings and extensions are stored and the file where 
+firefox looks for it as default, repectively.
+So, we will start to change the profile name and set it to the ini file:
 
 $ mv j08756.default kiosk.default
 $ editor profiles.ini
@@ -111,7 +131,8 @@ Path=kiosk.default
 
 Save it. Start then close Firefox.
 Firefox autoload
-We will need to have the Firefox loaded as soon as our kiosk runs. Here we follow the same autoload way that we used for idesk:
+We will need to have the Firefox loaded as soon as our kiosk runs. Here we follow the same
+autoload way that we used for idesk:
 
 $ cd ~/.X.d/
 $ touch firefox
@@ -121,14 +142,20 @@ Next, we will do some coding with XUL and Javascript.
 
 Configuring Firefox
 Install some add-ons
-To take the best of our kiosk, we will setup it to use less space on the screen and avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck "Menu Bar" item. Then, go to the Firefox menu and access the Add-ons manager. The add-ons we will use are:
+To take the best of our kiosk, we will setup it to use less space on the screen and
+avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck
+"Menu Bar" item. Then, go to the Firefox menu and access the Add-ons manager.
+The add-ons we will use are:
 Movable Firefox Button
 Adblock Plus
 
-Install both searching for them in the search box then restart as required. The last step, our own add-on will do the last trick!
+Install both searching for them in the search box then restart as required.
+The last step, our own add-on will do the last trick!
 
 Creating our add-on 
-Firefox add-ons are easy to build and can be used without the need to upload them to the Mozilla website. We will create a folder and file structure of our add-on to create a clock button that will also control the behavior of Firefox on the screen every time it loads.
+Firefox add-ons are easy to build and can be used without the need to upload them to
+the Mozilla website. We will create a folder and file structure of our add-on to create
+a clock button that will also control the behavior of Firefox on the screen every time it loads.
 
 Folder and file structure
 Open up a terminal and lets start by creating the files and folders
@@ -149,7 +176,9 @@ clock@kiosk.com/
 		clock.js
 		clock.xul
 
-The manifest and the rdf files will set up our add-on to be viewed and loaded by Firefox. The chrome directory (which doesn't have anything to do with Google Chrome or Chromium browser) will hold the add-on files. Edit each of them with its contents:
+The manifest and the rdf files will set up our add-on to be viewed and loaded by Firefox. 
+The chrome directory (which doesn't have anything to do with Google Chrome or 
+Chromium browser) will hold the add-on files. Edit each of them with its contents:
 
 chrome.manifest
 content clock chrome/
@@ -286,8 +315,13 @@ chrome/clock.xul
  
 </overlay>
 
-Now, restart you Firefox. It may ask if you want to install our clock extension. After restart again, nothing will change, we need to right-click the toolbar and go to Customize. In the window that opened we will find our clock add-on; grab it then drag to the right side of the "+" button in the same bar that tabs appear. Done on the drag itens window. Restart Firefox.
+Now, restart you Firefox. It may ask if you want to install our clock extension.
+After restart again, nothing will change, we need to right-click the toolbar and go
+to Customize. In the window that opened we will find our clock add-on;
+grab it then drag to the right side of the "+" button in the same bar that tabs appear. 
+Done on the drag itens window. Restart Firefox.
 Results
-Reboot the system and you will get the Firefox taking all the desktop without the titlebar and with the clock working. Our kiosk is now ready!
+Reboot the system and you will get the Firefox taking all the desktop without the titlebar
+and with the clock working. Our kiosk is now ready!
 	
 	
