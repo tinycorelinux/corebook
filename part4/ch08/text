@@ -131,7 +131,7 @@ So, in the *~/.X.d/* directory we will create a file to start it up:
 [source,sh]
 ----
 $ mkdir -p ~/.X.d
-$ cd ~/.X.d/
+$ cd ~/.X.d
 $ echo "idesk &" > idesk
 ----
 
@@ -185,12 +185,10 @@ $ cd ~/.X.d
 $ echo "firefox &" > firefox
 ----
 
-Next, we will do some coding with XUL and Javascript.
-
 Configuring Firefox
 ^^^^^^^^^^^^^^^^^^^
 
-To make the best of our kiosk, we will setup it to use less space on the screen and
+To make the best of our kiosk, we will setup it to use less space on the screen, and
 avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck the
 *Menu Bar* item. Then, go to the Firefox menu and access the *Add-ons manager*.
 
@@ -200,6 +198,8 @@ The add-ons we will use are:
 - Ad-block Plus
 
 Install both by searching for them in the search box, and then restart as required.
+
+Next, we will do some coding with XUL and Javascript.
 
 Creating our add-on
 ~~~~~~~~~~~~~~~~~~~
@@ -292,7 +292,6 @@ line.
     	about="urn:mozilla:extension:clock"
     	em:package="content/clock/" />
 	</em:file>
-
   </Description>
 </RDF>
 ----
