@@ -344,7 +344,8 @@ toolbar[mode="icons"] #appmenu-button
 *chrome/clock.js*
 [source,js]
 ----
-//start main window without borders
+// Start main window without borders
+// Note the long line
 document.getElementById("main-window").\
   setAttribute("hidechrome","true");
 
