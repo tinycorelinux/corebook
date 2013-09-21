@@ -389,14 +389,16 @@ setInterval( "getClock()", 1000 );
 
 <!DOCTYPE overlay >
 <overlay id="custombutton-overlay"
-  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  xmlns="http://www.mozilla.org/keymaster/ \
+    gatekeeper/there.is.only.xul">
 
 <script type="application/javascript"
   src="chrome://clock/content/clock.js"/>
 
 <!-- Firefox -->
 <toolbarpalette id="BrowserToolbarPalette">
-  <toolbaritem id="osStatusItems" label="OS Status Items">
+  <toolbaritem id="osStatusItems"
+    label="OS Status Items">
     <label id="osStatus-button-clock"/>
   </toolbaritem>
 </toolbarpalette>
@@ -405,7 +407,8 @@ setInterval( "getClock()", 1000 );
 <label id="osStatus-button-clock"
   value="00:00"
   tooltiptext="00/00/0000"
-  class="toolbarbutton-1 chromeclass-toolbar-additional clean"
+  class="toolbarbutton-1 \
+    chromeclass-toolbar-additional clean"
   crop="none" orient="horizontal" dir="reverse"
   />
  
