@@ -2,6 +2,8 @@
 A Web kiosk
 -----------
 
+*By Luiz Fernando Estevarengo AKA Zendrael*
+
 A kiosk machine is essentialy a terminal to access the web, any website or
 just one website or webapp for some reason. It does not run any kid of app
 other than the webbrowser taking all of the screen space, even if it is not fullscreen. 
