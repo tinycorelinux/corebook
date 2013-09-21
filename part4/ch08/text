@@ -339,14 +339,16 @@ toolbar[mode="icons"] #appmenu-button
 [source,js]
 ----
 //start main window without borders
-document.getElementById("main-window").setAttribute("hidechrome","true");
+document.getElementById("main-window").\
+  setAttribute("hidechrome","true");
 
 /*
     function clock
-   	 calculate the time and date to show
+   	 show the time and date
 */
 function getClock(){
-    var obj = document.getElementById("osStatus-button-clock");
+    var obj =
+      document.getElementById("osStatus-button-clock");
 
     var now = new Date();
     var hours = now.getHours();
@@ -354,8 +356,8 @@ function getClock(){
     var seconds = now.getSeconds();
     var timeValue = ""+ hours;
 
-    timeValue += ((minutes<10) ? ":0" : ":") + minutes;
-    //timeValue += ((seconds<10) ? ":0" : ":") + seconds;
+    timeValue +=
+      ((minutes<10) ? ":0" : ":") + minutes;
 
     //set date
     var month = now.getMonth() + 1;
@@ -375,22 +377,24 @@ setInterval( "getClock()", 1000 );
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="chrome://clock/content/clock.css"?>
+<?xml-stylesheet type="text/css"
+  href="chrome://clock/content/clock.css"?>
 
 <!DOCTYPE overlay >
-<overlay id="custombutton-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="custombutton-overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-<script type="application/javascript" src="chrome://clock/content/clock.js"/>
+<script type="application/javascript"
+  src="chrome://clock/content/clock.js"/>
 
 <!-- Firefox -->
 <toolbarpalette id="BrowserToolbarPalette">
-    <toolbaritem id="osStatusItens" label="OS Status Itens">
-   	 <label id="osStatus-button-clock"/>
-    </toolbaritem>
+  <toolbaritem id="osStatusItems" label="OS Status Items">
+    <label id="osStatus-button-clock"/>
+  </toolbaritem>
 </toolbarpalette>
 
 <!-- button details -->
-<!--<toolbarbutton id="osStatus-button-clock"-->
 <label id="osStatus-button-clock"
   value="00:00"
   tooltiptext="00/00/0000"
