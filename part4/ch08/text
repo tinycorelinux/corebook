@@ -354,7 +354,7 @@ document.getElementById("main-window").\
    	 show the time and date
 */
 function getClock(){
-    var obj =
+    var obj = \
       document.getElementById("osStatus-button-clock");
 
     var now = new Date();
