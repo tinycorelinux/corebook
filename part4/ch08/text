@@ -253,15 +253,16 @@ chrome://clock/content/clock.xul
 
 Please note the line continuations - this is not a shell script, so the long lines will need 
 to be intact. Remove the *\* line continuation sign, and put the following line on the same 
-line as this one.
+line.
 
 *install.rdf*
 [source,xml]
 ----
 <?xml version="1.0"?>
 
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
- 	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<RDF
+  xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description
 	about="urn:mozilla:install-manifest"
@@ -274,7 +275,7 @@ line as this one.
 	em:version="1.0"
 	em:homepageURL="http://www.zendrael.com/kiosk"
 
-	em:iconURL="chrome://clock/content/icon.png" >
+	em:iconURL="chrome://clock/content/icon.png">
 
 	<em:targetApplication><!-- Firefox -->
   	<Description
@@ -290,7 +291,6 @@ line as this one.
 	</em:file>
 
   </Description>
-
 </RDF>
 ----
 
