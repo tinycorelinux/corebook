@@ -458,6 +458,9 @@ and with the clock working. Our kiosk is now ready!
 	
 	
 At the time of writing, the Firefox version was 21. The install used about 54 Mb of space.
-When just started, displaying the default Firefox homepage, the RAM usage was 232 Mb. The 
-exact requirements depend on the web pages you intend to allow, but 256 Mb would be tight. 
+When just started, displaying the default Firefox homepage, the RAM usage was 232 Mb.
+
+The exact requirements depend on the web pages you intend to allow, but 256 Mb would be tight. 
 512 Mb of RAM would be recommended for this use.
+
+image::images/part4/ff.png[scaledwidth="100%"]
