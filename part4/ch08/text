@@ -405,11 +405,11 @@ setInterval( "getClock()", 1000 );
 </overlay>
 ----
 
-Now, start Firefox. It may ask if you want to install our clock extension: we do.
+Now, start Firefox. It may ask if you want to install our clock extension: do so.
 
 After a restart, nothing will change; we need to right-click the toolbar and go
-to Customize. In the window that opened we will find our clock add-on.
-Drag to the right side of the "+" button in the same bar that tabs appear. 
+to *Customize*. In the window we will find our clock add-on.
+Drag it to the right side of the *+* button in the same bar that tabs appear.
 
 Restart and close Firefox once more.
 
