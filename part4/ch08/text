@@ -16,15 +16,15 @@ Selecting extensions
 
 Starting with an installed TinyCore, you will need:
 
-- firefox.tcz (our browser)
-- idesk.tcz (for the screen icons)
-- liberation-fonts-ttf.tcz (many sites are designed for Microsoft fonts)
-- openbox.tcz (deals better with our add-on later)
+- *firefox.tcz* (our browser)
+- *idesk.tcz* (for the screen icons)
+- *liberation-fonts-ttf.tcz* (many sites are designed for Microsoft fonts)
+- *openbox.tcz* (deals better with our add-on later)
 
 Load all these extensions OnBoot.
 
-If you want to let the user do more on the web, you can also use alsa.tcz, 
-getflash.tcz, and your choice of Firefox add-ons.
+If you want to let the user do more on the web, you can also use *alsa.tcz*,
+*getflash.tcz*, and your choice of Firefox add-ons.
 
 For a better looking experience, you may want to have a gtk2 theme 
 engine loaded with a theme of your choice. This will not be covered as it 
