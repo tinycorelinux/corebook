@@ -241,6 +241,7 @@ The manifest and the rdf files will set up our add-on to be viewed and loaded by
 The chrome directory (which doesn't have anything to do with Google Chrome or 
 Chromium browser) will hold the add-on files. Edit each of them with its contents:
 
+<<<
 *chrome.manifest*
 [source,sh]
 ----
@@ -258,6 +259,7 @@ Please note the line continuations - this is not a shell script, so the long lin
 to be intact. Remove the *\* line continuation sign, and put the following line on the same 
 line.
 
+<<<
 *install.rdf*
 [source,xml]
 ----
@@ -296,6 +298,7 @@ line.
 </RDF>
 ----
 
+<<<
 *chrome/clock.css*
 [source,css]
 ----
@@ -337,6 +340,7 @@ toolbar[mode="icons"] #appmenu-button
 }
 ----
 
+<<<
 *chrome/clock.js*
 [source,js]
 ----
@@ -375,6 +379,7 @@ function getClock(){
 setInterval( "getClock()", 1000 );
 ----
 
+<<<
 *chrome/clock.xul*
 [source,xml]
 ----
