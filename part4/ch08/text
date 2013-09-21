@@ -117,7 +117,7 @@ table Icon
 end
 ----
 
-Note that the icon mentioned in the file is inside the .idesktop folder.
+Note the icon mentioned in the .idesktop folder.
 You can use any icon you want; to use the Firefox icon, you can copy it from 
 */usr/local/share/pixmaps*.
 
