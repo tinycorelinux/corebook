@@ -325,8 +325,11 @@ toolbar[mode="icons"] #appmenu-toolbar-button > .toolbarbutton-text,
 toolbar[mode="icons"] #appmenu-button > .button-box .button-text {
     display: none;
 }
+----
 
-chrome/clock.js
+*chrome/clock.js*
+[source,js]
+----
 //start main window without borders
 document.getElementById("main-window").setAttribute("hidechrome","true");
 
