@@ -447,6 +447,12 @@ umount /mnt/sda1
 Results
 ~~~~~~~
 
+[TIP]
+==========
+Turning this from a HD-based install to a PXE-based one would let you have an easily managed
+fleet of diskless web kiosks.
+==========
+
 Reboot the system and you will get Firefox taking all the desktop without the title bar
 and with the clock working. Our kiosk is now ready!
 	
