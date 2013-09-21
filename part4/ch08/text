@@ -416,7 +416,7 @@ setInterval( "getClock()", 1000 );
 </overlay>
 ----
 
-Note the three line continuations here too.
+Note the two line continuations here too - the mozilla.org link needs to be without spaces.
 
 Now, start Firefox. It may ask if you want to install our clock extension: do so.
 
