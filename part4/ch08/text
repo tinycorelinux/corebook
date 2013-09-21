@@ -199,21 +199,31 @@ The add-ons we will use are:
 Install both searching for them in the search box then restart as required.
 
 Creating our add-on 
+~~~~~~~~~~~~~~~~~~~
+
 Firefox add-ons are easy to build and can be used without the need to upload them to
 the Mozilla website. We will create a folder and file structure of our add-on to create
 a clock button that will also control the behavior of Firefox on the screen every time it loads.
 
 Folder and file structure
-Open up a terminal and lets start by creating the files and folders
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Start by creating the files and folders:
+
+[source,sh]
+----
 $ cd ~/.mozilla/firefox/kiosk.default/extensions
-$ mkdir -p clock$kiosk.com/chrome
+$ mkdir -p clock@kiosk.com/chrome
 $ cd clock@kiosk.com
 $ touch install.rdf chrome.manifest
 $ cd chrome
 $ touch clock.xul clock.js clock.css 
+----
 
-The resulting file structure will be something like this
+The resulting file structure will look like this:
+
+[source,sh]
+----
 clock@kiosk.com/
 	chrome.manifest
 	install.rdf
@@ -221,20 +231,32 @@ clock@kiosk.com/
 		clock.css
 		clock.js
 		clock.xul
+----
 
 The manifest and the rdf files will set up our add-on to be viewed and loaded by Firefox. 
 The chrome directory (which doesn't have anything to do with Google Chrome or 
 Chromium browser) will hold the add-on files. Edit each of them with its contents:
 
-chrome.manifest
+*chrome.manifest*
+[source,sh]
+----
 content clock chrome/
-#in the same line:
-style chrome://global/content/customizeToolbar.xul chrome://clock/content/clock.css
 
-#in the same line:
-overlay chrome://browser/content/browser.xul chrome://clock/content/clock.xul
+# long line
+style chrome://global/content/customizeToolbar.xul \
+chrome://clock/content/clock.css
+# another long line
+overlay chrome://browser/content/browser.xul \
+chrome://clock/content/clock.xul
+----
 
-install.rdf
+Please note the line continuations - this is not a shell script, so the long lines will need 
+to be intact. Remove the *\* line continuation sign, and put the following line on the same 
+line as this one.
+
+*install.rdf*
+[source,xml]
+----
 <?xml version="1.0"?>
 
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -269,8 +291,11 @@ install.rdf
   </Description>
 
 </RDF>
+----
 
-chrome/clock.css
+*chrome/clock.css*
+[source,css]
+----
 /* let the buttons be smaller as its icons */
 .clean {
     padding: 0px;
@@ -333,8 +358,11 @@ function getClock(){
 
 //set timeout events, updating clock
 setInterval( "getClock()", 1000 );
+----
 
-chrome/clock.xul
+*chrome/clock.xul*
+[source,xml]
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/css" href="chrome://clock/content/clock.css"?>
 
@@ -360,13 +388,37 @@ chrome/clock.xul
   />
  
 </overlay>
+----
 
-Now, restart you Firefox. It may ask if you want to install our clock extension.
-After restart again, nothing will change, we need to right-click the toolbar and go
-to Customize. In the window that opened we will find our clock add-on;
-grab it then drag to the right side of the "+" button in the same bar that tabs appear. 
-Done on the drag itens window. Restart Firefox.
+Now, start Firefox. It may ask if you want to install our clock extension: we do.
+
+After a restart, nothing will change; we need to right-click the toolbar and go
+to Customize. In the window that opened we will find our clock add-on.
+Drag to the right side of the "+" button in the same bar that tabs appear. 
+
+Restart and close Firefox once more.
+
+Shutdown considerations
+~~~~~~~~~~~~~~~~~~~~~~~
+
+It's desirable to be able to turn off our system by the power switch, making the kiosk more 
+reliable in the event of power loss.
+
+To do this, enable *copy2fs* via the *Toggle copy2fs* option in *Apps*. Now all extensions 
+are loaded to RAM.
+
+As the final step, we will unmount the disk after the boot has completed. This will prevent 
+any corruption from getting to the disk, enabling clean shutdowns via the power switch.
+
+Add the following to */opt/bootlocal.sh*, replacing *sda1* with your drive:
+[source,sh]
+----
+umount /mnt/sda1
+----
+
 Results
+~~~~~~~
+
 Reboot the system and you will get the Firefox taking all the desktop without the titlebar
 and with the clock working. Our kiosk is now ready!
 	
