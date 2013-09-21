@@ -4,8 +4,8 @@ A Web kiosk
 
 *By Luiz Fernando Estevarengo AKA Zendrael*
 
-A kiosk machine is essentially a terminal to access the web, any website, 
-just one website, or perhaps a web app. It does not run any kid of app
+A kiosk machine is essentially a terminal to access the web: any website,
+just one website, or perhaps a web app. It does not run any kind of app
 other than the web browser.
 
 With Core, we can build a simple kiosk with little effort, a bunch of extensions 
@@ -15,6 +15,7 @@ Selecting extensions
 ~~~~~~~~~~~~~~~~~~~~
 
 Starting with an installed TinyCore, you will need:
+
 - firefox.tcz (our browser)
 - idesk.tcz (for the screen icons)
 - liberation-fonts-ttf.tcz (many sites are designed for Microsoft fonts)
