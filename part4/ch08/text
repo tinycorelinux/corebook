@@ -5,7 +5,7 @@ A Web kiosk
 *By Luiz Fernando Estevarengo AKA Zendrael*
 
 A kiosk machine is essentially a terminal to access the web, any website, 
-just one website, or perhaps a webapp. It does not run any kid of app
+just one website, or perhaps a web app. It does not run any kid of app
 other than the web browser.
 
 With Core, we can build a simple kiosk with little effort, a bunch of extensions 
@@ -46,7 +46,7 @@ You may also choose to use the included *wbar*, or to not have icons at all, but
 Firefox in a loop (so that when the previous instance closes, a new one is started).
 ============
 
-Inside your home directory create one file, *.ideskrc* which will cointain the idesk 
+Inside your home directory create one file, *.ideskrc* which will contain the idesk 
 configuration; and one directory, where your icons will be kept, *.idesktop*:
 
 [source,sh]
@@ -156,7 +156,7 @@ $ mv *.default kiosk.default
 $ editor profiles.ini
 ----
 
-Then change the Path in profiles.ini to kisk.default as follows:
+Then change the Path in profiles.ini to kiosk.default as follows:
 
 [source,sh]
 ----
@@ -194,7 +194,7 @@ avoid some troubles with ads. Open up Firefox, right click the menu bar and unch
 
 The add-ons we will use are:
 - Movable Firefox Button
-- Adblock Plus
+- Ad-block Plus
 
 Install both searching for them in the search box then restart as required.
 
@@ -419,7 +419,7 @@ umount /mnt/sda1
 Results
 ~~~~~~~
 
-Reboot the system and you will get the Firefox taking all the desktop without the titlebar
+Reboot the system and you will get the Firefox taking all the desktop without the title bar
 and with the clock working. Our kiosk is now ready!
 	
 	
