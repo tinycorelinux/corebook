@@ -92,54 +92,74 @@ table Actions
 end
 ----
 
-Now, inside the .idesktop directory we will create the file that contains the information 
-of our icon to restart the browser if it crashes or the user close it by some way:
+Now, inside the *.idesktop* directory we will create the file that contains the information 
+of our icon to restart the browser if it crashes or the user closes it:
 
+[source,sh]
+----
 $ cd .idesktop
 $ touch kiosk.lnk
-
-Edit the file with 
-
 $ editor kiosk.lnk
+----
 
 With this content:
+
+[source,sh]
+----
 table Icon
-    Caption: Kiosk
-    Icon: .idesktop/kiosk.png
+    Caption: Web
+    Icon: .idesktop/web.png
     X: 100
     Y: 100
     Command[0]: firefox
 end
+----
 
 Note that the icon mentioned in the file is inside the .idesktop folder.
-You can use any icon you want, whereever it is. Save the file.
+You can use any icon you want; to use the Firefox icon, you can copy it from 
+*/usr/local/share/pixmaps*.
 
 iDesk autoload
-As the iDesk will serve to show an icon for our browser (if the user, for some reason closes it),
-it need to be loaded right after the boot. So, in the ~/.X.d/ directory we sill create a file
-named idesk with a single command inside it:
+^^^^^^^^^^^^^^
 
+As iDesk will serve to show an icon for our browser, we need to start it in a suitable 
+place.
+So, in the *~/.X.d/* directory we will create a file to start it up:
+
+[source,sh]
+----
+$ mkdir -p ~/.X.d
 $ cd ~/.X.d/
-$ touch idesk
 $ echo "idesk &" > idesk
+----
 
-Done with iDesk now.
 Firefox profile
-We will do a custom profile to handle the kiosk. Open up a terminal and type:
+^^^^^^^^^^^^^^^
 
+We will create a custom profile to handle the kiosk. Open and close Firefox at least once so 
+that the default profile gets created.
+
+Open up a terminal and type:
+
+[source,sh]
+----
 $ cd ~/.mozilla/firefox
-$ ls 
+$ ls
+---- 
 
-You will find some directory like j08765.default and a file name profiles.ini.
-Here is where your actual profile, settings and extensions are stored and the file where 
-firefox looks for it as default, repectively.
-So, we will start to change the profile name and set it to the ini file:
+You will find a directory like *j08765.default* and a file named *profiles.ini*.
+We will change the profile name to a more convenient one, and set it in the ini file:
 
-$ mv j08756.default kiosk.default
+[source,sh]
+----
+$ mv *.default kiosk.default
 $ editor profiles.ini
+----
 
 Then change the Path in profiles.ini to kisk.default as follows:
 
+[source,sh]
+----
 [General]
 StartWithLastProfile=1
 
@@ -147,29 +167,36 @@ StartWithLastProfile=1
 Name=kiosk
 IsRelative=1
 Path=kiosk.default
+----
 
-Save it. Start then close Firefox.
+Start and close Firefox to see that the moved profile is working.
+
 Firefox autoload
-We will need to have the Firefox loaded as soon as our kiosk runs. Here we follow the same
-autoload way that we used for idesk:
+^^^^^^^^^^^^^^^^
 
-$ cd ~/.X.d/
-$ touch firefox
+We will need to have the Firefox loaded as soon as our kiosk runs X. Here we follow the same
+way that we used for idesk:
+
+[source,sh]
+----
+$ cd ~/.X.d
 $ echo "firefox &" > firefox
+----
 
 Next, we will do some coding with XUL and Javascript.
 
 Configuring Firefox
-Install some add-ons
+^^^^^^^^^^^^^^^^^^^
+
 To take the best of our kiosk, we will setup it to use less space on the screen and
-avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck
-"Menu Bar" item. Then, go to the Firefox menu and access the Add-ons manager.
+avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck the
+*Menu Bar* item. Then, go to the Firefox menu and access the *Add-ons manager*.
+
 The add-ons we will use are:
-Movable Firefox Button
-Adblock Plus
+- Movable Firefox Button
+- Adblock Plus
 
 Install both searching for them in the search box then restart as required.
-The last step, our own add-on will do the last trick!
 
 Creating our add-on 
 Firefox add-ons are easy to build and can be used without the need to upload them to
