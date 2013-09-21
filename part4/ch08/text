@@ -60,7 +60,7 @@ $ mkdir .idesktop
 $ editor .ideskrc
 ----
 
-Edit the .ideskrc to reflect the colors of your desktop and some grid options:
+Edit the *.ideskrc* config file to reflect the colors of your desktop and some grid options:
 
 [source,sh]
 ----
