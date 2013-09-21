@@ -182,7 +182,7 @@ way that we used for idesk:
 [source,sh]
 ----
 $ cd ~/.X.d
-$ echo "firefox &" > firefox
+$ echo "/usr/local/firefox/firefox &" > firefox
 ----
 
 Configuring Firefox
