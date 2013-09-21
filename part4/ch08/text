@@ -297,14 +297,14 @@ line.
 *chrome/clock.css*
 [source,css]
 ----
-/* let the buttons be smaller as its icons */
+/* let the buttons be smaller */
 .clean {
     padding: 0px;
     margin: 0px;
 }
 
 /* remove arrow from buttons */
-.clean .toolbarbutton-menu-dropmarker{
+.clean .toolbarbutton-menu-dropmarker {
     display: none !important;
 }
 
@@ -313,17 +313,24 @@ line.
     margin-right: 3px;
 }
 
-#appmenu-toolbar-button .toolbarbutton-menu-dropmarker{
+#appmenu-toolbar-button
+  .toolbarbutton-menu-dropmarker {
     display: none !important;
 }
 
-toolbar:not([mode="text"]) #appmenu-toolbar-button > .toolbarbutton-icon,
-toolbar:not([mode="text"]) #appmenu-button > .button-box .button-icon {
-    list-style-image: url("moz-icon://stock/system-run?size=16") !important;
+toolbar:not([mode="text"]) #appmenu-toolbar-button
+  > .toolbarbutton-icon,
+toolbar:not([mode="text"]) #appmenu-button
+  > .button-box .button-icon {
+    list-style-image:
+      url("moz-icon://stock/system-run?size=16")
+      !important;
 }
 
-toolbar[mode="icons"] #appmenu-toolbar-button > .toolbarbutton-text,
-toolbar[mode="icons"] #appmenu-button > .button-box .button-text {
+toolbar[mode="icons"] #appmenu-toolbar-button
+  > .toolbarbutton-text,
+toolbar[mode="icons"] #appmenu-button
+  > .button-box .button-text {
     display: none;
 }
 ----
