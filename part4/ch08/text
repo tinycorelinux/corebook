@@ -11,6 +11,9 @@ other than the web browser.
 With Core, we can build a simple kiosk with little effort, a bunch of extensions 
 and the creation of an add-on to our browser of choice. 
 
+We assume persistent home/opt are not used, and that the home dir is under backup.
+This enables a clean slate on each reboot.
+
 Selecting extensions
 ~~~~~~~~~~~~~~~~~~~~
 
