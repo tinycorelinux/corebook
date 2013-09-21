@@ -432,8 +432,8 @@ Shutdown considerations
 It's desirable to be able to turn off our system by the power switch, making the kiosk more 
 reliable in the event of power loss.
 
-To do this, enable *copy2fs* via the *Toggle copy2fs* option in *Apps*. Now all extensions 
-are loaded to RAM.
+To do this, enable *copy2fs* via the *Toggle default install to file system* option in
+*Apps*. Now all extensions are loaded to RAM.
 
 As the final step, we will unmount the disk after the boot has completed. This will prevent 
 any corruption from getting to the disk, enabling clean shutdowns via the power switch.
@@ -457,3 +457,4 @@ Reboot the system and you will get Firefox taking all the desktop without the ti
 and with the clock working. Our kiosk is now ready!
 	
 	
+At the time of writing, the Firefox version was 21. The install used about 54 Mb of space.
