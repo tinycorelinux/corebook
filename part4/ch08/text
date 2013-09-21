@@ -38,16 +38,16 @@ iDesk icons
 
 What happens if our user, for some reason, closes the browser or it crashes? 
 We must have an easy way to restart the browser, preferably with a visual clue, 
-like an icon in the desktop. iDesk let us do it with icons that can not be changed, 
-deleted or moved on the desktop. Let's do the trick! 
+like an icon in the desktop. iDesk lets us do this with icons that can not be changed,
+deleted or moved on the desktop.
 
 [NOTE]
 ============
-You may also choose to use the included *wbar*, or to not have icons at all, but to run
+You may also choose to use the included *wbar*; or to not have icons at all, but to run
 Firefox in a loop (so that when the previous instance closes, a new one is started).
 ============
 
-Inside your home directory create one file, *.ideskrc* which will contain the idesk 
+Inside your home directory create one file, *.ideskrc* which will contain the iDesk
 configuration; and one directory, where your icons will be kept, *.idesktop*:
 
 [source,sh]
@@ -58,8 +58,6 @@ $ editor .ideskrc
 ----
 
 Edit the .ideskrc to reflect the colors of your desktop and some grid options:
-
-The content should be:
 
 [source,sh]
 ----
@@ -94,7 +92,7 @@ end
 ----
 
 Now, inside the *.idesktop* directory we will create the file that contains the information 
-of our icon to restart the browser if it crashes or the user closes it:
+of our icon, to restart the browser should it crash or should the user close it:
 
 [source,sh]
 ----
@@ -175,7 +173,7 @@ Start and close Firefox to see that the moved profile is working.
 Firefox autoload
 ^^^^^^^^^^^^^^^^
 
-We will need to have the Firefox loaded as soon as our kiosk runs X. Here we follow the same
+We will need to have Firefox loaded as soon as our kiosk runs X. Here we follow the same
 way that we used for idesk:
 
 [source,sh]
@@ -189,22 +187,24 @@ Next, we will do some coding with XUL and Javascript.
 Configuring Firefox
 ^^^^^^^^^^^^^^^^^^^
 
-To take the best of our kiosk, we will setup it to use less space on the screen and
+To make the best of our kiosk, we will setup it to use less space on the screen and
 avoid some troubles with ads. Open up Firefox, right click the menu bar and uncheck the
 *Menu Bar* item. Then, go to the Firefox menu and access the *Add-ons manager*.
 
 The add-ons we will use are:
+
 - Movable Firefox Button
 - Ad-block Plus
 
-Install both searching for them in the search box then restart as required.
+Install both by searching for them in the search box, and then restart as required.
 
-Creating our add-on 
+Creating our add-on
 ~~~~~~~~~~~~~~~~~~~
 
 Firefox add-ons are easy to build and can be used without the need to upload them to
-the Mozilla website. We will create a folder and file structure of our add-on to create
-a clock button that will also control the behavior of Firefox on the screen every time it loads.
+the Mozilla website. We will create an add-on to create
+a clock button, and to control the behavior of Firefox on the screen every time 
+it loads.
 
 Folder and file structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -423,7 +423,7 @@ umount /mnt/sda1
 Results
 ~~~~~~~
 
-Reboot the system and you will get the Firefox taking all the desktop without the title bar
+Reboot the system and you will get Firefox taking all the desktop without the title bar
 and with the clock working. Our kiosk is now ready!
 	
 	
