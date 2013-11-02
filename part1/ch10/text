@@ -105,7 +105,7 @@ bootcode, you can tell the system to use another list. The list is expected to b
 *tce* directory, just like *onboot.lst*.
 
 This is used for example to load different setups via a boot menu: a quick music environment 
-wouldn't need web browsers, for example.
+wouldn't need web browsers.
 
 .Example:
 - lst=myfile.lst
