@@ -5,6 +5,8 @@ Bootcodes explained
 Boot codes are a way to configure the system, by giving it information that needs to be 
 available during boot. In this chapter we will cover each in detail.
 
+The Linux kernel also exposes a set of boot codes; these will not be covered here.
+
 When using the CD, you can enter them at the command line (with the Core ISO) or by pressing 
 *tab* (with the TinyCore or CorePlus ISOs) at the desired menu item. On an installed system, 
 they are stored in your bootloader's configuration file.
