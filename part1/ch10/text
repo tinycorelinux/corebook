@@ -267,6 +267,14 @@ In case your BIOS is set to your local time and not UTC (GMT) time, use this boo
 Example:
 - noutc
 
+tz - timezone
+~~~~~~~~~~~~~
+
+This bootcode lets you manually specify your time zone.
+
+Example:
+- tz=GMT-8
+
 pause - wait for a keypress before completing boot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -320,14 +328,6 @@ With this boot code, the system will not log in, but instead ask for username an
 
 Example:
 - noautologin
-
-tz - timezone
-~~~~~~~~~~~~~
-
-This bootcode lets you manually specify your time zone.
-
-Example:
-- tz=GMT-8
 
 user - set the default username
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
