@@ -6,7 +6,7 @@ Boot codes are a way to configure the system, by giving it information that need
 available during boot. In this chapter we will cover each in detail.
 
 When using the CD, you can enter them at the command line (with the Core iso) or by pressing 
-*tab* (with the TinyCore or CorePlus isos) at the desired menu item. On an installed system, 
+*tab* (with the TinyCore or CorePlus ISOs) at the desired menu item. On an installed system, 
 they are stored in your bootloader's configuration file.
 
 For example, with *grub 0.97*, the file is called *menu.lst*, and the boot codes are stored 
