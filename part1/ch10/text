@@ -70,8 +70,8 @@ When waiting for a specific drive, both labels and UUIDs are accepted.
 The first form waits five seconds in all cases. The second form waits up to 15 seconds, 
 continuing immediately if the drive with the label "mydisk" shows up.
 
-swapfile - swapping in uncommon environments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+swapfile - swap in a file
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In normal use, you would use a regular Linux swap partition. However, if the system is 
 installed to a fat32 partition, and you cannot create a swap partition, you may use a swap 
