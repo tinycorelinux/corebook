@@ -37,7 +37,7 @@ installation even on machines with Core on the hard disk), or if the directory i
 The bootcode supports both labels and UUIDs (universal identifiers), which are a necessity 
 with USB drives, as you can't tell beforehand how the USB stick might get named.
 
-Examples:
+.Examples:
 - tce=sda1
 - tce=sda1/mydir
 - tce=LABEL=mydisk
@@ -49,7 +49,7 @@ restore - backup location
 If you wish to store the backup in a separate location (ie. not under the *tce* directory), 
 you need to use the *restore* bootcode.
 
-Example:
+.Example:
 - restore=sda1
 
 waitusb - slow drive detection
@@ -63,7 +63,7 @@ or a given number of seconds.
 
 When waiting for a specific drive, both labels and UUIDs are accepted.
 
-Examples:
+.Examples:
 - waitusb=5
 - waitusb=15:LABEL=mydisk
 
@@ -78,7 +78,7 @@ installed to a fat32 partition, and you cannot create a swap partition, you may 
 file. It is created with the GUI tool, and the bootcode is used to tell the system to use 
 it.
 
-Examples:
+.Examples:
 - swapfile
 - swapfile=sda1
 
@@ -93,7 +93,7 @@ disk. Each bootcode takes either a drive name, a label, or an UUID.
 
 These options are covered in more detail in the persistence chapter.
 
-Examples:
+.Examples:
 - home=sda1
 - home=LABEL=mydisk
 
@@ -107,7 +107,7 @@ bootcode, you can tell the system to use another list. The list is expected to b
 This is used for example to load different setups via a boot menu: a quick music environment 
 wouldn't need web browsers, for example.
 
-Example:
+.Example:
 - lst=myfile.lst
 
 base - don't load extensions
@@ -117,7 +117,7 @@ In case you don't want to load extensions, the *base* bootcode skips them. It ma
 as a restore option, as when combined with the *norestore* option, no drives are mounted 
 during the boot process.
 
-Example:
+.Example:
 - base
 
 norestore - don't load backup
@@ -127,7 +127,7 @@ To get a pristine environment without your settings, you can use the *norestore*
 It's useful to see if something also happens in a new configuration, for example. When 
 combined with the *base* bootcode, no drives are mounted during boot.
 
-Example:
+.Example:
 - norestore
 
 safebackup - enable safe backup by default
@@ -137,7 +137,7 @@ While you can select the safe backup from the backup GUI, this boot option force
 always be used. The safe backup means that a copy of your previous backup is made before 
 doing a new backup.
 
-Example:
+.Example:
 - safebackup
 
 showapps - verbose extension loading
@@ -147,7 +147,7 @@ By default, the loaded extensions are not listed. This bootcode has the system s
 extension by name when loading it. It slightly delays the boot, but it's useful to find 
 which extension has trouble loading, if one has become corrupted, for example.
 
-Example:
+.Example:
 - showapps
 
 iso - load extensions from an ISO file
@@ -157,7 +157,7 @@ This boot option tells the system to load extensions from an ISO file. It's usef
 virtual setups, and the syslinux memdisk option (as only DOS-based systems can read the 
 memory disk after boot).
 
-Examples:
+.Examples:
 - iso=sda1
 - iso=sda1/dir/TinyCore-4.4.iso
 
@@ -177,7 +177,7 @@ you can give one of the options above. The framebuffer can also be used as a
 graphical fallback system with the Xfbdev server, in case the normal VESA server fails to 
 work.
 
-Example:
+.Example:
 - vga=791
 
 xsetup - configure X during boot
@@ -187,7 +187,7 @@ While the X setup script, *xsetup*, may be launched after boot too, this bootcod
 system to launch it during boot. The wizard lets you choose the resolution and mouse 
 settings.
 
-Example:
+.Example:
 - xsetup
 
 lang - system locale
@@ -200,7 +200,7 @@ that language.
 
 If not set, the default C locale is used (US English, ASCII).
 
-Example:
+.Example:
 - lang=fi_FI
 
 kmap - console keymap
@@ -212,7 +212,7 @@ but not the larger X server Xorg.
 
 If not set, the default is used (US).
 
-Example:
+.Example:
 - kmap=qwerty/fi-latin9
 
 text - boot to text mode
@@ -221,7 +221,7 @@ text - boot to text mode
 In case an X server is installed, do not boot to graphical mode. If an X server is not 
 installed, the system will always boot to text mode.
 
-Example:
+.Example:
 - text
 
 superuser - boot to text mode, as root
@@ -229,7 +229,7 @@ superuser - boot to text mode, as root
 
 Like the *text* bootcode above, but boots to a root shell.
 
-Example:
+.Example:
 - superuser
 
 noicons - don't display icons
@@ -237,7 +237,7 @@ noicons - don't display icons
 
 This bootcode will disable the default icon bar, or optionally only ondemand icons.
 
-Examples:
+.Examples:
 - noicons
 - noicons=ondemand
 
@@ -247,7 +247,7 @@ noswap - don't use the swap partition
 By default, the system will use all Linux swap partitions automatically. This bootcode will 
 disable their use.
 
-Example:
+.Example:
 - noswap
 
 nodhcp - don't grab an IP address
@@ -256,7 +256,7 @@ nodhcp - don't grab an IP address
 The system will use DHCP to get an IP address by default. If you wish to set the IP 
 manually, you can use this bootcode to skip the DHCP process.
 
-Example:
+.Example:
 - nodhcp
 
 noutc - BIOS is using local time
@@ -264,7 +264,7 @@ noutc - BIOS is using local time
 
 In case your BIOS is set to your local time and not UTC (GMT) time, use this boot code.
 
-Example:
+.Example:
 - noutc
 
 tz - timezone
@@ -272,7 +272,7 @@ tz - timezone
 
 This bootcode lets you manually specify your time zone.
 
-Example:
+.Example:
 - tz=GMT-8
 
 pause - wait for a keypress before completing boot
@@ -281,7 +281,7 @@ pause - wait for a keypress before completing boot
 This bootcode lets you view the system boot messages more easily, by waiting for an enter 
 key press before completing the boot.
 
-Example:
+.Example:
 - pause
 
 cron and syslog - start daemons
@@ -290,7 +290,7 @@ cron and syslog - start daemons
 The *cron* and *syslog* bootcodes will start the respective daemon at boot. By default 
 neither is running.
 
-Example:
+.Example:
 - cron
 - syslog
 
@@ -299,7 +299,7 @@ host - set host name
 
 By default the host name is "box". This bootcode lets you set a custom one.
 
-Example:
+.Example:
 - host=foo
 
 protect - use encrypted backup
@@ -310,7 +310,7 @@ Blowfish with a 448-bit key, generated from the given passphrase. If not using a
 home, all your custom configuration will be in the backup, so this option prevents someone 
 from reading your backup off the drive.
 
-Example:
+.Example:
 - protect
 
 secure - set password on boot
@@ -318,7 +318,7 @@ secure - set password on boot
 
 If you need to set the password on boot, for example on a first run, use this bootcode.
 
-Example:
+.Example:
 - secure
 
 noautologin - disable automatic login
@@ -326,7 +326,7 @@ noautologin - disable automatic login
 
 With this boot code, the system will not log in, but instead ask for username and password.
 
-Example:
+.Example:
 - noautologin
 
 user - set the default username
@@ -334,7 +334,7 @@ user - set the default username
 
 The default user is normally named 'tc'. This bootcode lets you use a different name.
 
-Example:
+.Example:
 - user=john
 
 desktop - specify window manager
@@ -343,7 +343,7 @@ desktop - specify window manager
 If only one window manager is loaded, that one will be used. If you have multiple window 
 managers installed, this bootcode will let you specify which one to load.
 
-Example:
+.Example:
 - desktop=fluxbox
 
 laptop - force loading of laptop modules
@@ -352,7 +352,7 @@ laptop - force loading of laptop modules
 Usually these modules are autodetected, but if your laptop does not load the modules (AC, 
 battery, and PCMCIA), you can add this bootcode to force-load them.
 
-Example:
+.Example:
 - laptop
 
 noembed - use a separate tmpfs
@@ -366,7 +366,7 @@ Using this bootcode temporarily doubles the RAM use, as both copies are kept in 
 during boot. As an extra copy is made, it also slows the boot time. It allows GNU df to 
 detect the free space in /, used by some proprietary software installers.
 
-Example:
+.Example:
 - noembed
 
 nozswap - disable compressed swap in RAM
@@ -376,7 +376,7 @@ By default, Core uses a RAM compression technique allowing you to use more RAM t
 actually have. If you experience problems with this, the *nozswap* bootcode lets you disable 
 this.
 
-Example:
+.Example:
 - nozswap
 
 xvesa - set resolution directly
@@ -384,7 +384,7 @@ xvesa - set resolution directly
 
 This bootcode lets you specify the resolution for Xvesa directly.
 
-Example:
+.Example:
 - xvesa=800x600x32
 
 mydata - use a different name for backup
@@ -393,7 +393,7 @@ mydata - use a different name for backup
 By default, the backup is named mydata.tgz. Using this boot code you can use a different 
 name.
 
-Example:
+.Example:
 - mydata=command.com
 
 blacklist - blacklist modules
@@ -406,7 +406,7 @@ One prominent example is the PC speaker. Some people love the beeps, others hate
 To blacklist multiple modules, you can use either multiple *blacklist* bootcodes, or give a 
 comma-separated list.
 
-Examples:
+.Examples:
 - blacklist=pcspkr
 - blacklist=pcspkr,e100
 
@@ -416,5 +416,5 @@ multivt - setup multiple consoles
 By default, the system saves RAM by only setting up one console. Using this option, the more 
 common amount of six consoles gets setup.
 
-Example:
+.Example:
 - multivt
