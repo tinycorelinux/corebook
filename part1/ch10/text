@@ -1,0 +1,420 @@
+
+Bootcodes explained
+-------------------
+
+Boot codes are a way to configure the system, by giving it information that needs to be 
+available during boot. In this chapter we will cover each in detail.
+
+When using the CD, you can enter them at the command line (with the Core iso) or by pressing 
+*tab* (with the TinyCore or CorePlus isos) at the desired menu item. On an installed system, 
+they are stored in your bootloader's configuration file.
+
+For example, with *grub 0.97*, the file is called *menu.lst*, and the boot codes are stored 
+on the kernel line:
+[source,sh]
+----
+kernel /boot/vmlinuz quiet showapps
+----
+
+If using extlinux, the file is called *extlinux.cfg*, and the codes are stored in the APPEND 
+line:
+[source,sh]
+----
+APPEND initrd=/boot/core.gz quiet showapps
+----
+
+tce - extensions directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The *tce* bootcode specifies where to locate and store the extensions and backup. If it's 
+not given, the system will scan all drives for a first-level directory called */tce*. Thus 
+it may improve boot time to specify where it is.
+
+It needs to be given when there are multiple such directories (for example to use your USB 
+installation even on machines with Core on the hard disk), or if the directory is not named 
+*tce*.
+
+The bootcode supports both labels and UUIDs (universal identifiers), which are a necessity 
+with USB drives, as you can't tell beforehand how the USB stick might get named.
+
+Examples:
+- tce=sda1
+- tce=sda1/mydir
+- tce=LABEL=mydisk
+- tce=LABEL=mydisk/mydir
+
+restore - backup location
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you wish to store the backup in a separate location (ie. not under the *tce* directory), 
+you need to use the *restore* bootcode.
+
+Example:
+- restore=sda1
+
+waitusb - slow drive detection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many USB drives are very slow to be detected. Even if plugged in before boot, they may take 
+ten seconds to initialize - longer than the system would take to boot.
+
+The *waitusb* bootcode allows you to tell the system to wait, either for a specific drive, 
+or a given number of seconds.
+
+When waiting for a specific drive, both labels and UUIDs are accepted.
+
+Examples:
+- waitusb=5
+- waitusb=15:LABEL=mydisk
+
+The first form waits five seconds in all cases. The second form waits up to 15 seconds, 
+continuing immediately if the drive with the label "mydisk" shows up.
+
+swapfile - swapping in uncommon environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In normal use, you would use a regular Linux swap partition. However, if the system is 
+installed to a fat32 partition, and you cannot create a swap partition, you may use a swap 
+file. It is created with the GUI tool, and the bootcode is used to tell the system to use 
+it.
+
+Examples:
+- swapfile
+- swapfile=sda1
+
+The first form will scan for a swap file, the second will scan for it only in the specified 
+drive.
+
+home and opt - persistence
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The *home* and *opt* bootcodes let you keep the respective directories on a persistent
+disk. Each bootcode takes either a drive name, a label, or an UUID.
+
+These options are covered in more detail in the persistence chapter.
+
+Examples:
+- home=sda1
+- home=LABEL=mydisk
+
+lst - extension list
+~~~~~~~~~~~~~~~~~~~~
+
+By default, the system loads all extensions in the list *onboot.lst*. Using the *lst* 
+bootcode, you can tell the system to use another list. The list is expected to be in the 
+*tce* directory, just like *onboot.lst*.
+
+This is used for example to load different setups via a boot menu: a quick music environment 
+wouldn't need web browsers, for example.
+
+Example:
+- lst=myfile.lst
+
+base - don't load extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In case you don't want to load extensions, the *base* bootcode skips them. It may be used
+as a restore option, as when combined with the *norestore* option, no drives are mounted 
+during the boot process.
+
+Example:
+- base
+
+norestore - don't load backup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To get a pristine environment without your settings, you can use the *norestore* bootcode. 
+It's useful to see if something also happens in a new configuration, for example. When 
+combined with the *base* bootcode, no drives are mounted during boot.
+
+Example:
+- norestore
+
+safebackup - enable safe backup by default
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While you can select the safe backup from the backup GUI, this boot option forces it to 
+always be used. The safe backup means that a copy of your previous backup is made before 
+doing a new backup.
+
+Example:
+- safebackup
+
+showapps - verbose extension loading
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the loaded extensions are not listed. This bootcode has the system show each 
+extension by name when loading it. It slightly delays the boot, but it's useful to find 
+which extension has trouble loading, if one has become corrupted, for example.
+
+Example:
+- showapps
+
+iso - load extensions from an ISO file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This boot option tells the system to load extensions from an ISO file. It's useful for some 
+virtual setups, and the syslinux memdisk option (as only DOS-based systems can read the 
+memory disk after boot).
+
+Examples:
+- iso=sda1
+- iso=sda1/dir/TinyCore-4.4.iso
+
+vga - framebuffer resolution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[options="header",cols="1<h,4*1^"]
+|=====
+|             | 640x480  | 800x600  | 1024x768  | 1280x1024
+|256 colors   | 769      | 771      | 773       | 775
+|16-bit       | 785      | 788      | 791       | 794
+|24-bit       | 786      | 789      | 792       | 795
+|=====
+
+By default, the system boots in VGA text mode (80x25). To get a higher-resolution console, 
+you can give one of the options above. The framebuffer can also be used as a 
+graphical fallback system with the Xfbdev server, in case the normal VESA server fails to 
+work.
+
+Example:
+- vga=791
+
+xsetup - configure X during boot
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While the X setup script, *xsetup*, may be launched after boot too, this bootcode tells the 
+system to launch it during boot. The wizard lets you choose the resolution and mouse 
+settings.
+
+Example:
+- xsetup
+
+lang - system locale
+~~~~~~~~~~~~~~~~~~~~
+
+If you have generated your preferred locale using the *getlocale.tcz* extension, you can use 
+this bootcode to enable it. With a custom locale, numbers, dates and so on will be printed 
+in your local convention, and all applications that are translated to your language will use 
+that language.
+
+If not set, the default C locale is used (US English, ASCII).
+
+Example:
+- lang=fi_FI
+
+kmap - console keymap
+~~~~~~~~~~~~~~~~~~~~~
+
+If you have *kmaps.tcz* installed, you can use this bootcode to set the default 
+console keymap. The console keymap is also used by the tiny X servers (Xvesa and Xfbdev), 
+but not the larger X server Xorg.
+
+If not set, the default is used (US).
+
+Example:
+- kmap=qwerty/fi-latin9
+
+text - boot to text mode
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+In case an X server is installed, do not boot to graphical mode. If an X server is not 
+installed, the system will always boot to text mode.
+
+Example:
+- text
+
+superuser - boot to text mode, as root
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Like the *text* bootcode above, but boots to a root shell.
+
+Example:
+- superuser
+
+noicons - don't display icons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This bootcode will disable the default icon bar, or optionally only ondemand icons.
+
+Examples:
+- noicons
+- noicons=ondemand
+
+noswap - don't use the swap partition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the system will use all Linux swap partitions automatically. This bootcode will 
+disable their use.
+
+Example:
+- noswap
+
+nodhcp - don't grab an IP address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The system will use DHCP to get an IP address by default. If you wish to set the IP 
+manually, you can use this bootcode to skip the DHCP process.
+
+Example:
+- nodhcp
+
+noutc - BIOS is using local time
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In case your BIOS is set to your local time and not UTC (GMT) time, use this boot code.
+
+Example:
+- noutc
+
+pause - wait for a keypress before completing boot
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This bootcode lets you view the system boot messages more easily, by waiting for an enter 
+key press before completing the boot.
+
+Example:
+- pause
+
+cron and syslog - start daemons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The *cron* and *syslog* bootcodes will start the respective daemon at boot. By default 
+neither is running.
+
+Example:
+- cron
+- syslog
+
+host - set host name
+~~~~~~~~~~~~~~~~~~~~
+
+By default the host name is "box". This bootcode lets you set a custom one.
+
+Example:
+- host=foo
+
+protect - use encrypted backup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The default backup is a normal archive file. This option lets you encrypt the backup using 
+Blowfish with a 448-bit key, generated from the given passphrase. If not using a persistent 
+home, all your custom configuration will be in the backup, so this option prevents someone 
+from reading your backup off the drive.
+
+Example:
+- protect
+
+secure - set password on boot
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you need to set the password on boot, for example on a first run, use this bootcode.
+
+Example:
+- secure
+
+noautologin - disable automatic login
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this boot code, the system will not log in, but instead ask for username and password.
+
+Example:
+- noautologin
+
+tz - timezone
+~~~~~~~~~~~~~
+
+This bootcode lets you manually specify your time zone.
+
+Example:
+- tz=GMT-8
+
+user - set the default username
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The default user is normally named 'tc'. This bootcode lets you use a different name.
+
+Example:
+- user=john
+
+desktop - specify window manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If only one window manager is loaded, that one will be used. If you have multiple window 
+managers installed, this bootcode will let you specify which one to load.
+
+Example:
+- desktop=fluxbox
+
+laptop - force loading of laptop modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Usually these modules are autodetected, but if your laptop does not load the modules (AC, 
+battery, and PCMCIA), you can add this bootcode to force-load them.
+
+Example:
+- laptop
+
+noembed - use a separate tmpfs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is an advanced option that changes where in RAM Core is run from. By default, Core uses 
+the tmpfs setup by the kernel; with this bootcode, Core will setup a new tmpfs file system, 
+and use that instead.
+
+Using this bootcode temporarily doubles the RAM use, as both copies are kept in RAM at once 
+during boot. As an extra copy is made, it also slows the boot time. It allows GNU df to 
+detect the free space in /, used by some proprietary software installers.
+
+Example:
+- noembed
+
+nozswap - disable compressed swap in RAM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, Core uses a RAM compression technique allowing you to use more RAM than you 
+actually have. If you experience problems with this, the *nozswap* bootcode lets you disable 
+this.
+
+Example:
+- nozswap
+
+xvesa - set resolution directly
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This bootcode lets you specify the resolution for Xvesa directly.
+
+Example:
+- xvesa=800x600x32
+
+mydata - use a different name for backup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the backup is named mydata.tgz. Using this boot code you can use a different 
+name.
+
+Example:
+- mydata=command.com
+
+blacklist - blacklist modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Occasionally a module for your hardware is loaded, but you don't want it to load. In these 
+cases, you can blacklist it.
+
+One prominent example is the PC speaker. Some people love the beeps, others hate them.
+To blacklist multiple modules, you can use either multiple *blacklist* bootcodes, or give a 
+comma-separated list.
+
+Examples:
+- blacklist=pcspkr
+- blacklist=pcspkr,e100
+
+multivt - setup multiple consoles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the system saves RAM by only setting up one console. Using this option, the more 
+common amount of six consoles gets setup.
+
+Example:
+- multivt
