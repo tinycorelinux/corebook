@@ -15,7 +15,7 @@ To this end, we'll be setting up a FTP server with anonymous uploads, and a read
 downloads section. FTP can be easily scripted, and it tends to be more efficient at serving 
 files than HTTP.
 
-Please keep in mind that FTP works over plaintext; don't store confidential data here, or 
+Please keep in mind that FTP works over plain text; don't store confidential data here, or 
 use any secure passwords for the authenticated content.
 
 It's assumed the data drive is mounted on boot. We'll be using *sda1* in this example.
@@ -40,7 +40,7 @@ $ cp /usr/local/etc/bftpd.conf.sample \
 $ editor /mnt/sda1/bftpd.conf
 ----
 
-The entries we'll consider now are HELLO_STRING, QUIT_MSG (cosmetical messages), the 
+The entries we'll consider now are HELLO_STRING, QUIT_MSG (cosmetic messages), the 
 ALLOWCOMMAND ones, the USERLIMIT ones, and the user sections.
 
 Once the hello and quit messages are to your liking, check that the only allowed command is 
@@ -60,7 +60,7 @@ the user to be restricted to our data drive, so remove the DENY_LOGIN variable f
 user ftp {
   #Any password fits.
   ANONYMOUS_USER="yes"
-  ROOTDIR="/mnt/sda1"  
+  CHANGE_UID="yes"
 }
 ----
 
@@ -84,7 +84,7 @@ $ cd /mnt/sda1
 $ mkdir upload download
 $ sudo chown ftp upload
 $ chmod o-w download
-$ chmod g+w upload
+$ sudo chmod g+w upload
 
 # Anything placed in the download dir
 # is read-only via FTP.
@@ -108,4 +108,8 @@ processes list by running *ps*, and that it's listening by running *netstat -l -
 A command-line FTP client is available in the *inetutils* extension, but you can use any 
 browser or FTP client to test the uploads and downloads.
 
-TODO TEST RESULTS
+Results
+~~~~~~~
+
+You now have a convenient place to store files from anywhere. The server requires about
+500kb of RAM per logged-in user.
