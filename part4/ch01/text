@@ -5,8 +5,8 @@ Simple Web server
 *By Luiz Fernando Estevarengo AKA Zendrael*
 
 Building a simple web server is really easy with Core and Busybox HTTPD. This server is tiny 
-and fast, although it does not run some server-side pages, you can run CGI scripts compiled 
-or not - you can even write a shell script to act like a CGI.
+and fast, although it does not run some server-side pages, you can run CGI scripts -
+you can even write a shell script to act like a CGI.
 
 Install the busybox-httpd.tcz extension via Apps or by the command line, OnBoot
 so that it's loaded it every time the computer boots up.
