@@ -10,7 +10,7 @@ that, while the command-line update is a batch one.
 
 In both cases, the updated extensions are stored in a staging directory, and the actual 
 update will be applied on the next reboot. This ensures that no running app will be 
-interfered by things being changed from under it.
+interfered with by things being changed from under it.
 
 Apps
 ~~~~
