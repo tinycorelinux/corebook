@@ -69,7 +69,7 @@ the hardware doesn't wake up in time, Tiny Core will move on and finish booting 
 data.
 
 If you store data on external/slow media, it may be necessary to use the boot code 
-*waitusb=5* or similar. This pauses the pauses the boot process for five seconds, waiting 
+*waitusb=5* or similar. This pauses the boot process for five seconds, waiting 
 for 
 slow devices to register with the system bus. 
 
