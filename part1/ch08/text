@@ -8,8 +8,8 @@ MD5 checking
 ~~~~~~~~~~~~
 
 This option allows you to do a corruption check for downloaded extensions. Many types of 
-corruption are detected when trying to install an extension, but for some types, or 
-extensions not installed, it can be useful to do a manual check.
+corruption are detected when trying to install an extension, but for some types,
+it can be useful to do a manual check.
 
 Check for orphans
 ~~~~~~~~~~~~~~~~~
