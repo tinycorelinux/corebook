@@ -20,6 +20,10 @@ First edition
 <para>
 ISBN 123456789-000
 </para>
+<para>
+The ISBN is only valid for the printed edition.
+The PDF is not considered a published work in the sense that it would need an ISBN.
+</para>
 </legalnotice>
 
 <subtitle>A look at Tiny Core Linux</subtitle>
