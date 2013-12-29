@@ -19,7 +19,7 @@ up to date).
 
 For the sake of an example, let's create a separate image that changes the login message.
 
-Practise image
+Practice image
 ~~~~~~~~~~~~~~
 
 The login message is stored in */etc/issue*. Therefore we need to create an image that 
