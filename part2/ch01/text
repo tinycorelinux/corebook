@@ -14,8 +14,8 @@ intending to create a stand-alone image for a specific deployment that runs enti
 As updating a remastered image to a newer Core version can be a hassle, a method for that is 
 covered in the next chapter.
 
-Pre-requirements
-~~~~~~~~~~~~~~~~
+Prerequisites
+~~~~~~~~~~~~~
 
 You need a Linux distribution with the required programs available: cpio, tar, gzip, advdef, 
 and mkisofs. This need not be Tiny Core itself, but remastering inside Tiny Core is the most 
