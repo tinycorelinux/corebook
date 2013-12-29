@@ -28,15 +28,15 @@ contains the exact same path, with the contents we want to see.
 [source,sh]
 ----
 $ cd /tmp
-$ sudo mkdir -p tmp/etc
-$ echo "I believe!" | sudo tee tmp/etc/issue
+$ sudo mkdir -p ex/etc
+$ echo "I believe!" | sudo tee ex/etc/issue
 ----
 
 Now our new directory tree should look like this:
 
 [source,sh]
 ----
-tmp/
+ex/
 `-- etc/
     `-- issue
     
@@ -47,7 +47,7 @@ Let's pack it up like we would a normal remaster.
 
 [source,sh]
 ----
-$ cd /tmp/tmp
+$ cd /tmp/ex
 $ sudo find | sudo cpio -o -H newc | \
   gzip 2 > ../myimg.gz
 $ advdef -z4 ../myimg.gz
