@@ -44,6 +44,8 @@ with USB drives, as you can't tell beforehand how the USB stick might get named.
 - tce=sda1/mydir
 - tce=LABEL=mydisk
 - tce=LABEL=mydisk/mydir
+- tce=UUID=fho4-3436t
+- tce=UUID=fho4-3436t/mydir
 
 restore - backup location
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,6 +70,7 @@ When waiting for a specific drive, both labels and UUIDs are accepted.
 .Examples:
 - waitusb=5
 - waitusb=15:LABEL=mydisk
+- waitusb=15:UUID=fho4-3436t
 
 The first form waits five seconds in all cases. The second form waits up to 15 seconds, 
 continuing immediately if the drive with the label "mydisk" shows up.
@@ -98,6 +101,7 @@ These options are covered in more detail in the persistence chapter.
 .Examples:
 - home=sda1
 - home=LABEL=mydisk
+- home=UUID=fho4-3436t
 
 lst - extension list
 ~~~~~~~~~~~~~~~~~~~~
