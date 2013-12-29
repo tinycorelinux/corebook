@@ -15,7 +15,8 @@ Philosophies
 
 As a quick summary, Tiny Core
 loads itself into RAM from storage, then mounts applications on storage, or installs 
-applications to RAM from storage.
+applications to RAM from storage. An extension is said to be 'loaded' or 'installed'
+regardless of the method used (mount vs. copy to RAM).
 
 Tiny Core is different because users are not encouraged to perform a 'traditional', 
 hard-drive installation of the operating system. Sure, a hard drive installation is 
