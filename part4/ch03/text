@@ -126,7 +126,7 @@ It's however a balance with usability. Most devices support HTTP and HTTP authen
 SSH access can be considered considerably more luxurious.
 
 As the router is assumed to handle firewalling, no firewall is installed on the box in this 
-example. Adding one would be an additional defense layer, but its advantage in practise 
+example. Adding one would be an additional defense layer, but its advantage in practice 
 would be small in this scenario.
 
 Using a heavier HTTP server would allow SSL connections, giving slightly better protection 
