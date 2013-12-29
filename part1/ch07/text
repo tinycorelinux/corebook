@@ -35,8 +35,9 @@ adding the line BACKUP=0 to your .profile.
 ======
 
 The backup is controlled by two files in /opt: *.filetool.lst* lists everything to include, 
-and *.xfiletool.lst* lists everything to exclude. For the syntax of these files, see the 
-documentation on tar.
+and *.xfiletool.lst* lists everything to exclude. Exclusions will override inclusions.
+
+For the syntax of these files, see the documentation on tar.
 
 Persistent home/opt
 ~~~~~~~~~~~~~~~~~~~
