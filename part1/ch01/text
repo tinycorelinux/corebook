@@ -125,8 +125,9 @@ supported disk partition (ext2, ext3, ext4, vfat).
 Applications are optionally mounted on reboot (see onboot.lst in forum and wiki). 
 Mounting applications saves RAM for other uses.
 
-Unless specified with a boot code of *tce=xdyz* Tiny Core will search for and uses the /tce 
-directory of downloaded extensions.
+Unless specified with a boot code of *tce=xdyz* Tiny Core will search all drives on the
+computer and use the first /tce directory
+it finds for storing/loading extensions.
 
 Tiny Core uses the Apps tool to place application extensions in this tce/ directory and 
 to flag them as 
