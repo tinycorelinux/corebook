@@ -44,7 +44,7 @@ image::images/part1/scattered.png[scaledwidth="100%"]
 Boot codes
 ~~~~~~~~~~
 
-Depending upon how how Tiny Core is installed (GRUB, LILO, CD, USB stick ...), users have 
+Depending upon how Tiny Core is installed (GRUB, LILO, CD, USB stick ...), users have 
 the option to use boot codes on each reboot (CD, etc), or to store those codes in a boot 
 configuration file (GRUB, LILO, etc.).
 
