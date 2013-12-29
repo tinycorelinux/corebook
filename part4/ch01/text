@@ -9,7 +9,7 @@ and fast, although it does not run some server-side pages, you can run CGI scrip
 you can even write a shell script to act like a CGI.
 
 Install the busybox-httpd.tcz extension via Apps or by the command line, OnBoot
-so that it's loaded it every time the computer boots up.
+so that it's loaded every time the computer boots up.
 To start it each boot, include this line in */opt/bootlocal.sh*:
 
 [source,sh]
