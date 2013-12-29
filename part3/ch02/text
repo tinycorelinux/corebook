@@ -101,7 +101,7 @@ Root's login
 ~~~~~~~~~~~~
 
 Once bootsync.sh is complete (and while bootlocal.sh happily does its own thing in the 
-background, on another cpu core if there is one), init regains control.
+background, on another CPU core if there is one), init regains control.
 
 As the boot is now complete from init's point of view, it feels safe to launch up all 
 requested terminals. By default, this is only the first terminal, but with the *multivt*

@@ -56,7 +56,7 @@ At the time, only gzip compression was supported, but since then the new options
 XZ have been evaluated. 
 
 LZO created slightly bigger extensions, but its speed advantage was not seen in our use - 
-the cpu could keep up fine with gzip compression, bottle-necked by the hard drive reading 
+the CPU could keep up fine with gzip compression, bottle-necked by the hard drive reading 
 speed.
 
 XZ, while nicely improving the compression ratio, comes with the downsides of LZMA: for each 
