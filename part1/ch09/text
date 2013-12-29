@@ -38,7 +38,7 @@ The mouse support in early Virtualbox 4 releases was broken with Xvesa as far as
 using Xorg or Virtualbox 3 instead are workarounds.
 
 In current Virtualbox 4 releases, disabling the *absolute pointing device* and using the
-key-based switching allows the mouse work properly.
+key-based switching allows the mouse to work properly.
 
 VMWare
 ~~~~~~
