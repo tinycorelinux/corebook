@@ -207,8 +207,8 @@ The decision on whether to use the default backup, or to set up a persistent hom
 directory depends on the amount of data you intend to save, and the device you use for 
 storage (USB flash and SSDs may have limited write cycles, for instance).
 
-Bottom matter
-~~~~~~~~~~~~~
+Bottom line
+~~~~~~~~~~~
 
 If you have made it this far, congratulations! You're ready to get Tiny Core and get 
 started. Browse the wiki, the forums, the download pages, and join the community 
