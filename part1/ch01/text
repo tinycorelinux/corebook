@@ -76,7 +76,7 @@ slow devices to register with the system bus.
 Dependency checking and downloading
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tiny Core makes application-getting as easy as possible. The Apps tool provides application 
+Tiny Core makes getting applications as easy as possible. The Apps tool provides application 
 details from individual .info files - this is enlightening reading material when choosing 
 applications. Always read the .info files, and re-read them before upgrading to catch 
 changes and concerns.
