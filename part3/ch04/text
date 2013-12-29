@@ -39,7 +39,7 @@ Modeled after the .lsm format used in old software archives, the info file ident
 extension and its main properties: size, description, creator, license, and so on. 
 
 Often the comments field includes usage instructions specific to Core, and the change-log 
-field may include required actions for the update, so its adviced to read the info file for 
+field may include required actions for the update, so it's advised to read the info file for 
 any extension you install/update. indexterm:[info file]
 
 nano.tcz.info:
