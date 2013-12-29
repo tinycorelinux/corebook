@@ -342,7 +342,7 @@ The default user is normally named 'tc'. This bootcode lets you use a different 
 desktop - specify window manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If only one window manager is loaded, that one will be used. If you have multiple window 
+If only one window manager is installed, that one will be used. If you have multiple window 
 managers installed, this bootcode will let you specify which one to load.
 
 .Example:
