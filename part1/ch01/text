@@ -64,7 +64,7 @@ a USB pen drive, compact flash, or other portable media. This need not be the bo
 in fact, for example it is common to store user data on a hard disk, while booting from cd 
 or USB.
 
-Sometimes, hardware doesn't wake up fast enough for Tiny Core's boot sequence, though. If 
+Sometimes, hardware doesn't wake up fast enough for Tiny Core's boot sequence. If 
 the hardware doesn't wake up in time, Tiny Core will move on and finish booting without that 
 data.
 
