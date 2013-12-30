@@ -113,6 +113,9 @@ cover the general parts here.
 Step 1: Partitioning & formatting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+BIOS installations
+++++++++++++++++++
+
 Create a normal partition on the target disk using your favorite program: for GUI we 
 recommend *Gparted*, for command line *cfdisk*; both should be available in all major 
 distros.
@@ -129,6 +132,23 @@ partition.
 Using more exotic file systems like XFS needs either a remaster or some other way to load 
 the XFS support, in order to access the XFS partition.
 =============
+
+UEFI installations
+++++++++++++++++++
+
+Create a GPT EFI boot partition and a normal partition using your favorite program: for GUI
+we recommend *Gparted*, for command line *gdisk*; both should be available in all major
+distros.
+
+The EFI partition should be formatted with vfat and the normal partition should be formatted
+with a Linux file system.
+
+[NOTE]
+===========
+Older Apple machines typically use 32-bit EFI whereas more modern Apple machines and PC
+hardware use 64-bit (U)EFI. This means that you will need to use either core64 or corepure64
+with 64-bit (U)EFI installations.
+===========
 
 Step 2: Files
 ^^^^^^^^^^^^^
@@ -149,9 +169,8 @@ Step 3: Bootloader
 Finally, you need to install a bootloader to the target disk's MBR, and point it to the 
 kernel and initrd.
 
-NOTE: For UEFI installs, please consult your bootloader's documentation.
-
-The syslinux family, lilo, grub 0.x, and grub 2 have been tested to work fine.
+For BIOS installs, the syslinux family, lilo, grub 0.x, and grub 2 have been tested to work
+fine. For UEFI installs, only grub 2 has been tested.
 
 For a normal boot, no boot codes need to be added - the location of the *tce* directory will 
 be autodetected. If you anticipate having multiple *tce* directories, then it's recommended 
@@ -178,4 +197,16 @@ title Core
 root (hd0,0)
 kernel /boot/vmlinuz quiet waitusb=5
 initrd /boot/core.gz
+----
+
+Likewise, a typical grub 2 config file (with the partition's UUID replaced):
+
+[source,sh]
+----
+search --no-floppy --fs-uuid --set=root "fdsf-gt434"
+
+menuentry "Core" {
+  linux /boot/vmlinuz quiet waitusb=5
+  initrd /boot/core.gz
+}
 ----
