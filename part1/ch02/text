@@ -117,7 +117,9 @@ Create a normal partition on the target disk using your favorite program: for GU
 recommend *Gparted*, for command line *cfdisk*; both should be available in all major 
 distros.
 
-The partition should be formatted with a Linux file system. We recommend *ext4*.
+The partition should be formatted with a Linux file system. We recommend *ext4* for general
+use. If the target is an USB stick or other media with limited writes, you may want to use
+*ext2* instead, as journaling file systems do extra writes to preserve integrity.
 
 If the target is a regular hard disk, it's recommended to also create and format a swap 
 partition.
