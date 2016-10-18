@@ -49,7 +49,7 @@ Let's pack it up like we would a normal remaster.
 ----
 $ cd /tmp/ex
 $ sudo find | sudo cpio -o -H newc | \
-  gzip 2 > ../myimg.gz
+  gzip -2 > ../myimg.gz
 $ advdef -z4 ../myimg.gz
 ----
 

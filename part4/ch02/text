@@ -162,7 +162,7 @@ Let's pack our new initrd image up:
 ----
 $ cd /tmp/initrd
 $ sudo find | sudo cpio -o -H newc | \
-  gzip 2 > ../myimg.gz
+  gzip -2 > ../myimg.gz
 $ advdef -z4 ../myimg.gz
 ----
 
